@@ -1,25 +1,27 @@
-# Reports
+# Technical reports
 
-## Results
+These documents describe the environment, its validation and the pilot investigations.
 
-Start with the [results summary](../docs/CURRENT_RESULTS.md).
+## Case documentation
 
-| Case | Detailed report |
+| Case | Report |
 |---|---|
 | 1 | [Final RC6 pilot](uc_bench_case1_pilot_v1_rc6_final.md) |
 | 2 | [Final MMMVP release](UC_BENCH_CASE2_MMMVP_V1_RELEASE.md) |
 | 3 | [Local validation and remaining work](UC_BENCH_CASE3_MMMVP_LOCAL_READINESS.md) |
-| 4 | Historical work only; see the results summary |
+| 4 | Historical development material in the portfolio below |
 
-## LaTeX
+## Manuscript files
 
-- [Updated Case 2 section](CASE2_UPDATED_SECTION_WITH_MODEL1.tex): includes Model 1 and excludes Model 3 attempt 2.
-- [Full portfolio source](overleaf_case_portfolio/main.tex) and [Overleaf ZIP](overleaf_case_portfolio/uc_bench_case_portfolio_overleaf.zip): earlier report. Its Case 2 status predates the final freeze; use the updated section and current results when revising it.
-- [Client report](overleaf_client_report/README.md): earlier presentation.
-- [Early Case 1 correction](overleaf_case1_corrected/README.md) and [illustrative mock](overleaf_case1_mock/README.md): retained for reference.
+- [Updated Case 2 section](CASE2_UPDATED_SECTION_WITH_MODEL1.tex)
+- [Full portfolio source](overleaf_case_portfolio/main.tex) and [Overleaf ZIP](overleaf_case_portfolio/uc_bench_case_portfolio_overleaf.zip)
+- [Client report](overleaf_client_report/README.md)
+- [Early Case 1 correction](overleaf_case1_corrected/README.md) and [illustrative mock](overleaf_case1_mock/README.md)
 
-## Earlier work
+The portfolio predates the final Case 2 freeze. Use the final release report and updated Case 2 section when revising it. The illustrative mock is labelled separately from empirical work.
 
-The other reports document development and repairs. For Case 2, the [diagnostic-scoring repair](UC_BENCH_CASE2_DIAGNOSTIC_SCORING_REPAIR.md) and [optionality repair](UC_BENCH_CASE2_OPTIONALITY_REPAIR.md) explain how the accepted replay scores were established. The [additional Sonnet attempt](UC_BENCH_CASE2_DIAGNOSTIC_CANARY.md) remains archived and is excluded from the current comparison.
+## Development history
+
+The [diagnostic-scoring repair](UC_BENCH_CASE2_DIAGNOSTIC_SCORING_REPAIR.md) and [optionality repair](UC_BENCH_CASE2_OPTIONALITY_REPAIR.md) explain how the accepted Case 2 replays were established. The [additional Sonnet attempt](UC_BENCH_CASE2_DIAGNOSTIC_CANARY.md) remains archived and is excluded from the selected comparison.
 
 Reports contain case answers. Keep them outside the agent's evaluation workspace.

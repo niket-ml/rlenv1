@@ -1,37 +1,42 @@
 # UC-Bench
 
-UC-Bench tests whether an AI agent can assess a predictor that estimates response to infliximab in ulcerative colitis. The agent checks the patient records, reproduces the analysis and decides whether another study is worth funding. It can request more evidence when that would help resolve the decision.
+An agent environment for computational-biology diligence.
 
-## Project status
+A research team receives a predictor intended to estimate response to infliximab in ulcerative colitis. The predictor has promising reported performance. The team must establish whether the evidence justifies funding its next study.
 
-| Case | Question | Status |
-|---|---|---|
-| 1 | Is there enough evidence to fund the next research stage? | Complete: final RC6 pilot |
-| 2 | Does the predictor work within each study site? | Complete: frozen MMMVP release and initial model runs |
-| 3 | Can the predictions be reproduced through a documented procedure? | Local checks passed; model runs on the current version are pending |
-| 4 | Are the predicted probabilities useful for the proposed decision? | Historical work exists; release review is pending |
+UC-Bench gives that investigation to an AI agent. The agent works with patient records and the files behind the reported analysis. It commits a validation plan before seeing outcomes, calculates performance from the underlying data and decides whether further evidence would change the investment decision.
 
-Case 3 has two versions with the same starting files. The follow-up result retains predictive signal in one version and falls close to chance in the other.
+## What the environment tests
 
-## Where to start
+The challenge is to carry a scientific argument through a complete investigation. A correct calculation has to use the right patient population. A follow-up study has to answer the unresolved question. The final recommendation has to remain within what the evidence supports.
 
-- [Results](docs/CURRENT_RESULTS.md): model names, scores and what failed.
-- [Reports](reports/README.md): detailed reports and LaTeX files.
-- [Case 2 runbook](docs/CASE2_MMMVP_V1_RUNBOOK.md): how to use the packaged environment.
+| Investigation | Central question |
+|---|---|
+| Evidence sufficiency | When does the available evidence justify further research? |
+| Study-site effects | Does apparent performance survive analysis within individual sites? |
+| Execution provenance | Can the prediction file be linked to a procedure the team can verify? |
+| Probability use | Are the predicted probabilities suitable for the proposed decision? |
 
-## Files
+Earlier choices affect what can validly be concluded later. The agent has room to choose a supported analysis and decide whether additional evidence is worth obtaining. An evidence-backed decision to stop can complete the task successfully.
 
-Code is in `src/uc_bench/`, with commands in `scripts/` and tests in `tests/`. Case inputs live in `tasks/`; hidden evidence lives in `grader_private/`.
+## Evaluation
 
-Saved runs and release records are in `artifacts/` and `build/`. These folders contain the evidence behind the results. Development work lives in `development/`, and the build history is in `audit/`.
+The verifier independently recomputes important results from saved artifacts and checks the order of consequential actions. Complete mission success requires a supported evidence chain through the final submission. Partial credit records the valid work completed along the way.
 
-Use the existing Python environment at `.venv.nosync/`. Credentials stay in the ignored local `.env` file.
+The environment includes alternative-workflow controls and altered-input tests that challenge copied answers. Saved trajectories support replay and inspection of the first consequential failure. Provider faults are recorded separately from scientific errors.
 
-A Git checkout contains the source and documentation. Private grader data, model-run
-artifacts and generated development workspaces stay local, so release verification and
-evidence-dependent tests also need those preserved bundles. Reports contain case answers;
-keep this repository private while the evaluation cases are in use.
+Initial runs across multiple model families produced incomplete investigations and failures in analysis commitments and evidence handling. These are pilot observations; repeated evaluations are needed to estimate failure rates.
 
-This is a small pilot with one retained attempt per model in the displayed comparison. Repeated attempts are needed to establish a reliable ranking.
+Cases 1 and 2 have completed initial model evaluation. Case 3 has passed local validation, with model evaluation on its current version pending. Case 4 remains at an earlier development stage.
 
-The [previous README](docs/history/README_before_2026-09-28.md) documents earlier versions. The [cleanup record](audit/WORKSPACE_CLEANUP_2026-09-28.md) lists what was changed and checked.
+## Repository
+
+- [Technical reports](reports/README.md)
+- [Case 2 environment runbook](docs/CASE2_MMMVP_V1_RUNBOOK.md)
+- [Case 3 implementation](reports/CASE3_MMMVP_IMPLEMENTATION_SPEC.md)
+
+Environment code is in `src/uc_bench/`, with evaluation commands in `scripts/` and controls in `tests/`. Public case inputs live in `tasks/`.
+
+This checkout contains source and documentation. Private evidence and model-run artifacts are stored separately and are required for full release verification. Reports contain case answers and belong outside agent evaluation workspaces.
+
+For the existing local setup, use `.venv.nosync/`. Credentials stay in the ignored `.env` file.
