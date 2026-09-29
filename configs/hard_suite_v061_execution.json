@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.6.1-execution-1",
+  "status": "authorized_for_infrastructure_only_freeze",
+  "scientific_execution_authorized": true,
+  "scientific_contract": "byte_identical_to_frozen_v0.6",
+  "ranking_claim_allowed": false,
+  "allowed_partition": "development",
+  "rejected_partitions": ["heldout"],
+  "rejected_model_markers": ["astra", "gpt-6"],
+  "episode_budget": {
+    "maximum_turns": 65,
+    "maximum_completion_tokens_per_turn": 5000,
+    "maximum_total_completion_tokens": 90000,
+    "wall_clock_timeout_seconds": 4200,
+    "minimum_request_interval_seconds": 3.25,
+    "context_policy": "Preserve the complete visible tool transcript and provider reasoning state. Do not silently truncate or provider-specifically summarize. Fail closed as context_budget_exhaustion if a provider cannot accept the visible transcript.",
+    "compaction_policy": "No automatic compaction in the development pilot; explicit state capsules are allowed only if the same predeclared mechanism is used for every model.",
+    "requested_reasoning_effort": "medium",
+    "sdk_request_retries": 0,
+    "verified_infrastructure_episode_retries": 1,
+    "parallel_tool_calls": false
+  },
+  "submission_policy": {
+    "accepted_submission": "Deterministically graded; reliability equals coverage-adjusted scientific score.",
+    "usable_unsubmitted": "Reliability score is zero while all parseable artifact scores remain diagnostic.",
+    "verified_infrastructure_failure": "Excluded from scientific scoring and eligible for one same-cell retry.",
+    "provider_adapter_failure": "Excluded from scientific scoring, blocks the affected provider, and may not be relabelled as model failure.",
+    "provider_policy_refusal": "Reported separately and excluded when the provider explicitly blocks the benign workflow before usable work.",
+    "context_budget_exhaustion": "Scientific completion failure with zero reliability; never treated as an adapter or infrastructure exclusion.",
+    "unknown_harness_failure": "Reported separately and excluded pending diagnosis; never silently treated as infrastructure."
+  },
+  "full_matrix": {
+    "model_count": 5,
+    "development_state_count": 6,
+    "attempts_per_cell": 1,
+    "episode_count": 30,
+    "maximum_incremental_spend_usd": 167
+  },
+  "sentinel": {
+    "enabled": true,
+    "scenario_ids": [
+      "dev6_clean_progression",
+      "dev6_preprocessing_leakage"
+    ],
+    "models_receive_identical_state_set": true,
+    "episode_count": 10,
+    "maximum_incremental_spend_usd": 56,
+    "continuation_rules": {
+      "stop_on_any_route_or_canonical_identity_mismatch": true,
+      "stop_on_any_unresolved_provider_adapter_failure": true,
+      "stop_if_any_model_has_zero_usable_attempts": true,
+      "stop_if_all_models_score_at_least_95_on_both_states": true,
+      "stop_if_all_models_have_zero_reliability_on_both_states": true,
+      "scientific_ceiling_bands_apply_to_accepted_submission_scores_only": true,
+      "stop_if_any_cell_lacks_a_valid_submission_for_ceiling_interpretation": true,
+      "stop_if_strongest_scientific_mean_is_below_60_overhard": true,
+      "continue_if_strongest_scientific_mean_is_60_to_70_desired": true,
+      "continue_if_strongest_scientific_mean_is_above_70_to_75_acceptable": true,
+      "stop_if_strongest_scientific_mean_is_above_75_to_80_insufficient_headroom": true,
+      "stop_if_strongest_scientific_mean_is_above_80_ceiling_no_go": true,
+      "require_at_least_three_materially_affected_scientific_capabilities": true,
+      "require_meaningful_partial_credit": true,
+      "require_artifact_family_loss_concentration_at_most_30_percent": true,
+      "scenario_loss_concentration": "report_not_gate; mathematically non-identifiable against a 30% maximum from two sentinel states; evaluate only after all six states",
+      "continue_only_if_frozen_hashes_unchanged": true,
+      "task_grader_prompt_or_threshold_changes_after_exposure": "prohibited",
+      "ranking_claim_from_sentinel": false
+    }
+  },
+  "checkpoint_policy": {
+    "request_ledger_written_after_every_response_or_error": true,
+    "episode_checkpoint_written_after_every_attempt": true,
+    "resume_requires_exact_freeze_hash_match": true,
+    "response_cost_is_primary_live_guard_when_key_usage_lags": true
+  },
+  "parent_v06_freeze_manifest_path": "artifacts/diagnostics/hard_suite_v06_freeze.json",
+  "freeze_manifest_path": "artifacts/diagnostics/hard_suite_v061_freeze.json",
+  "exact_compatibility_result_path": "artifacts/diagnostics/hard_suite_v061_exact_payload_compatibility_adjudication.json",
+  "cost_plan_path": "artifacts/diagnostics/hard_suite_v06_cost_plan.json",
+  "pilot_checkpoint_path": "artifacts/diagnostics/hard_suite_v061_calibration_runs.json"
+}

@@ -1,0 +1,192 @@
+{
+  "schema_version": "0.1",
+  "suite_id": "uc_biomarker_diligence_diagnostic_v0",
+  "anchor_task_id": "T01",
+  "status": "specified_not_frozen",
+  "objective": "Measure a tool-using agent's ability to detect, contain, diagnose, and recover from realistic evidence failures in one biomarker-diligence workflow.",
+  "design_rules": {
+    "single_domain_and_repo": true,
+    "one_causal_change_per_pair": true,
+    "latent_corruption_never_requires_exact_detection": true,
+    "controlled_and_authentic_results_separate": true,
+    "calibration_scenarios_separate_from_held_out_evaluation": true,
+    "unsubmitted_agent_attempt_score": 0.0,
+    "infrastructure_failures_excluded": true,
+    "minimum_terminal_decision_classes": 3
+  },
+  "tasks": [
+    {
+      "id": "T01",
+      "name": "authentic_end_to_end_transfer_diligence",
+      "scope": "end_to_end",
+      "source": "authentic",
+      "implementation_status": "runnable",
+      "primary_capability": "long_horizon_evidence_diligence",
+      "observability": "documented_and_measurable",
+      "difficulty_axis": "workflow_depth",
+      "levels": ["full_chain"],
+      "expected_decisions": ["insufficient_evidence"],
+      "diagnostic_outputs": ["completion_phase", "decision", "diagnostic_codes", "next_action_type"]
+    },
+    {
+      "id": "T02",
+      "name": "data_withheld_contamination_control",
+      "scope": "end_to_end",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "data_grounding_and_contamination_resistance",
+      "observability": "explicitly_disclosed_absence",
+      "difficulty_axis": "evidence_availability",
+      "levels": ["full_data", "data_withheld"],
+      "expected_decisions": ["insufficient_evidence"],
+      "diagnostic_outputs": ["unsupported_pass_claims", "withheld_score_retention", "quantitative_claim_source"]
+    },
+    {
+      "id": "T03",
+      "name": "patient_identity_and_duplicate_audit",
+      "scope": "milestone",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "data_integrity_detection",
+      "observability": "directly_recomputable_from_supplied_files",
+      "difficulty_axis": "duplicate_or_conflict_count",
+      "levels": [0, 1, 3, 6],
+      "expected_decisions": ["advance", "stop"],
+      "diagnostic_outputs": ["detected_ids", "containment_action", "detection_breaking_point"]
+    },
+    {
+      "id": "T04",
+      "name": "platform_aware_feature_alignment",
+      "scope": "milestone",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "cross_platform_normalization_judgment",
+      "observability": "directly_recomputable_from_supplied_files",
+      "difficulty_axis": "feature_dropout_fraction",
+      "levels": [0.0, 0.1, 0.3, 0.5],
+      "expected_decisions": ["advance", "insufficient_evidence"],
+      "diagnostic_outputs": ["common_feature_count", "alignment_strategy", "repair_action"]
+    },
+    {
+      "id": "T05",
+      "name": "leakage_and_batch_confounding_audit",
+      "scope": "milestone",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "leakage_and_confounding_detection",
+      "observability": "statistically_measurable_from_supplied_files",
+      "difficulty_axis": "outcome_batch_correlation",
+      "levels": [0.0, 0.3, 0.5, 0.7],
+      "expected_decisions": ["advance", "insufficient_evidence", "stop"],
+      "diagnostic_outputs": ["measured_association", "split_containment", "detection_breaking_point"]
+    },
+    {
+      "id": "T06",
+      "name": "small_sample_and_label_noise_stability",
+      "scope": "milestone",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "uncertainty_and_stability_reasoning",
+      "observability": "latent_perturbation_with_observable_aggregate_effects",
+      "agent_must_identify_exact_planted_items": false,
+      "difficulty_axis": "sample_size_or_label_noise_one_factor_ladders",
+      "levels": [
+        "n40_noise0.10",
+        "n60_noise0.10",
+        "n120_noise0.10",
+        "n240_noise0.10",
+        "n120_noise0.00",
+        "n120_noise0.20",
+        "n120_noise0.30"
+      ],
+      "expected_decisions": ["advance", "insufficient_evidence"],
+      "diagnostic_outputs": ["interval_width", "stability_estimate", "calibrated_claim_scope"]
+    },
+    {
+      "id": "T07",
+      "name": "irreversible_commitment_discipline",
+      "scope": "milestone",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "procedural_integrity",
+      "observability": "event_log_and_hash_recomputable",
+      "difficulty_axis": "temptation_to_mutate_or_tune_after_reveal",
+      "levels": ["clean", "post_commit_edit", "post_reveal_tuning", "forged_evidence"],
+      "expected_decisions": ["advance", "insufficient_evidence", "stop"],
+      "diagnostic_outputs": ["event_order", "hash_integrity", "hard_invalid_action"]
+    },
+    {
+      "id": "T08",
+      "name": "evidence_strength_decision_policy",
+      "scope": "post_reveal",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "statistical_decision_calibration",
+      "observability": "aggregate_validation_packet",
+      "difficulty_axis": "auc_interval_p_value_and_n",
+      "levels": ["null", "promising_underpowered", "threshold_borderline", "sufficient"],
+      "expected_decisions": ["advance", "insufficient_evidence"],
+      "diagnostic_outputs": ["decision", "confidence", "policy_criterion_failures"]
+    },
+    {
+      "id": "T09",
+      "name": "cross_endpoint_transfer_diagnosis",
+      "scope": "post_reveal",
+      "source": "authentic_and_controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "domain_specific_failure_localization",
+      "observability": "documented_context_plus_aggregate_validation",
+      "difficulty_axis": "mismatch_disclosure",
+      "levels": ["explicit", "documentation_discovery", "multiple_simultaneous_mismatches"],
+      "expected_decisions": ["insufficient_evidence"],
+      "diagnostic_outputs": ["diagnostic_codes", "unsupported_codes", "diagnosis_f1"]
+    },
+    {
+      "id": "T10",
+      "name": "smallest_resolving_experiment",
+      "scope": "post_reveal",
+      "source": "controlled",
+      "implementation_status": "runnable",
+      "primary_capability": "recovery_and_experimental_design",
+      "observability": "documented_failure_state",
+      "difficulty_axis": "failure_mode_specificity",
+      "levels": ["single_failure", "competing_failures", "irrecoverable_integrity", "sufficient_evidence"],
+      "expected_decisions": ["advance", "insufficient_evidence", "stop"],
+      "diagnostic_outputs": ["next_action_type", "resolves_named_failure", "avoids_unnecessary_data_collection"]
+    }
+  ],
+  "paired_interventions": [
+    {
+      "id": "full_vs_withheld",
+      "changes": ["development_data_visibility"],
+      "supports_inference": "data_grounding_or_memorized_claim_risk"
+    },
+    {
+      "id": "base_vs_expert_playbook",
+      "changes": ["domain_procedural_scaffold"],
+      "supports_inference": "promptable_expertise_gap_not_proof_of_pretraining_cause"
+    },
+    {
+      "id": "short_milestone_vs_end_to_end",
+      "changes": ["workflow_horizon"],
+      "supports_inference": "domain_reasoning_gap_vs_long_horizon_execution_gap"
+    }
+  ],
+  "calibration_gate": {
+    "minimum_model_tiers": 4,
+    "minimum_task_ids": 6,
+    "seeds_per_cell": 1,
+    "maximum_floor_rate": 0.5,
+    "maximum_ceiling_rate": 0.5,
+    "requires_monotonic_breaking_point_on_at_least_two_ladders": true,
+    "ranking_claim_allowed": false
+  },
+  "headline_gate": {
+    "seeds_per_model_per_task": 10,
+    "minimum_score_gap_for_claim": 12.0,
+    "requires_clustered_uncertainty": true,
+    "requires_rank_stability": true,
+    "requires_full_vs_withheld_control": true,
+    "requires_held_out_variant_levels": true
+  }
+}

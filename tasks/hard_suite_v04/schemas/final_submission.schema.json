@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "family_id",
+    "variant_id",
+    "selected_resource_id",
+    "decision",
+    "confidence",
+    "primary_failure",
+    "primary_estimand_id",
+    "analysis_method_id",
+    "metrics",
+    "interpretation_id",
+    "evidence_ids",
+    "containment_status",
+    "smallest_next_action",
+    "recommended_intervention",
+    "intervention_effect",
+    "unnecessary_escalation",
+    "rationale"
+  ],
+  "properties": {
+    "family_id": {"type": "string", "minLength": 1},
+    "variant_id": {"type": "string", "minLength": 1},
+    "selected_resource_id": {"enum": ["R1", "R2", "R3", "none"]},
+    "decision": {"enum": ["advance", "insufficient_evidence", "stop"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "primary_failure": {"type": "string", "minLength": 1},
+    "primary_estimand_id": {"type": "string", "minLength": 1},
+    "analysis_method_id": {"type": "string", "minLength": 1},
+    "metrics": {"type": "object", "minProperties": 5, "additionalProperties": {"type": "number"}},
+    "interpretation_id": {"type": "string", "minLength": 1},
+    "evidence_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "containment_status": {"enum": ["not_contained", "contained", "contained_process_only", "verified_no_issue"]},
+    "smallest_next_action": {"type": "string", "minLength": 1},
+    "recommended_intervention": {"type": "string", "minLength": 1},
+    "intervention_effect": {"enum": ["resolves", "ineffective", "resolves_process_only", "evidence_still_insufficient", "no_resource_selected"]},
+    "unnecessary_escalation": {"type": "boolean"},
+    "rationale": {"type": "string", "minLength": 30}
+  }
+}

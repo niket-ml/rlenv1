@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.8-final-two-condition-development-check-1",
+  "scientific_version": "v0.8",
+  "parent_development_snapshot": "artifacts/diagnostics/hard_suite_v08_execution_snapshot_02.json",
+  "execution_snapshot": "artifacts/diagnostics/hard_suite_v08_execution_snapshot_03.json",
+  "model_id": "openai/gpt-5.6-sol",
+  "provider_order": [
+    "OpenAI"
+  ],
+  "allow_fallbacks": false,
+  "partition": "development",
+  "conditions_in_order": [
+    {
+      "condition_id": "case_03_signal_remains",
+      "case_id": "case_03",
+      "mechanism": "signal_remains",
+      "seed": 80303
+    },
+    {
+      "condition_id": "case_04",
+      "case_id": "case_04",
+      "mechanism": "default",
+      "seed": 80401
+    }
+  ],
+  "episode_budget_source": "configs/hard_suite_v08_execution.json",
+  "maximum_incremental_spend_usd": 4.78,
+  "per_episode_preflight_guard_usd": 2.39,
+  "persistence": {
+    "host_only": true,
+    "atomic_after_every_model_response": true,
+    "atomic_after_every_tool_action": true,
+    "credential_redaction": true,
+    "agent_visible": false
+  },
+  "stop_before_second_condition_for": [
+    "infrastructure_failure",
+    "provider_or_route_failure",
+    "unrecovered_schema_failure",
+    "grader_or_scoring_inconsistency",
+    "cumulative_cost_cap"
+  ],
+  "continue_after_genuine_scientific_failure": true,
+  "forbidden_models": [
+    "openai/gpt-5.2",
+    "anthropic/claude-opus-5",
+    "google/gemini-3.1-pro-preview",
+    "moonshotai/kimi-k3",
+    "openai/gpt-6-astra"
+  ],
+  "forbidden_partitions": [
+    "heldout"
+  ],
+  "release_freeze": false,
+  "ranking_claim_allowed": false
+}

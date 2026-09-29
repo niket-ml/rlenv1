@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1",
+  "suite_id": "uc_biomarker_data_diagnostics_v0",
+  "generation_seed": 20260906,
+  "tasks": [
+    {
+      "task_id": "T03",
+      "name": "patient_identity_and_duplicate_audit",
+      "ladder_id": "duplicate_pair_count",
+      "scenarios": [
+        {"scenario_id": "duplicates_0", "duplicate_pair_count": 0},
+        {"scenario_id": "duplicates_1", "duplicate_pair_count": 1},
+        {"scenario_id": "duplicates_3", "duplicate_pair_count": 3},
+        {"scenario_id": "duplicates_6", "duplicate_pair_count": 6}
+      ]
+    },
+    {
+      "task_id": "T04",
+      "name": "platform_aware_feature_alignment",
+      "ladder_id": "required_feature_dropout_fraction",
+      "scenarios": [
+        {"scenario_id": "dropout_0", "dropout_fraction": 0.0},
+        {"scenario_id": "dropout_10", "dropout_fraction": 0.1},
+        {"scenario_id": "dropout_30", "dropout_fraction": 0.3},
+        {"scenario_id": "dropout_50", "dropout_fraction": 0.5}
+      ]
+    },
+    {
+      "task_id": "T05",
+      "name": "leakage_and_batch_confounding_audit",
+      "ladder_id": "outcome_batch_phi",
+      "scenarios": [
+        {"scenario_id": "phi_0", "target_phi": 0.0},
+        {"scenario_id": "phi_30", "target_phi": 0.3},
+        {"scenario_id": "phi_50", "target_phi": 0.5},
+        {"scenario_id": "phi_70", "target_phi": 0.7}
+      ]
+    },
+    {
+      "task_id": "T06",
+      "name": "small_sample_and_label_noise_stability",
+      "ladder_id": "sample_size",
+      "scenarios": [
+        {"scenario_id": "size_n40_noise10", "sample_size": 40, "label_noise": 0.1},
+        {"scenario_id": "size_n60_noise10", "sample_size": 60, "label_noise": 0.1},
+        {"scenario_id": "size_n120_noise10", "sample_size": 120, "label_noise": 0.1},
+        {"scenario_id": "size_n240_noise10", "sample_size": 240, "label_noise": 0.1}
+      ]
+    },
+    {
+      "task_id": "T06",
+      "name": "small_sample_and_label_noise_stability",
+      "ladder_id": "label_noise",
+      "scenarios": [
+        {"scenario_id": "noise_n120_0", "sample_size": 120, "label_noise": 0.0},
+        {"scenario_id": "noise_n120_10", "sample_size": 120, "label_noise": 0.1},
+        {"scenario_id": "noise_n120_20", "sample_size": 120, "label_noise": 0.2},
+        {"scenario_id": "noise_n120_30", "sample_size": 120, "label_noise": 0.3}
+      ]
+    }
+  ]
+}

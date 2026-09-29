@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-09-14T00:50:50.424108+00:00",
+  "label": "CASE 2 GRACEFUL-FAILURE SUCCESSOR — CALIBRATION PENDING",
+  "release_id": "uc-bench-case2-graceful-failure-v1",
+  "closure": "1276e91e322b2e84c0a008b24b41add487dcdd2a5faea211ab7d837fb5db3aa4",
+  "preservation_passed": true,
+  "inheritance": {
+    "model_configuration": true,
+    "execution_limits": true,
+    "provider_adapters": true,
+    "request_sha256": true,
+    "threshold_sha256": true,
+    "all_predecessor_files_identical": true
+  },
+  "evidence": {
+    "development/case2_graceful/release_candidate.json": "eb0ac67a8688af49bcfffac4c14581daf9fb44075225c01425205eb9eb3db1d7",
+    "development/case2_graceful/validation_receipt.json": "56f456448a7a239ba3a6d1ec8e9cfc3639485ac86d2451b2eeab61973a05338c",
+    "development/case2_graceful/funding_routes.json": "98c0025106e7597548b710bdda51dfc9df0112169cce03b85d97e7dcd90e5633",
+    "development/case2_graceful/cost_plan.json": "f4b8a0d62ea14d2a19c55d9b0d0372d4381c9c1663e72091398f10243585b485",
+    "reports/UC_BENCH_CASE2_GRACEFUL_FAILURE_SUCCESSOR.md": "de45119d2a2285387c63d121de11e5659fd5e9f9d76085cd968ba0f1b662caa8"
+  },
+  "actual_inference_spend_usd": 0,
+  "scientific_authorization": false,
+  "verdict": "LOCAL GO; CALIBRATION PENDING FRESH APPROVAL"
+}

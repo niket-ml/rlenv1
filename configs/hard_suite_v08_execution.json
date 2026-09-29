@@ -1,0 +1,56 @@
+{
+  "schema_version": "0.8-three-condition-development-1",
+  "status": "authorized_bounded_development_tranche",
+  "partition": "development",
+  "model_id": "openai/gpt-5.6-sol",
+  "provider_order": ["OpenAI"],
+  "allow_fallbacks": false,
+  "conditions_in_order": [
+    {
+      "condition_id": "case_02",
+      "case_id": "case_02",
+      "mechanism": "default",
+      "seed": 70802
+    },
+    {
+      "condition_id": "case_03_signal_remains",
+      "case_id": "case_03",
+      "mechanism": "signal_remains",
+      "seed": 70804
+    },
+    {
+      "condition_id": "case_04",
+      "case_id": "case_04",
+      "mechanism": "default",
+      "seed": 70805
+    }
+  ],
+  "episode_budget": {
+    "maximum_turns": 65,
+    "maximum_completion_tokens_per_turn": 5000,
+    "maximum_total_completion_tokens": 90000,
+    "wall_clock_timeout_seconds": 4200,
+    "minimum_request_interval_seconds": 3.25,
+    "requested_reasoning_effort": "medium",
+    "sdk_request_retries": 0,
+    "scientific_episode_retries": 0,
+    "context_policy": "Preserve the complete visible tool transcript and provider reasoning state; do not compact automatically."
+  },
+  "attempts_per_condition": 1,
+  "episode_count": 3,
+  "maximum_incremental_spend_usd": 8.0,
+  "per_episode_preflight_guard_usd": 2.39,
+  "checkpoint_after_every_request": true,
+  "checkpoint_after_every_episode": true,
+  "stop_after_three_for_mandatory_review": true,
+  "ranking_claim_allowed": false,
+  "forbidden_conditions": ["case_01", "case_03_signal_collapses"],
+  "forbidden_models": [
+    "openai/gpt-5.2",
+    "anthropic/claude-opus-5",
+    "google/gemini-3.1-pro-preview",
+    "moonshotai/kimi-k3",
+    "openai/gpt-6-astra"
+  ],
+  "forbidden_partitions": ["heldout"]
+}

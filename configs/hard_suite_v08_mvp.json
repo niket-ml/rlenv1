@@ -1,0 +1,162 @@
+{
+  "schema_version": "0.8-mvp-development-1",
+  "status": "unfrozen_local_validation",
+  "suite_id": "uc_anti_tnf_predictor_diligence_v0_8_mvp",
+  "environment_count": 1,
+  "case_packet_count": 4,
+  "controlled_condition_count": 5,
+  "source_science_version": "v0.7",
+  "scientific_purpose_changed": false,
+  "public_case_root": "tasks/hard_suite_v07/development",
+  "private_case_root": "grader_private/hard_suite_v07",
+  "active_conditions": [
+    {
+      "condition_id": "case_01",
+      "source_case_id": "case_01",
+      "source_mechanism": "default",
+      "scientific_purpose": "Recognize a usable patient-level research signal, avoid treating harmless data-room imperfections as blockers, and keep claims bounded.",
+      "important_calculation": "Patient-level AUC with uncertainty, Brier score, committed-bin calibration error, net benefit at 0.50, and site sensitivity.",
+      "consequential_decision": "Continue bounded external research validation or stop the current predictor.",
+      "accepted_resources": ["none", "X31"],
+      "resource_decision_rules": {
+        "CURRENT_PROBABILITY_USE": ["none"],
+        "CLEAN_PIPELINE_SIGNAL": ["X31"]
+      },
+      "accepted_dispositions": ["CONTINUE"],
+      "belief_change_rule": "NONDECREASE",
+      "accepted_alternatives": [
+        "Mean, median, first-locked-biopsy, or a defensible repeated-measures patient estimand",
+        "Patient bootstrap or a defensible hierarchical uncertainty analysis",
+        "Purchase nothing when current evidence is sufficient, or purchase the inexpensive pipeline replay when execution uncertainty remains live"
+      ],
+      "hidden_variant": "No paired mechanism variant in this MVP condition; outcomes and any purchased X31 return remain hidden until the required action.",
+      "verifier_method": "Rebuild one row per patient from raw sample mappings, recompute all committed metrics, inspect fit membership, and verify any replay directly from purchased predictions.",
+      "important_failure": "Stopping a valid research programme because minor replay drift or a harmless anomaly is treated as a decisive scientific failure."
+    },
+    {
+      "condition_id": "case_02",
+      "source_case_id": "case_02",
+      "source_mechanism": "default",
+      "scientific_purpose": "Detect pseudoreplication and hospital/site structure that make the naive biopsy-row result look transportable.",
+      "important_calculation": "Compare biopsy-row and patient-level discrimination, then quantify site-specific and site-weighted performance, calibration, and utility.",
+      "consequential_decision": "Pause the predictor pending identity/transport evidence, or stop if matched external evidence already confirms failure.",
+      "accepted_resources": ["none", "X17", "X46"],
+      "resource_decision_rules": {
+        "CURRENT_PROBABILITY_USE": ["none"],
+        "PATIENT_IDENTITY": ["X17"],
+        "TRANSPORT": ["X46"]
+      },
+      "accepted_dispositions": ["PAUSE", "INSUFFICIENT_EVIDENCE", "STOP"],
+      "belief_change_rule": "NONINCREASE",
+      "accepted_alternatives": [
+        "Collapse biopsies to a patient estimand or use a defensible repeated-measures model",
+        "Use the low-cost identity crosswalk to contain the ambiguity",
+        "Use the within-budget matched external cohort when the declared aim is to resolve transport directly rather than only reconcile identity",
+        "Purchase nothing when the immediate advancement decision is already PAUSE or STOP because current patient/site evidence is decision-invalid and causal diagnosis is not required now"
+      ],
+      "hidden_variant": "No paired mechanism variant in this MVP condition; the selected X17 or X46 evidence remains hidden until purchase.",
+      "verifier_method": "Reconstruct fingerprint-defined patients, recompute naive and patient/site metrics, and independently verify either source crosswalk coverage or matched external results.",
+      "important_failure": "Treating correlated biopsy rows or site prevalence as independent patient-level biological signal."
+    },
+    {
+      "condition_id": "case_03_signal_collapses",
+      "source_case_id": "case_03",
+      "source_mechanism": "signal_collapses",
+      "scientific_purpose": "Detect validation-informed preprocessing, exclude the contaminated result, and test whether a clean pipeline replay preserves the signal.",
+      "important_calculation": "Mark original metrics ineligible and recompute patient-level discrimination, calibration, utility, and uncertainty after a clean replay.",
+      "consequential_decision": "Stop the current predictor when its signal collapses under clean replay.",
+      "accepted_resources": ["X31"],
+      "resource_decision_rules": {
+        "CLEAN_PIPELINE_SIGNAL": ["X31"]
+      },
+      "accepted_dispositions": ["STOP"],
+      "belief_change_rule": "DECREASE",
+      "accepted_alternatives": [
+        "Equivalent outcome-blind reconstruction of the same frozen predictor",
+        "Mean, median, first-locked-biopsy, or a defensible repeated-measures patient estimand",
+        "Stop before purchase only under a documented business contract in which recovery of this asset has no value"
+      ],
+      "hidden_variant": "The public starting evidence is shared with signal-remains; only the purchased clean replay reveals that performance collapses.",
+      "verifier_method": "Inspect raw fit membership and chronology, exclude the original result, and independently recompute the clean-replay metrics from X31 predictions and sealed outcomes.",
+      "important_failure": "Using contaminated validation metrics or buying evidence that cannot determine whether a clean reconstruction preserves the signal."
+    },
+    {
+      "condition_id": "case_03_signal_remains",
+      "source_case_id": "case_03",
+      "source_mechanism": "signal_remains",
+      "scientific_purpose": "Detect the same validation-informed preprocessing but recover when a clean replay retains decision-relevant signal.",
+      "important_calculation": "Mark original metrics ineligible and recompute patient-level discrimination, calibration, utility, and uncertainty after the clean replay.",
+      "consequential_decision": "Continue bounded external research validation while prohibiting clinical or treatment-effect claims.",
+      "accepted_resources": ["X31"],
+      "resource_decision_rules": {
+        "CLEAN_PIPELINE_SIGNAL": ["X31"]
+      },
+      "accepted_dispositions": ["CONTINUE"],
+      "belief_change_rule": "INCREASE",
+      "accepted_alternatives": [
+        "Equivalent outcome-blind reconstruction of the same frozen predictor",
+        "Mean, median, first-locked-biopsy, or a defensible repeated-measures patient estimand",
+        "A conditional continuation whose unresolved transport and utility gates are explicit"
+      ],
+      "hidden_variant": "The public starting evidence is shared with signal-collapse; only the purchased clean replay reveals retained performance.",
+      "verifier_method": "Inspect raw fit membership and chronology, exclude the original result, and independently recompute the clean-replay metrics from X31 predictions and sealed outcomes.",
+      "important_failure": "Turning leakage detection into a universal-stop heuristic and failing to revise after valid clean evidence."
+    },
+    {
+      "condition_id": "case_04",
+      "source_case_id": "case_04",
+      "source_mechanism": "default",
+      "scientific_purpose": "Distinguish attractive discrimination from unusable probability calibration and harmful threshold utility.",
+      "important_calculation": "Patient-level AUC with uncertainty, Brier score, committed-bin calibration error, and model-versus-default net benefit at 0.50.",
+      "consequential_decision": "Pause or stop probability-based triage despite attractive AUC; purchasing nothing is valid when the current decision is already resolved.",
+      "accepted_resources": ["none", "X46"],
+      "resource_decision_rules": {
+        "CURRENT_PROBABILITY_USE": ["none"],
+        "TRANSPORT": ["X46"]
+      },
+      "accepted_dispositions": ["PAUSE", "STOP"],
+      "belief_change_rule": "DECREASE",
+      "accepted_alternatives": [
+        "Net benefit or a contract-equivalent expected-utility analysis",
+        "Stop without further spending when current calibration and utility already fail decisively",
+        "Purchase matched external evidence when deciding whether the defect transports rather than deciding current-use eligibility"
+      ],
+      "hidden_variant": "No paired mechanism variant in this MVP condition; the optional X46 result remains hidden until purchase.",
+      "verifier_method": "Rebuild the patient table, recompute discrimination, calibration and threshold utility, and verify matched external metrics if X46 is purchased.",
+      "important_failure": "Advancing a probability-based treatment triage rule on AUC alone despite harmful calibration or utility."
+    }
+  ],
+  "requirement_classes": [
+    "mission_critical_science",
+    "accepted_professional_alternative",
+    "diagnostic_only"
+  ],
+  "local_control_types": [
+    "correct_reference",
+    "different_valid_solution",
+    "plausible_scientific_error",
+    "hard_coded_without_artifacts",
+    "altered_input",
+    "correct_decision_without_required_analysis",
+    "incorrect_optional_diagnostic"
+  ],
+  "active_mvp_excludes": [
+    "post-MVP roadmap investigations",
+    "held-out cases",
+    "Claude",
+    "Gemini",
+    "Kimi",
+    "GPT-5.2",
+    "Astra"
+  ],
+  "paid_calls_authorized": true,
+  "paid_authorization_scope": {
+    "model_id": "openai/gpt-5.6-sol",
+    "conditions": ["case_02", "case_03_signal_remains", "case_04"],
+    "attempts_per_condition": 1,
+    "maximum_incremental_spend_usd": 8.0,
+    "stop_afterward_for_review": true
+  },
+  "release_candidate_freeze_authorized": false,
+  "roadmap_path": "configs/hard_suite_v08_case_portfolio.json"
+}

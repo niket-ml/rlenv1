@@ -1,0 +1,330 @@
+{
+  "schema_version": "0.1",
+  "task_contract": "diagnostic_decision_v0",
+  "scoring_policy": {
+    "version": "0.2",
+    "weights": {
+      "decision": 0.40,
+      "diagnosis": 0.30,
+      "next_action": 0.20,
+      "required_evidence_recall": 0.10
+    },
+    "confidence": "reported_across_packets_not_scored_per_packet",
+    "additional_valid_evidence_ids_are_penalized": false,
+    "v0_1_action_aliases": {
+      "expand_endpoint_matched_validation": "endpoint_matched_validation",
+      "prospective_endpoint_matched_validation": "endpoint_matched_validation"
+    },
+    "wrong_decision_ceiling": 59.0
+  },
+  "decision_policy": {
+    "advance_requires_all": {
+      "auc_minimum": 0.70,
+      "auc_interval_lower_strictly_above": 0.50,
+      "permutation_p_maximum": 0.05,
+      "evaluated_n_minimum": 100,
+      "validation_usable_under_feature_contract": true,
+      "no_hard_integrity_failure": true
+    },
+    "stop_when": "hard_integrity_failure_is_true",
+    "otherwise": "insufficient_evidence"
+  },
+  "scenarios": [
+    {
+      "task_id": "T08",
+      "scenario_id": "null_well_powered",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "golimumab",
+          "validation_drug": "golimumab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.51, "auc_interval": [0.43, 0.59], "permutation_p_value": 0.39, "evaluated_n": 240},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["null_discrimination"],
+        "expected_next_action_type": "revisit_model_specification",
+        "required_evidence_ids": ["VAL-001", "POL-001"],
+        "confidence_range": [0.60, 0.90]
+      }
+    },
+    {
+      "task_id": "T08",
+      "scenario_id": "promising_underpowered",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "golimumab",
+          "validation_drug": "golimumab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.78, "auc_interval": [0.57, 0.91], "permutation_p_value": 0.018, "evaluated_n": 60},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["underpowered_validation"],
+        "expected_next_action_type": "expand_validation_sample",
+        "accepted_legacy_next_action_types": ["expand_endpoint_matched_validation"],
+        "required_evidence_ids": ["VAL-001", "POL-001"],
+        "confidence_range": [0.60, 0.90]
+      }
+    },
+    {
+      "task_id": "T08",
+      "scenario_id": "borderline_interval",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "golimumab",
+          "validation_drug": "golimumab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.71, "auc_interval": [0.50, 0.83], "permutation_p_value": 0.047, "evaluated_n": 140},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["borderline_uncertainty"],
+        "expected_next_action_type": "expand_validation_sample",
+        "accepted_legacy_next_action_types": ["expand_endpoint_matched_validation"],
+        "required_evidence_ids": ["VAL-001", "POL-001"],
+        "confidence_range": [0.55, 0.85]
+      }
+    },
+    {
+      "task_id": "T08",
+      "scenario_id": "sufficient_evidence",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "golimumab",
+          "validation_drug": "golimumab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.81, "auc_interval": [0.70, 0.89], "permutation_p_value": 0.001, "evaluated_n": 240},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "advance",
+        "expected_diagnostic_codes": ["none"],
+        "expected_next_action_type": "independent_replication",
+        "required_evidence_ids": ["VAL-001", "POL-001"],
+        "confidence_range": [0.65, 0.90]
+      }
+    },
+    {
+      "task_id": "T09",
+      "scenario_id": "explicit_cross_endpoint_transfer",
+      "packet": {
+        "context": {
+          "development_endpoint": "endoscopic_and_histologic_mucosal_healing_week_4_to_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "Affymetrix_HG-U133_Plus_2.0",
+          "validation_platform": "Affymetrix_HG-U133A_2.0",
+          "development_drug": "infliximab",
+          "validation_drug": "golimumab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.66, "auc_interval": [0.52, 0.80], "permutation_p_value": 0.019, "evaluated_n": 59},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["underpowered_validation", "endpoint_mismatch", "platform_shift", "drug_transfer"],
+        "expected_next_action_type": "endpoint_matched_validation",
+        "accepted_legacy_next_action_types": ["expand_endpoint_matched_validation", "prospective_endpoint_matched_validation"],
+        "required_evidence_ids": ["CTX-001", "VAL-001", "POL-001"],
+        "confidence_range": [0.60, 0.90]
+      }
+    },
+    {
+      "task_id": "T09",
+      "scenario_id": "endpoint_only",
+      "packet": {
+        "context": {
+          "development_endpoint": "mucosal_healing_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "infliximab",
+          "validation_drug": "infliximab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.68, "auc_interval": [0.54, 0.80], "permutation_p_value": 0.020, "evaluated_n": 120},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["endpoint_mismatch"],
+        "expected_next_action_type": "endpoint_matched_validation",
+        "accepted_legacy_next_action_types": ["expand_endpoint_matched_validation", "prospective_endpoint_matched_validation"],
+        "required_evidence_ids": ["CTX-001", "VAL-001", "POL-001"],
+        "confidence_range": [0.60, 0.90]
+      }
+    },
+    {
+      "task_id": "T09",
+      "scenario_id": "platform_only",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "Affymetrix_HG-U133_Plus_2.0",
+          "validation_platform": "RNA_seq",
+          "development_drug": "infliximab",
+          "validation_drug": "infliximab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.69, "auc_interval": [0.57, 0.79], "permutation_p_value": 0.012, "evaluated_n": 180},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["platform_shift"],
+        "expected_next_action_type": "platform_harmonized_validation",
+        "required_evidence_ids": ["CTX-001", "VAL-001", "POL-001"],
+        "confidence_range": [0.55, 0.85]
+      }
+    },
+    {
+      "task_id": "T09",
+      "scenario_id": "matched_but_null",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "infliximab",
+          "validation_drug": "infliximab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.55, "auc_interval": [0.47, 0.63], "permutation_p_value": 0.24, "evaluated_n": 240},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["null_discrimination"],
+        "expected_next_action_type": "revisit_model_specification",
+        "required_evidence_ids": ["CTX-001", "VAL-001", "POL-001"],
+        "confidence_range": [0.60, 0.90]
+      }
+    },
+    {
+      "task_id": "T10",
+      "scenario_id": "underpowered_cross_endpoint",
+      "packet": {
+        "context": {
+          "development_endpoint": "mucosal_healing_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "infliximab",
+          "validation_drug": "golimumab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.76, "auc_interval": [0.54, 0.90], "permutation_p_value": 0.031, "evaluated_n": 54},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["underpowered_validation", "endpoint_mismatch", "drug_transfer"],
+        "expected_next_action_type": "endpoint_matched_validation",
+        "accepted_legacy_next_action_types": ["expand_endpoint_matched_validation", "prospective_endpoint_matched_validation"],
+        "required_evidence_ids": ["CTX-001", "VAL-001", "POL-001"],
+        "confidence_range": [0.60, 0.90]
+      }
+    },
+    {
+      "task_id": "T10",
+      "scenario_id": "hard_identity_conflict",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "infliximab",
+          "validation_drug": "infliximab",
+          "hard_integrity_failure": true,
+          "integrity_finding": "Two validation identifiers map to the same biopsy with discordant outcomes; no resolution key exists."
+        },
+        "validation": {"auc": 0.84, "auc_interval": [0.76, 0.91], "permutation_p_value": 0.001, "evaluated_n": 220},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "stop",
+        "expected_diagnostic_codes": ["sample_identity_conflict"],
+        "expected_next_action_type": "resolve_sample_identity",
+        "required_evidence_ids": ["CTX-001", "POL-001"],
+        "confidence_range": [0.80, 0.98]
+      }
+    },
+    {
+      "task_id": "T10",
+      "scenario_id": "recoverable_feature_dropout",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "targeted_panel",
+          "development_drug": "infliximab",
+          "validation_drug": "infliximab",
+          "hard_integrity_failure": false,
+          "validation_usable_under_feature_contract": false,
+          "integrity_finding": "Thirty percent of committed model features are absent and the prespecified missing-feature policy is fail_closed."
+        },
+        "validation": {"auc": 0.79, "auc_interval": [0.68, 0.87], "permutation_p_value": 0.003, "evaluated_n": 210},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "insufficient_evidence",
+        "expected_diagnostic_codes": ["feature_dropout"],
+        "expected_next_action_type": "repair_and_revalidate",
+        "required_evidence_ids": ["CTX-001", "POL-001"],
+        "confidence_range": [0.65, 0.90]
+      }
+    },
+    {
+      "task_id": "T10",
+      "scenario_id": "sufficient_next_stage",
+      "packet": {
+        "context": {
+          "development_endpoint": "clinical_response_week_6",
+          "validation_endpoint": "clinical_response_week_6",
+          "development_platform": "RNA_seq",
+          "validation_platform": "RNA_seq",
+          "development_drug": "infliximab",
+          "validation_drug": "infliximab",
+          "hard_integrity_failure": false
+        },
+        "validation": {"auc": 0.82, "auc_interval": [0.72, 0.90], "permutation_p_value": 0.001, "evaluated_n": 260},
+        "evidence_ids": ["CTX-001", "VAL-001", "POL-001"]
+      },
+      "rubric": {
+        "expected_decision": "advance",
+        "expected_diagnostic_codes": ["none"],
+        "expected_next_action_type": "independent_replication",
+        "required_evidence_ids": ["VAL-001", "POL-001"],
+        "confidence_range": [0.65, 0.90]
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["scenario_id", "target_endpoint", "assessment_timepoint", "label_sources", "ambiguity_status", "endpoint_transfer_status", "sensitivity_plan", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "target_endpoint": {"type": "string"},
+    "assessment_timepoint": {"type": "string"},
+    "label_sources": {"type": "array", "items": {"type": "string"}},
+    "ambiguity_status": {"enum": ["clear", "conditional", "blocked", "unresolved"]},
+    "endpoint_transfer_status": {"enum": ["matched", "conditional", "mismatched", "unresolved"]},
+    "sensitivity_plan": {"type": "object"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

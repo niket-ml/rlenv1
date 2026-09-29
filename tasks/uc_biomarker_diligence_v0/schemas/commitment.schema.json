@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UC-Bench irreversible commitment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["target_endpoint", "endpoint_interpretation", "feature_schema_version", "missing_feature_policy", "decision_threshold", "expected_auc", "expected_auc_interval", "permutation_count", "artifact_paths"],
+  "properties": {
+    "target_endpoint": {"type": "string", "minLength": 1},
+    "endpoint_interpretation": {"type": "string", "minLength": 1},
+    "feature_schema_version": {"type": "string", "minLength": 1},
+    "missing_feature_policy": {"type": "string", "minLength": 1},
+    "decision_threshold": {"type": "number", "minimum": 0, "maximum": 1},
+    "expected_auc": {"type": "number", "minimum": 0, "maximum": 1},
+    "expected_auc_interval": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+    "permutation_count": {"type": "integer", "minimum": 1},
+    "artifact_paths": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["scenario_id", "steps", "outcomes_used_during_fit", "validation_data_used_to_fit_transforms", "leakage_status", "platform_transfer_status", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "steps": {"type": "array", "items": {"type": "object"}},
+    "outcomes_used_during_fit": {"type": "boolean"},
+    "validation_data_used_to_fit_transforms": {"type": "boolean"},
+    "leakage_status": {"enum": ["clear", "conditional", "blocked", "invalid"]},
+    "platform_transfer_status": {"enum": ["matched", "conditional", "mismatched", "unresolved"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

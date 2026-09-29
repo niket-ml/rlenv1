@@ -1,0 +1,8 @@
+{
+  "decision_threshold": 0.5,
+  "drug": "infliximab",
+  "input": "baseline colonic-mucosa transcriptomic features",
+  "model_id": "uc-lock-2026-07",
+  "output": "week-6 response probability",
+  "weights_sha256": "63c96d4b63cc83a3a4700c74e37772cc7ec19cf2e5f7859b3e870f75ef0dddb3"
+}

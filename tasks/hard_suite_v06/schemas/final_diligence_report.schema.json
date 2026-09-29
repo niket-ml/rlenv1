@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["scenario_id", "decision", "confidence", "claim_statuses", "belief_update", "intervention_effect", "smallest_next_action", "limitations", "supported_claims", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "decision": {"enum": ["advance", "conditional_advance", "pause", "stop", "insufficient_evidence"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "claim_statuses": {"type": "object"},
+    "belief_update": {"type": "object"},
+    "intervention_effect": {"enum": ["resolves_blocker", "exposes_second_blocker", "reduces_uncertainty_without_resolving", "ineffective", "misleading_reassurance", "no_resource_needed"]},
+    "smallest_next_action": {"type": "object"},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "supported_claims": {"type": "array", "items": {"type": "object"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

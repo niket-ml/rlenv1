@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1",
+  "framework": "verifiers",
+  "framework_version": "0.3.1",
+  "harness": "isolated_coding_agent_plus_domain_tools",
+  "model_configuration": "configs/smoke_models.json",
+  "model_environment_variables": [
+    "UC_BENCH_MODEL_A",
+    "UC_BENCH_MODEL_B",
+    "UC_BENCH_MODEL_C"
+  ],
+  "provider_key_environment_variables": [
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "OPENROUTER_API_KEY"
+  ],
+  "isolation_backend_environment_variable": "UC_BENCH_ISOLATION_BACKEND",
+  "allowed_isolation_backends": ["docker", "prime", "modal"],
+  "isolation_credential_environment_variables": {
+    "prime": ["PRIME_API_KEY"],
+    "modal": ["MODAL_TOKEN_ID", "MODAL_TOKEN_SECRET"]
+  },
+  "attempts_per_model": 3,
+  "smoke_trajectory_count": 9,
+  "condition": "full_data",
+  "temperature": null,
+  "temperature_policy": "omit_for_cross_provider_parameter_compatibility",
+  "maximum_agent_turns": 40,
+  "maximum_total_completion_tokens": 40000,
+  "model_names_are_runtime_configuration": false,
+  "scripted_fixtures_are_model_results": false
+}

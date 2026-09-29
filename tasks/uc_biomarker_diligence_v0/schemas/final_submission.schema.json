@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UC-Bench terminal evidence decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "confidence", "rationale", "failure_mode", "diagnostic_codes", "evidence_artifact_paths", "next_action_type", "next_action"],
+  "properties": {
+    "decision": {"enum": ["advance", "stop", "insufficient_evidence"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "rationale": {"type": "string", "minLength": 1},
+    "failure_mode": {"description": "Choose the most specific supported mode from the public vocabulary; use none only when no failure applies.", "enum": ["none", "underpowered_cross_endpoint_and_cross_platform_transfer", "recoverable_feature_dropout", "irrecoverable_sample_identity_conflict"]},
+    "diagnostic_codes": {"type": "array", "description": "Select only independently supported codes; unsupported code stuffing is penalized.", "minItems": 1, "uniqueItems": true, "items": {"enum": ["none", "underpowered_validation", "endpoint_mismatch", "platform_shift", "drug_transfer", "feature_dropout", "sample_identity_conflict"]}},
+    "evidence_artifact_paths": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "next_action_type": {"description": "Controlled vocabulary used for deterministic scoring.", "enum": ["prospective_endpoint_matched_validation", "independent_replication", "repair_and_revalidate", "resolve_sample_identity"]},
+    "next_action": {"type": "string", "minLength": 1}
+  }
+}

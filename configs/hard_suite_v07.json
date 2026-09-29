@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.7-vertical-1",
+  "suite_id": "uc_anti_tnf_predictor_diligence_v0_7",
+  "status": "ready_for_one_time_freeze_and_bounded_execution",
+  "construct": "Investigate whether a locked baseline-biopsy transcriptomic predictor supports a safe anti-TNF investment decision.",
+  "development_cases": [
+    "case_01",
+    "case_02",
+    "case_03",
+    "case_04"
+  ],
+  "case_03_controlled_mechanisms": [
+    "signal_collapses",
+    "signal_remains"
+  ],
+  "checkpoint_weights": {
+    "C1": 15,
+    "C2": 20,
+    "C3": 25,
+    "C4": 20,
+    "C5": 20
+  },
+  "checkpoint_names": {
+    "C1": "evidence_and_analysis_unit",
+    "C2": "locked_validation_plan",
+    "C3": "quantitative_execution",
+    "C4": "diagnosis_and_followup_choice",
+    "C5": "belief_revision_and_final_decision"
+  },
+  "scientific_reward_for_routine_mechanics": 0,
+  "full_mission_requires": [
+    "irreversible_pre_reveal_commitment",
+    "valid_decision_relevant_analysis",
+    "contaminated_evidence_excluded",
+    "decision_efficient_followup_or_justified_no_action",
+    "correct_belief_revision",
+    "supported_final_decision",
+    "bounded_claim_scope"
+  ],
+  "actions": [
+    "list_files",
+    "read_file",
+    "save_checkpoint",
+    "commit_validation_plan",
+    "reveal_validation",
+    "purchase_resource",
+    "submit"
+  ],
+  "irreversible_transitions": [
+    "validation plan locks before outcome reveal",
+    "exactly one resource action follows pre-purchase reasoning",
+    "start-state mutation terminates the episode",
+    "submission terminates the episode"
+  ],
+  "maximum_tool_calls": 80,
+  "maximum_resource_purchases": 1,
+  "paid_runner_created": true,
+  "benchmark_frozen": false,
+  "scientific_calls_authorized": true,
+  "heldout_cases_created": false,
+  "astra_policy": "explicitly_rejected",
+  "first_calibration": {
+    "status": "authorized_only_after_local_gates_and_freeze",
+    "models": [
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.2"
+    ],
+    "cases": [
+      "case_01",
+      "case_02",
+      "case_03:signal_collapses",
+      "case_03:signal_remains",
+      "case_04"
+    ],
+    "attempts_per_cell": 1,
+    "episode_count": 10,
+    "maximum_paid_rounds_before_construct_decision": 2,
+    "ranking_claim_allowed": false
+  },
+  "calibration_gates": {
+    "strongest_work_quality_target": [55, 75],
+    "strongest_full_mission_success_target": [1, 3],
+    "ideal_strongest_full_mission_success": 2,
+    "both_models_solve_at_least_one_easier_case": true,
+    "ceiling_model_fails_at_least_one_harder_case": true,
+    "weaker_model_has_meaningful_partial_credit": true,
+    "minimum_distinct_consequential_failure_types": 3,
+    "maximum_single_checkpoint_gap_share": 0.30,
+    "mechanical_or_schema_difficulty_allowed": false,
+    "too_easy_if_strongest_mean_above": 75,
+    "too_easy_if_strongest_passes_all_missions": true,
+    "too_hard_or_defective_if_strongest_mean_below": 45,
+    "too_hard_or_defective_if_strongest_passes_zero_missions": true
+  },
+  "local_gates": {
+    "reference_minimum_each_case": 90,
+    "two_alternative_solutions_minimum_each_case": 90,
+    "empty_schema_maximum": 15,
+    "generic_report_maximum": 20,
+    "keyword_attack_maximum": 15,
+    "graceful_recovery_minimum": 55,
+    "paraphrase_or_nesting_maximum_difference": 0.01,
+    "both_scientific_and_environment_reviews_required": true
+  }
+}

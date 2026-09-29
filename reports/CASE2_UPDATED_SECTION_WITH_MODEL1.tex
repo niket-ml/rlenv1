@@ -1,0 +1,130 @@
+\reportcase{2}{Does the result hold within each study site?}
+Case 2 evaluates whether the predictor's performance supports further validation. The analysis must distinguish prediction of individual treatment response from associations attributable to recruitment site.
+
+The dataset contains 203 records provisionally assigned to 96 patients. Some patients contribute multiple records, and recruitment sites contribute unequal numbers of patients. The agent must verify patient identities and account for repeated observations when estimating performance and uncertainty.
+
+The agent compares pooled performance with performance within recruitment sites. Differences in response rates and predictor outputs between sites can produce a favourable pooled result even when within-site prediction is weak. The final recommendation must reflect whether the analysis supports patient-level prediction or requires additional validation.
+
+\reporthead{What the agent must find out}
+The agent identifies which records belong to the same patient, chooses the included patients and records its plan before seeing responses. It then compares performance across all patients with performance within each site. A predictor can appear useful in the combined sample even if it ranks patients poorly within individual sites because hospitals can differ in both their patient populations and their measurements. If the predictor assigns higher scores to patients at a hospital where response is more common, its overall performance may look good---even if it cannot distinguish responders from nonresponders within that hospital.
+
+For example, suppose 80\% of patients respond at Hospital A and 20\% at Hospital B. Assigning every patient at A a higher score than every patient at B would produce an above-chance overall ranking, despite providing no useful ranking within either hospital.
+
+\begin{center}
+\begin{tikzpicture}[node distance=5mm]
+\node[box] (a) {203 records associated with 96 patient groups\\Check patient identities, repeated records and recruitment sites};
+\node[gate,below=of a] (b) {Record patient selection and analysis rules\\Then receive the patients' response results};
+\node[box,below=of b] (c) {Calculate performance across all patients and within each site\\Save both record counts and patient counts};
+\node[box,below=of c] (d) {Identify the remaining decision question\\Are identities reliable? Does the predictor work in another matched study?};
+\node[gate,text width=3.4cm,below=6mm of d.south,xshift=-4.4cm] (e) {Request an identity check if patient assignments affect the conclusion};
+\node[gate,text width=3.4cm,below=6mm of d.south] (f) {Request another cohort if performance elsewhere affects the conclusion};
+\node[gate,text width=3.4cm,below=6mm of d.south,xshift=4.4cm] (g) {Buy nothing if current results already answer the stated question};
+\node[result,below=8mm of f] (h) {Analyse the additional information and submit a recommendation\\Explain which findings support the next step and which uses remain unsupported};
+\foreach \x/\y in {a/b,b/c,c/d,d/e,d/f,d/g,e/h,f/h,g/h} \draw[arr] (\x)--(\y);
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 6. Case 2's patient, site and purchase decisions.}
+
+The agent may combine repeated records into one observation per patient, or retain multiple records and account for their shared patient identity. Either approach is acceptable if repeated measurements do not make the study appear to contain more independent patients than it does.
+
+The agent can request additional information if it is needed to reach a decision. A patient-identity review establishes which records belong to the same person. Data from an independent study tests whether the predictor works in a different patient group. These options address different problems: additional study data cannot correct the current patient mapping, and correcting that mapping cannot demonstrate performance elsewhere. Before making a purchase, the agent must explain what it needs to learn and how the answer could change its recommendation.
+
+The agent may recommend proceeding, pausing or stopping. Each recommendation must be supported by a checkable patient mapping and saved calculations.
+
+\newpage
+\reportcase{2}{Substantial partial work, but no complete success}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=.82cm]
+\foreach \x in {0,2.5,5,7.5,10} \draw[black!12] (\x,-.35)--(\x,3.45);
+\foreach \y/\name/\value/\col/\display in {3/Model 1/78.49/Blue/78.49,2/Model 2/65.91/Teal/65.91,1/Model 3/61.29/Purple/61.29,0/Model 4/16.13/Amber/16.13} {
+ \node[anchor=east,font=\small] at (-.2,\y) {\name};
+ \fill[\col!80] (0,{\y-.21}) rectangle ({\value/10},{\y+.21});
+ \node[anchor=west,font=\small] at ({\value/10+.12},\y) {\display};
+}
+\draw[Ink] (0,-.45)--(10,-.45);
+\foreach \x/\label in {0/0,2.5/25,5/50,7.5/75,10/100} \node[below,font=\small] at (\x,-.45) {\label};
+\node[below,font=\small] at (5,-.92) {Work score};
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 7. Verified work across four Case 2 model attempts.}
+
+No attempt passed the complete investigation. Models 1 and 2 submitted final recommendations, but each failed at least one decision-critical check. Models 3 and 4 did not finish. The work scores retain independently verifiable partial credit; they are not mission-pass thresholds.
+
+\begin{tabularx}{\textwidth}{@{}Ylrr@{}}\toprule
+Agent & Final outcome & API requests & Cost (USD) \\\midrule
+Model 1 & Submitted, but failed checks & 36 & 0.50 \\
+Model 2 & Submitted, but failed checks & 53 & 1.17 \\
+Model 3 & Did not submit & 65 & 7.39 \\
+Model 4 & Did not submit & 65 & 0.88 \\\bottomrule
+\end{tabularx}
+\reportcaption{Table 3. Completion and inference cost.}
+
+Case 2 assigns partial scores to verifiable unfinished work. Case 1 did not score its unfinished attempt. This difference prevents a direct comparison of case-average scores. Each model shown here has one retained Case 2 attempt; repeated runs are still required to estimate reliability or establish a stable ranking.
+
+\reporthead{The combined result concealed a site problem}
+The next chart compares ranking across all patients with ranking at the weakest site. AUC 0.50 means chance ranking. The agents used different accepted patient selections, so their exact estimates differ.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=.78cm]
+\foreach \x/\label in {0/.45,2/.55,4/.65,6/.75,8/.85} {
+ \draw[black!12] (\x,-.35)--(\x,2.4);
+ \node[below,font=\small] at (\x,-.4) {\label};
+}
+\draw[Muted,dashed] (1,-.35)--(1,2.4);
+\foreach \y/\name/\all/\weak in {2/Model 1/.699318/.487500,1/Model 2/.703704/.500000,0/Model 3/.720982/.504464} {
+ \node[anchor=east,font=\small] at (-.2,\y) {\name};
+ \draw[Ink!40,thick] ({(\weak-.45)*20},\y)--({(\all-.45)*20},\y);
+ \fill[Amber] ({(\weak-.45)*20},\y) circle (3pt);
+ \fill[Teal] ({(\all-.45)*20},\y) circle (3pt);
+}
+\node[below,font=\small] at (4,-.88) {Patient-ranking score (AUC)};
+\node[font=\small,anchor=west] at (8.4,1.5) {\textcolor{Teal}{All patients}};
+\node[font=\small,anchor=west] at (8.4,.7) {\textcolor{Amber}{Weakest site}};
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 8. Overall ranking versus the weakest study site.}
+
+Across all patients, AUC was about 0.70--0.72. At the weakest site, it was about 0.49--0.50. This gap limits claims about reliable performance across sites. It does not, by itself, identify the cause.
+
+In the attempt that evaluated the additional cohort, its AUC was 0.672, but its net benefit at the 50\% cutoff was $-0.087$. Better knowledge of ranking did not establish that the proposed cutoff was useful. Model 1 instead bought no additional evidence because its internal site analysis had already failed the declared robustness gate.
+
+\newpage
+\reportcase{2}{The failures occurred at different steps}
+The map separates checks that failed from work that was missing. A missing entry does not prove an incorrect calculation. It means that the evaluator could not find qualifying work for that check.
+
+\begin{tabularx}{\textwidth}{@{}Ycccc@{}}\toprule
+What the evaluator checked & M1 & M2 & M3 & M4 \\\midrule
+Kept the plan fixed after seeing responses & \reportmet & \reportfailed & \reportmet & \reportmet \\
+Provided the required links between saved files & \reportmet & \reportfailed & \reportmet & \reportmissing \\
+Handled repeated records from the same patient & \reportmet & \reportmet & \reportmet & \reportmissing \\
+Supported patient ranking and its uncertainty & \reportfailed & \reportmet & \reportfailed & \reportmissing \\
+Checked whether predicted chances matched responses & \reportmet & \reportmet & \reportmet & \reportmissing \\
+Supported the consequences of the 50\% cutoff & \reportfailed & \reportmet & \reportmet & \reportmissing \\
+Checked patient and record counts at each site & \reportmet & \reportfailed & \reportfailed & \reportmissing \\
+Made a decision-relevant follow-up choice & \reportmet & \reportfailed & \reportfailed & \reportmissing \\
+Supported the final recommendation & \reportfailed & \reportfailed & \reportmissing & \reportmissing \\\bottomrule
+\end{tabularx}
+\reportcaption{Figure 9. Where each Case 2 investigation failed or stopped.}
+
+Green means the check passed. Amber means it failed. Grey means qualifying work was missing. M1--M4 abbreviate Model 1--Model 4.
+
+\reporthead{Model 1 omitted its committed uncertainty interval}
+Model 1 fixed the analysis unit before seeing responses, preserved the saved-artifact chain and calculated the main patient-level and site-level point estimates correctly. It found an overall AUC of 0.699 and a site-weighted AUC of 0.544; the weakest-site AUC was 0.488. It therefore rejected a multisite performance claim.
+
+Its first decision-critical failure was omission of the precommitted bootstrap interval for discrimination. A point estimate alone did not complete the declared uncertainty analysis. The model also reported threshold utility using an expected-utility alias without saving the two explicit value and cost parameters required by its chosen verbose representation. Manual recomputation confirmed that its reported net benefit of 0.293 was numerically correct, but the submitted calculation object did not contain the complete parameterization needed for the verifier to accept it.
+
+Model 1 bought no additional evidence and submitted a stop/no-use recommendation because the internal site analysis had already failed. The follow-up choice was accepted as decision-relevant. The final-recommendation property nevertheless failed downstream because two analyses on which the submitted claim set depended were incomplete. This does not mean that the direction of the stop decision was itself unsafe.
+
+\reporthead{Model 2 changed a declared input after seeing responses}
+Model 2 calculated several primary numbers correctly. It bought another cohort, reduced its stated confidence in site performance and submitted a stop decision. However, it changed a declared input file after the response results were available. That was the first important error.
+
+The saved work no longer demonstrated that the final analysis followed the original plan. Additional broken file links and decision-rule inconsistencies also remained. The cautious final recommendation did not fix those problems. An input-protection tool could help, but no paired test measured its effect.
+
+\reporthead{Model 3 omitted required uncertainty}
+The agent calculated useful point estimates but omitted the required uncertainty estimate for ranking. It also left the site analysis and purchased-cohort analysis incomplete. It did not submit. This is a specific omission, not evidence that all its calculations were wrong.
+
+\reporthead{Model 4 did not deliver enough finished work for a scientific diagnosis}
+Model 4 reached response disclosure and continued working. It did not register qualifying calculations or finish the purchase and recommendation stages. No specific important scientific error was established before it stopped. The observed problem was incomplete delivery of the investigation.
+
+\reporthead{Interpretation}
+Case 2 exposes distinct failures in plan adherence, uncertainty estimation, patient counting, utility documentation and use of additional data. Model 1's completed trajectory shows that the environment can retain substantial correct work while still identifying a localized mission-critical omission. The two unfinished attempts also indicate a completion problem. These single attempts do not establish stable model rankings or failure rates. Statistical assistance and workflow tools should be tested separately before attributing any failure to model training.

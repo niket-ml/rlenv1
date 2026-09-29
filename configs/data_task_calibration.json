@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.1",
+  "status": "pinned_pre_calibration",
+  "selection_policy": "Same-provider temporal ladder reused from packet calibration; release date is metadata and never enters scoring.",
+  "models": [
+    {
+      "model_id": "openai/gpt-5.6-sol",
+      "tier": "current_flagship",
+      "released": "2026-07-09",
+      "input_usd_per_million_tokens": 2.0,
+      "output_usd_per_million_tokens": 10.0,
+      "planning_guard_per_task_usd": 0.4
+    },
+    {
+      "model_id": "openai/gpt-5.4",
+      "tier": "previous_flagship",
+      "released": "2026-03-05",
+      "input_usd_per_million_tokens": 2.5,
+      "output_usd_per_million_tokens": 15.0,
+      "planning_guard_per_task_usd": 0.4
+    },
+    {
+      "model_id": "openai/gpt-5.2",
+      "tier": "earlier_flagship",
+      "released": "2025-12-10",
+      "input_usd_per_million_tokens": 1.75,
+      "output_usd_per_million_tokens": 14.0,
+      "planning_guard_per_task_usd": 0.4
+    },
+    {
+      "model_id": "openai/gpt-4.1-mini",
+      "tier": "older_small",
+      "released": "2025-04-14",
+      "input_usd_per_million_tokens": 0.4,
+      "output_usd_per_million_tokens": 1.6,
+      "planning_guard_per_task_usd": 0.4
+    }
+  ],
+  "sentinel_scenarios": [
+    {"task_id": "T03", "scenario_id": "duplicates_0", "role": "symmetric_clean_control"},
+    {"task_id": "T03", "scenario_id": "duplicates_1", "role": "single_identity_conflict"},
+    {"task_id": "T04", "scenario_id": "dropout_10", "role": "acceptable_but_nonzero_dropout"},
+    {"task_id": "T04", "scenario_id": "dropout_30", "role": "unacceptable_feature_dropout"},
+    {"task_id": "T05", "scenario_id": "phi_30", "role": "recoverable_confounding"},
+    {"task_id": "T05", "scenario_id": "phi_50", "role": "stop_boundary"},
+    {"task_id": "T06", "scenario_id": "size_n40_noise10", "role": "small_sample"},
+    {"task_id": "T06", "scenario_id": "noise_n120_20", "role": "adequately_sized_but_unstable"}
+  ],
+  "attempts_per_cell": 1,
+  "trajectory_budget": {
+    "maximum_turns": 12,
+    "maximum_completion_tokens_per_turn": 2500,
+    "maximum_total_completion_tokens": 12000,
+    "wall_clock_timeout_seconds": 900
+  },
+  "cost_planning": {
+    "trajectory_count": 32,
+    "planning_guard_usd": 12.8,
+    "warning": "One attempt per cell detects floors, ceilings, and implementation defects only; it cannot support a ranking claim."
+  },
+  "acceptance": {
+    "maximum_model_floor_rate": 0.5,
+    "maximum_model_ceiling_rate": 0.5,
+    "minimum_distinct_model_means": 3,
+    "strict_temporal_order_is_diagnostic_not_forced": true,
+    "ranking_claim_allowed": false
+  }
+}

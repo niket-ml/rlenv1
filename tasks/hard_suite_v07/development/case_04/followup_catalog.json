@@ -1,0 +1,111 @@
+{
+  "budget_units": 3,
+  "maximum_purchases": 1,
+  "resources": [
+    {
+      "cannot_answer": [
+        "clinical meaning of the endpoint",
+        "pipeline execution",
+        "new outcomes"
+      ],
+      "cost_units": 1,
+      "delay_days": 4,
+      "resource_id": "X17",
+      "returns": [
+        "source-key crosswalk",
+        "visit chronology",
+        "record-level unresolved list"
+      ],
+      "title": "Source-record reconciliation package"
+    },
+    {
+      "cannot_answer": [
+        "patient identity",
+        "pipeline execution",
+        "platform transport"
+      ],
+      "cost_units": 2,
+      "delay_days": 9,
+      "resource_id": "X24",
+      "returns": [
+        "blinded dual-reviewer labels",
+        "source excerpts",
+        "adjudication log"
+      ],
+      "title": "Endpoint evidence package"
+    },
+    {
+      "cannot_answer": [
+        "endpoint meaning",
+        "future clinical utility",
+        "drug-class transport"
+      ],
+      "cost_units": 1,
+      "delay_days": 5,
+      "resource_id": "X31",
+      "returns": [
+        "containerized replay predictions",
+        "fit-input hashes",
+        "execution lineage"
+      ],
+      "title": "Pipeline execution package"
+    },
+    {
+      "cannot_answer": [
+        "original identity errors",
+        "original transform execution"
+      ],
+      "cost_units": 3,
+      "delay_days": 21,
+      "resource_id": "X46",
+      "returns": [
+        "new matched predictions and outcomes",
+        "site fields",
+        "decision-threshold table"
+      ],
+      "title": "Matched external evidence package"
+    },
+    {
+      "cannot_answer": [
+        "systematic label bias",
+        "pipeline leakage",
+        "wrong intended use"
+      ],
+      "cost_units": 3,
+      "delay_days": 45,
+      "resource_id": "X58",
+      "returns": [
+        "additional records under the current collection process",
+        "updated precision"
+      ],
+      "title": "Larger sample package"
+    },
+    {
+      "cannot_answer": [
+        "missing source records",
+        "unobserved outcomes",
+        "unexecuted analyses"
+      ],
+      "cost_units": 1,
+      "delay_days": 3,
+      "resource_id": "X63",
+      "returns": [
+        "cross-functional review memo based on existing files",
+        "analysis recommendations"
+      ],
+      "title": "Expert review package"
+    },
+    {
+      "cannot_answer": [
+        "any unresolved empirical question"
+      ],
+      "cost_units": 0,
+      "delay_days": 0,
+      "resource_id": "none",
+      "returns": [
+        "no new evidence"
+      ],
+      "title": "Purchase nothing"
+    }
+  ]
+}

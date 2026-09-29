@@ -1,0 +1,112 @@
+{
+  "schema_version": "0.3",
+  "suite_id": "uc_biomarker_diligence_hard_v0_3",
+  "status": "frozen_pre_model",
+  "supersedes": "uc_biomarker_diligence_hard_v0",
+  "supersession_reason": "v0.2 difficulty depended on a 20-turn horizon and produced a GPT-5.4 floor; v0.3 uses irreversible resource selection and a relaxed 32-turn horizon.",
+  "scoring": {
+    "decision": 0.15,
+    "quantitative_analysis": 0.15,
+    "scientific_diagnosis": 0.15,
+    "evidence_integration": 0.1,
+    "resource_selection": 0.2,
+    "recovery_design": 0.15,
+    "commitment_and_reproducibility": 0.1
+  },
+  "trajectory_budget": {
+    "maximum_turns": 32,
+    "maximum_completion_tokens_per_turn": 3000,
+    "maximum_total_completion_tokens": 40000,
+    "wall_clock_timeout_seconds": 1800
+  },
+  "resource_selection_contract": {
+    "one_resource_or_none": true,
+    "selection_committed_before_reveal": true,
+    "unavailable_resource_rejected_before_commit": true,
+    "only_selected_resource_packet_revealed": true,
+    "cost_is_secondary_to_identifiability": true,
+    "wrong_resource_can_preserve_correct_abstention_but_cannot_receive_selection_credit": true
+  },
+  "development_pairs": [
+    {
+      "family_id": "H01_identity_metadata",
+      "failure_mode": "identity_overlap",
+      "public_source_variant_id": "dev_identity_more_rows",
+      "resolved_evidence_variant_id": "dev_identity_reconciled",
+      "correct_resource_id": "R2",
+      "control": {"variant_id": "dev3_identity_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev3_identity_metadata", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "larger_validation_sample", "class": "additional_data", "cost_units": 3, "description": "Add 80 biopsies under the current identifiers and split manifest."},
+        {"resource_id": "R2", "intervention": "patient_visit_reconciliation", "class": "better_labels_and_metadata", "cost_units": 1, "description": "Independent source-record crosswalk for patient, biopsy date, and visit."},
+        {"resource_id": "R3", "intervention": "ibd_clinical_expert", "class": "expert_assistance", "cost_units": 1, "description": "Clinical opinion on whether repeat biopsies are plausible in this protocol."}
+      ]
+    },
+    {
+      "family_id": "H02_transfer_data",
+      "failure_mode": "transfer_interaction",
+      "public_source_variant_id": "dev_transfer_expert_only",
+      "resolved_evidence_variant_id": "dev_transfer_matched_cohort",
+      "correct_resource_id": "R3",
+      "control": {"variant_id": "dev3_transfer_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev3_transfer_matched", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "endpoint_matched_cohort", "class": "additional_data", "cost_units": 2, "description": "Adequately sized cohort matching the response endpoint only."},
+        {"resource_id": "R2", "intervention": "drug_matched_cohort", "class": "additional_data", "cost_units": 2, "description": "Adequately sized cohort matching drug and platform but not endpoint."},
+        {"resource_id": "R3", "intervention": "endpoint_drug_platform_matched_cohort", "class": "additional_data", "cost_units": 3, "description": "Prospective bridge matching endpoint, drug, and platform jointly."}
+      ]
+    },
+    {
+      "family_id": "H03_process_science",
+      "failure_mode": "batch_confounding",
+      "public_source_variant_id": "dev_process_unaudited",
+      "resolved_evidence_variant_id": "dev_process_audited",
+      "correct_resource_id": "R1",
+      "control": {"variant_id": "dev3_process_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev3_process_tool", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "leakage_safe_splitting", "class": "better_process_or_tools", "cost_units": 1, "description": "Regenerate predictions with patient-grouped splits and training-only preprocessing."},
+        {"resource_id": "R2", "intervention": "larger_validation_sample", "class": "additional_data", "cost_units": 3, "description": "Add samples while preserving the current split and preprocessing implementation."},
+        {"resource_id": "R3", "intervention": "ibd_clinical_expert", "class": "expert_assistance", "cost_units": 1, "description": "Assess biological plausibility of the apparent high discrimination."}
+      ]
+    },
+    {
+      "family_id": "H04_label_expertise",
+      "failure_mode": "label_uncertainty",
+      "public_source_variant_id": "dev_labels_more_rows",
+      "resolved_evidence_variant_id": "dev_labels_adjudicated",
+      "correct_resource_id": "R2",
+      "control": {"variant_id": "dev3_labels_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev3_labels_adjudicated", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "larger_validation_sample", "class": "additional_data", "cost_units": 3, "description": "Add 100 records labeled by the same extraction rule."},
+        {"resource_id": "R2", "intervention": "expert_endpoint_adjudication", "class": "better_labels_and_metadata", "cost_units": 2, "description": "Blinded IBD panel adjudicates the prespecified week-6 endpoint from source records."},
+        {"resource_id": "R3", "intervention": "biostatistician", "class": "expert_assistance", "cost_units": 1, "description": "Recommend sensitivity analyses without changing or adjudicating labels."}
+      ]
+    },
+    {
+      "family_id": "H05_evidence_sufficiency",
+      "failure_mode": "underpowered_validation",
+      "public_source_variant_id": "dev_evidence_unresolved",
+      "resolved_evidence_variant_id": "dev_evidence_replicated",
+      "correct_resource_id": "R3",
+      "control": {"variant_id": "dev3_evidence_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev3_evidence_replication", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "experimental_design_expert", "class": "expert_assistance", "cost_units": 1, "description": "Rank follow-up experiments but provide no new outcomes."},
+        {"resource_id": "R2", "intervention": "drug_matched_cohort", "class": "additional_data", "cost_units": 2, "description": "Small drug-matched cohort retaining endpoint and platform mismatch."},
+        {"resource_id": "R3", "intervention": "independent_replication", "class": "additional_data", "cost_units": 3, "description": "Adequately sized independent replication matching the intended use population."}
+      ]
+    }
+  ],
+  "acceptance_gates": {
+    "strongest_mean_maximum": 85.0,
+    "strongest_ideal_range": [65.0, 80.0],
+    "strongest_ceiling_rate_maximum": 0.25,
+    "weakest_universal_failure_forbidden": true,
+    "minimum_interpretable_failure_modes": 3,
+    "maximum_single_family_gap_share": 0.3,
+    "schema_primary_gap_forbidden": true,
+    "ranking_claim_allowed": false
+  }
+}

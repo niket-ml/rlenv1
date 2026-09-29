@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.7.2-interface-execution-1",
+  "status": "pre_freeze_no_paid_execution",
+  "parent_scientific_execution": "configs/hard_suite_v07_execution.json",
+  "parent_model_panel": "configs/hard_suite_v07_model_panel.json",
+  "scientific_global_cap_usd": 45.0,
+  "stages": [
+    {
+      "stage_id": "sol_two_case_grader_check",
+      "model_id": "openai/gpt-5.6-sol",
+      "conditions": ["case_01", "case_03_signal_collapses"],
+      "cumulative_spend_guard_usd": 5.0,
+      "interpretation": "infrastructure_and_grader_check_not_ranking"
+    },
+    {
+      "stage_id": "sol_remaining_three",
+      "model_id": "openai/gpt-5.6-sol",
+      "conditions": ["case_02", "case_03_signal_remains", "case_04"],
+      "cumulative_spend_guard_usd": 12.0,
+      "requires_prior_stage_manual_approval": true
+    },
+    {
+      "stage_id": "gpt52_only_after_credible_sol_measurement",
+      "model_id": "openai/gpt-5.2",
+      "conditions": [
+        "case_01",
+        "case_02",
+        "case_03_signal_collapses",
+        "case_03_signal_remains",
+        "case_04"
+      ],
+      "cumulative_spend_guard_usd": 45.0,
+      "requires_prior_stage_manual_approval": true
+    }
+  ],
+  "two_case_fail_fast": [
+    "valid content missed or misclassified",
+    "representation-caused score cap",
+    "event record and submitted actions disagree",
+    "unsupported conclusion rewarded",
+    "both cases near-perfect mainly from procedure"
+  ],
+  "heldout_requests_allowed": 0,
+  "astra_requests_allowed": 0,
+  "ranking_claim_allowed": false,
+  "pilot_description": "calibrated pilot environment or case study"
+}

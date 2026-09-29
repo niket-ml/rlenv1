@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "family_id",
+    "variant_id",
+    "ranked_hypotheses",
+    "planned_metric_ids",
+    "selected_discriminating_experiment",
+    "requested_resource_id",
+    "pre_reveal_decision",
+    "if_leading_supported",
+    "if_leading_refuted"
+  ],
+  "properties": {
+    "family_id": {"type": "string", "pattern": "^H0[1-5]_"},
+    "variant_id": {"type": "string", "minLength": 1},
+    "ranked_hypotheses": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/failure"}},
+    "planned_metric_ids": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string"}},
+    "selected_discriminating_experiment": {"$ref": "#/$defs/experiment"},
+    "requested_resource_id": {"type": "string", "enum": ["none", "R1", "R2", "R3"]},
+    "pre_reveal_decision": {"$ref": "#/$defs/decision"},
+    "if_leading_supported": {"$ref": "#/$defs/decision"},
+    "if_leading_refuted": {"$ref": "#/$defs/decision"}
+  },
+  "$defs": {
+    "decision": {"type": "string", "enum": ["advance", "insufficient_evidence", "stop"]},
+    "failure": {"type": "string", "enum": ["identity_overlap", "endpoint_mismatch", "platform_shift", "drug_transfer", "transfer_interaction", "feature_contract_failure", "batch_confounding", "label_uncertainty", "underpowered_validation", "model_misspecification", "no_material_failure"]},
+    "experiment": {"type": "string", "enum": ["patient_linkage_audit", "factorial_transfer_bridge", "platform_mapping_audit", "leakage_safe_reanalysis", "blinded_label_readjudication", "endpoint_matched_validation", "drug_matched_validation", "independent_replication", "none_proceed"]}
+  }
+}

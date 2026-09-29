@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V0.5 final diligence decision",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["scenario_id", "decision", "confidence", "metrics", "claim_statuses", "intervention_effect", "belief_update", "smallest_next_action_class", "smallest_next_action", "supported_claims", "limitations", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string", "minLength": 1},
+    "decision": {"enum": ["advance", "conditional_advance", "pause", "stop", "insufficient_evidence"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "metrics": {"type": "object", "minProperties": 4, "additionalProperties": {"type": "number"}},
+    "claim_statuses": {
+      "type": "object",
+      "required": ["identity", "endpoint", "preprocessing", "transport", "evidence"],
+      "additionalProperties": {"enum": ["admissible", "conditional", "blocked", "invalid"]}
+    },
+    "intervention_effect": {"enum": ["resolves_blocker", "reduces_uncertainty_without_resolving", "exposes_second_blocker", "ineffective", "misleading_reassurance", "no_resource_needed"]},
+    "belief_update": {
+      "type": "object",
+      "required": ["prior_confidence", "posterior_confidence", "direction", "explanation"],
+      "properties": {
+        "prior_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "posterior_confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "direction": {"enum": ["increase", "decrease", "unchanged"]},
+        "explanation": {"type": "string", "minLength": 2}
+      }
+    },
+    "smallest_next_action_class": {"enum": ["none", "additional_data", "better_labels_and_metadata", "expert_assistance", "better_process_or_tools", "model_adaptation"]},
+    "smallest_next_action": {"type": "string", "minLength": 2},
+    "supported_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["claim", "status", "evidence_refs"],
+        "properties": {
+          "claim": {"type": "string", "minLength": 2},
+          "status": {"enum": ["supported", "conditional", "unsupported"]},
+          "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1}
+        }
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 2}, "minItems": 1},
+    "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 3, "uniqueItems": true}
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2",
+  "status": "frozen_pre_development_calibration",
+  "purpose": "One-seed difficulty, failure-mode, and paired-intervention calibration; never a stable ranking.",
+  "models": [
+    {
+      "model_id": "openai/gpt-5.6-sol",
+      "tier": "development_frontier",
+      "input_usd_per_million_tokens": 2.0,
+      "output_usd_per_million_tokens": 10.0,
+      "planning_guard_per_task_usd": 0.75
+    },
+    {
+      "model_id": "openai/gpt-5.4",
+      "tier": "development_previous",
+      "input_usd_per_million_tokens": 2.5,
+      "output_usd_per_million_tokens": 15.0,
+      "planning_guard_per_task_usd": 0.75
+    },
+    {
+      "model_id": "openai/gpt-5.2",
+      "tier": "development_earlier",
+      "input_usd_per_million_tokens": 1.75,
+      "output_usd_per_million_tokens": 14.0,
+      "planning_guard_per_task_usd": 0.75
+    }
+  ],
+  "variant_ids": [
+    "dev_identity_more_rows",
+    "dev_identity_reconciled",
+    "dev_transfer_expert_only",
+    "dev_transfer_matched_cohort",
+    "dev_process_unaudited",
+    "dev_process_audited",
+    "dev_labels_more_rows",
+    "dev_labels_adjudicated",
+    "dev_evidence_unresolved",
+    "dev_evidence_replicated"
+  ],
+  "attempts_per_cell": 1,
+  "trajectory_budget": {
+    "maximum_turns": 20,
+    "maximum_completion_tokens_per_turn": 3000,
+    "maximum_total_completion_tokens": 24000,
+    "wall_clock_timeout_seconds": 1500
+  },
+  "cost_planning": {
+    "trajectory_count": 30,
+    "planning_guard_usd": 22.5,
+    "warning": "The runner stops before any request whose per-task planning guard would exceed the explicit command-line cap."
+  },
+  "prerequisite_local_artifact": "artifacts/diagnostics/hard_suite_controls.json",
+  "acceptance": {
+    "strongest_mean_maximum": 85.0,
+    "strongest_ceiling_rate_maximum": 0.25,
+    "weakest_universal_zero_forbidden": true,
+    "minimum_interpretable_failure_modes": 3,
+    "maximum_single_family_gap_share": 0.3,
+    "ranking_claim_allowed": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Diagnostic decision submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "confidence", "diagnostic_codes", "evidence_ids", "next_action_type", "rationale"],
+  "properties": {
+    "decision": {"type": "string", "enum": ["advance", "stop", "insufficient_evidence"]},
+    "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+    "diagnostic_codes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["none", "null_discrimination", "underpowered_validation", "borderline_uncertainty", "endpoint_mismatch", "platform_shift", "drug_transfer", "sample_identity_conflict", "feature_dropout"]
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z]+-[0-9]{3}$"}
+    },
+    "next_action_type": {
+      "type": "string",
+      "enum": ["independent_replication", "expand_validation_sample", "endpoint_matched_validation", "platform_harmonized_validation", "revisit_model_specification", "resolve_sample_identity", "repair_and_revalidate"]
+    },
+    "rationale": {"type": "string", "minLength": 1, "maxLength": 1000}
+  }
+}

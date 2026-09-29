@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V0.5 prospective diligence commitment",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["scenario_id", "intended_use", "audits", "reproduction", "plan", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string", "minLength": 1},
+    "intended_use": {
+      "type": "object",
+      "required": ["population", "endpoint", "prediction_time", "probability_threshold"],
+      "properties": {
+        "population": {"type": "string", "minLength": 1},
+        "endpoint": {"type": "string", "minLength": 1},
+        "prediction_time": {"type": "string", "minLength": 1},
+        "probability_threshold": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1}
+      }
+    },
+    "audits": {
+      "type": "object",
+      "required": ["provenance", "identity", "endpoint", "preprocessing", "transport"],
+      "properties": {
+        "provenance": {"$ref": "#/$defs/audit"},
+        "identity": {"$ref": "#/$defs/audit"},
+        "endpoint": {"$ref": "#/$defs/audit"},
+        "preprocessing": {"$ref": "#/$defs/audit"},
+        "transport": {"$ref": "#/$defs/audit"}
+      }
+    },
+    "reproduction": {
+      "type": "object",
+      "required": ["predictions_compared", "max_abs_error", "passed", "model_sha256"],
+      "properties": {
+        "predictions_compared": {"type": "integer", "minimum": 0},
+        "max_abs_error": {"type": "number", "minimum": 0},
+        "passed": {"type": "boolean"},
+        "model_sha256": {"type": "string", "minLength": 16}
+      }
+    },
+    "plan": {
+      "type": "object",
+      "required": ["analysis_unit", "grouping_keys", "uncertainty_unit", "preprocessing_fit_scope", "primary_estimand", "metric_families", "decision_rule", "pre_reveal_decision", "live_hypotheses", "artifact_paths"],
+      "properties": {
+        "analysis_unit": {"type": "string", "minLength": 1},
+        "grouping_keys": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "uncertainty_unit": {"type": "string", "minLength": 1},
+        "preprocessing_fit_scope": {"type": "string", "minLength": 1},
+        "primary_estimand": {"type": "string", "minLength": 1},
+        "metric_families": {"type": "array", "items": {"type": "string"}, "minItems": 4, "uniqueItems": true},
+        "decision_rule": {
+          "type": "object",
+          "required": ["minimum_auc", "minimum_auc_ci_low", "maximum_brier", "minimum_net_benefit"],
+          "properties": {
+            "minimum_auc": {"type": "number"},
+            "minimum_auc_ci_low": {"type": "number"},
+            "maximum_brier": {"type": "number"},
+            "minimum_net_benefit": {"type": "number"}
+          }
+        },
+        "pre_reveal_decision": {"enum": ["advance", "conditional_advance", "pause", "stop", "insufficient_evidence"]},
+        "live_hypotheses": {"type": "array", "items": {"type": "string", "minLength": 2}, "minItems": 2, "uniqueItems": true},
+        "artifact_paths": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "uniqueItems": true}
+      }
+    },
+    "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 3, "uniqueItems": true}
+  },
+  "$defs": {
+    "audit": {
+      "type": "object",
+      "required": ["status", "evidence_refs", "decision_effect"],
+      "properties": {
+        "status": {"enum": ["clear", "conditional", "blocked", "invalid", "unknown"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "decision_effect": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

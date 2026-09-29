@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1",
+  "episode_id": "uc_biomarker_diligence_v0",
+  "milestones": [
+    {"id": "M01", "name": "workspace_and_file_integrity", "weight": 0.04},
+    {"id": "M02", "name": "patient_level_cohort_reconstruction", "weight": 0.08},
+    {"id": "M03", "name": "treatment_arm_timepoint_and_endpoint_integrity", "weight": 0.08},
+    {"id": "M04", "name": "platform_aware_feature_alignment", "weight": 0.10},
+    {"id": "M05", "name": "leakage_safe_reference_analysis", "weight": 0.12},
+    {"id": "M06", "name": "stability_and_negative_controls", "weight": 0.13},
+    {"id": "M07", "name": "commit_before_sealed_validation", "weight": 0.15},
+    {"id": "M08", "name": "failure_diagnosis_and_containment", "weight": 0.12},
+    {"id": "M09", "name": "evidence_calibration_and_terminal_decision", "weight": 0.12},
+    {"id": "M10", "name": "reproducibility_and_resolving_next_action", "weight": 0.06}
+  ],
+  "expected_total": 1.0,
+  "setup_milestone_ids": ["M01", "M02", "M03", "M04"],
+  "maximum_setup_share": 0.30
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Data diagnostic submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "scenario_id",
+    "decision",
+    "confidence",
+    "diagnostic_codes",
+    "metrics",
+    "affected_ids",
+    "analysis_method",
+    "next_action_type",
+    "rationale"
+  ],
+  "properties": {
+    "task_id": {"type": "string", "enum": ["T03", "T04", "T05", "T06"]},
+    "scenario_id": {"type": "string", "minLength": 1, "maxLength": 80},
+    "decision": {"type": "string", "enum": ["advance", "stop", "insufficient_evidence"]},
+    "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+    "diagnostic_codes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "none",
+          "sample_identity_conflict",
+          "feature_dropout",
+          "batch_confounding",
+          "underpowered_validation",
+          "unstable_validation"
+        ]
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "number"}
+    },
+    "affected_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 120}
+    },
+    "analysis_method": {
+      "type": "string",
+      "enum": [
+        "exact_expression_fingerprint",
+        "unambiguous_gene_mapping_then_intersection",
+        "binary_phi_coefficient",
+        "prespecified_stratified_bootstrap"
+      ]
+    },
+    "next_action_type": {
+      "type": "string",
+      "enum": [
+        "continue_prespecified_analysis",
+        "resolve_sample_identity",
+        "restore_required_features",
+        "batch_stratified_resampling",
+        "independent_batch_balanced_validation",
+        "expand_validation_sample",
+        "revisit_model_specification",
+        "independent_replication"
+      ]
+    },
+    "rationale": {"type": "string", "minLength": 1, "maxLength": 1200}
+  }
+}

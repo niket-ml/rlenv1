@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.1",
+  "task_id": "uc_biomarker_diligence_v0",
+  "name": "anti_tnf_biomarker_diligence",
+  "unit": "one_end_to_end_decision_chain",
+  "conditions": ["full_data", "data_withheld"],
+  "paired_conditions": true,
+  "start_phase": "working",
+  "terminal_decisions": ["advance", "stop", "insufficient_evidence"],
+  "allowed_tools": [
+    "inspect_workspace",
+    "read_file",
+    "write_file",
+    "run_command",
+    "ask_analyst",
+    "commit_analysis",
+    "reveal_validation",
+    "submit"
+  ],
+  "tool_limits": {
+    "ask_analyst": 3,
+    "commit_analysis": 1,
+    "reveal_validation": 1,
+    "submit": 1
+  },
+  "analyst_topics": [
+    "cohort_endpoint",
+    "platform_processing",
+    "intended_use"
+  ],
+  "predictor_contract": {
+    "model_type": "linear_logistic_on_within_sample_gene_ranks",
+    "minimum_genes": 1,
+    "maximum_genes": 50,
+    "sealed_features_visible_to_agent": false,
+    "arbitrary_serialized_code_allowed": false
+  },
+  "evaluation": {
+    "sealed_cohort": "GSE92415",
+    "bootstrap_resamples": 2000,
+    "permutation_count": 10000,
+    "raw_auc_is_headline_ranking_metric": false,
+    "authentic_and_controlled_results_separate": true,
+    "data_withheld_retention_exclusion_threshold": 0.80
+  },
+  "post_reveal": {
+    "committed_artifacts_mutable": false,
+    "agent_receives_individual_predictions": false,
+    "agent_receives_individual_labels": false,
+    "allowed_new_artifacts": [
+      "results/validation_result.json",
+      "submission/final_submission.json"
+    ]
+  }
+}

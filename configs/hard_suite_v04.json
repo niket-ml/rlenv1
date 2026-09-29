@@ -1,0 +1,164 @@
+{
+  "schema_version": "0.4",
+  "suite_id": "uc_biomarker_diligence_hard_v0_4",
+  "status": "frozen_before_any_v04_model_call",
+  "frozen_at": "2026-09-07",
+  "supersedes": "uc_biomarker_diligence_hard_v0_3",
+  "supersession_reason": "v0.3 produced useful resource-selection failures but GPT-5.6 Sol averaged 98.4 on its quantitative component.",
+  "result_partition": "controlled_biomedical_statistical_simulation",
+  "scoring": {
+    "quantitative_statistical_reasoning": 0.30,
+    "scientific_diagnosis": 0.15,
+    "decision": 0.15,
+    "resource_selection_value_of_information": 0.15,
+    "recovery_design": 0.15,
+    "commitment_and_reproducibility": 0.10
+  },
+  "trajectory_budget": {
+    "maximum_turns": 40,
+    "maximum_completion_tokens_per_turn": 3500,
+    "maximum_total_completion_tokens": 50000,
+    "wall_clock_timeout_seconds": 2400,
+    "minimum_request_interval_seconds": 3.25
+  },
+  "bootstrap": {
+    "replicates": 399,
+    "confidence_level": 0.95,
+    "development_seed_offset": 41000,
+    "heldout_seed_offset": 91000
+  },
+  "permutation": {
+    "replicates": 399,
+    "p_value_correction": "plus_one"
+  },
+  "resource_contract": {
+    "choose_one_resource_or_none": true,
+    "commit_before_reveal": true,
+    "only_selected_packet_revealed": true,
+    "unavailable_resource_rejected_before_commit": true,
+    "wrong_resource_remains_scorable": true,
+    "infrastructure_failures_excluded": true,
+    "usable_unsubmitted_attempt_score": 0.0
+  },
+  "development_pairs": [
+    {
+      "family_id": "Q01_identity_dependence",
+      "failure_mode": "patient_dependence_and_identity_ambiguity",
+      "seed": 40101,
+      "correct_resource_id": "R2",
+      "control": {"variant_id": "dev4_identity_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev4_identity_reconciled", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "larger_row_sample_same_patient_structure", "class": "additional_data", "cost_units": 3, "description": "Add visits under the same unresolved patient identifiers."},
+        {"resource_id": "R2", "intervention": "patient_visit_reconciliation", "class": "better_labels_and_metadata", "cost_units": 1, "description": "Source-record crosswalk for patient, visit, and biopsy identity."},
+        {"resource_id": "R3", "intervention": "ibd_clinical_expert_opinion", "class": "expert_assistance", "cost_units": 1, "description": "Assess whether repeat biopsies are clinically plausible without reconciling records."}
+      ]
+    },
+    {
+      "family_id": "Q02_transport_factorial",
+      "failure_mode": "endpoint_drug_platform_transport_interaction",
+      "seed": 40202,
+      "correct_resource_id": "R3",
+      "control": {"variant_id": "dev4_transport_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev4_transport_matched", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "ibd_clinical_expert_opinion", "class": "expert_assistance", "cost_units": 1, "description": "Clinical plausibility assessment without new labelled outcomes."},
+        {"resource_id": "R2", "intervention": "drug_platform_matched_endpoint_mismatched_cohort", "class": "additional_data", "cost_units": 2, "description": "Add a cohort matching drug and platform but retaining the endpoint mismatch."},
+        {"resource_id": "R3", "intervention": "endpoint_drug_platform_factorial_bridge", "class": "additional_data", "cost_units": 3, "description": "Adequately sized multi-site factorial bridge spanning all three transport factors."}
+      ]
+    },
+    {
+      "family_id": "Q03_process_confounding",
+      "failure_mode": "batch_confounding_and_split_leakage",
+      "seed": 40303,
+      "correct_resource_id": "R1",
+      "control": {"variant_id": "dev4_process_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev4_process_repaired", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "leakage_safe_grouped_and_batch_blocked_validation", "class": "better_process_or_tools", "cost_units": 1, "description": "Regenerate out-of-fold predictions with patient grouping, fit-only preprocessing, and batch-blocked evaluation."},
+        {"resource_id": "R2", "intervention": "larger_validation_sample_same_process", "class": "additional_data", "cost_units": 3, "description": "Add rows while retaining the current split and preprocessing process."},
+        {"resource_id": "R3", "intervention": "transcriptomics_platform_specialist", "class": "expert_assistance", "cost_units": 1, "description": "Review platform plausibility without regenerating predictions."}
+      ]
+    },
+    {
+      "family_id": "Q04_label_sensitivity",
+      "failure_mode": "ambiguous_endpoint_labels",
+      "seed": 40404,
+      "correct_resource_id": "R2",
+      "control": {"variant_id": "dev4_labels_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev4_labels_adjudicated", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "more_labels_same_extraction_rule", "class": "additional_data", "cost_units": 3, "description": "Add records labelled by the same ambiguous extraction rule."},
+        {"resource_id": "R2", "intervention": "blinded_expert_endpoint_adjudication", "class": "expert_assistance", "cost_units": 2, "description": "Blinded IBD experts adjudicate the prespecified endpoint from source records, producing corrected labels."},
+        {"resource_id": "R3", "intervention": "biostatistician_sensitivity_advice", "class": "expert_assistance", "cost_units": 1, "description": "Specify sensitivity analyses without resolving any patient labels."}
+      ]
+    },
+    {
+      "family_id": "Q05_decision_sufficiency",
+      "failure_mode": "underpowered_decision_evidence",
+      "seed": 40505,
+      "correct_resource_id": "R3",
+      "control": {"variant_id": "dev4_evidence_control", "correct_resource_available": false},
+      "treated": {"variant_id": "dev4_evidence_replicated", "correct_resource_available": true},
+      "resources": [
+        {"resource_id": "R1", "intervention": "experimental_design_expert", "class": "expert_assistance", "cost_units": 1, "description": "Prioritise experiments without adding outcomes."},
+        {"resource_id": "R2", "intervention": "small_partially_matched_replication", "class": "additional_data", "cost_units": 2, "description": "Add a small replication that remains too imprecise for the decision target."},
+        {"resource_id": "R3", "intervention": "adequately_powered_independent_replication", "class": "additional_data", "cost_units": 3, "description": "Independent intended-use replication sized for uncertainty and utility targets."}
+      ]
+    }
+  ],
+  "analysis_contracts": {
+    "Q01_identity_dependence": {
+      "candidate_estimands": ["row_level_auc", "patient_level_auc", "visit_level_accuracy"],
+      "candidate_methods": ["row_bootstrap", "patient_clustered_bootstrap", "label_stratified_bootstrap"],
+      "primary_estimand_id": "patient_level_auc",
+      "analysis_method_id": "patient_clustered_bootstrap",
+      "required_metrics": ["row_auc", "patient_auc", "patient_auc_ci_low", "patient_auc_ci_high", "unique_patient_units", "kish_effective_n", "leakage_inflation", "identity_conflict_count"],
+      "metric_tolerances": {"row_auc": 0.01, "patient_auc": 0.01, "patient_auc_ci_low": 0.025, "patient_auc_ci_high": 0.025, "unique_patient_units": 0.0, "kish_effective_n": 0.5, "leakage_inflation": 0.015, "identity_conflict_count": 0.0}
+    },
+    "Q02_transport_factorial": {
+      "candidate_estimands": ["pooled_auc", "factorial_auc_contrasts", "all_matched_auc_only"],
+      "candidate_methods": ["pooled_row_bootstrap", "site_clustered_factorial_bootstrap", "unstratified_t_test"],
+      "primary_estimand_id": "factorial_auc_contrasts",
+      "analysis_method_id": "site_clustered_factorial_bootstrap",
+      "required_metrics": ["unmatched_auc", "all_matched_auc", "endpoint_main_effect", "drug_main_effect", "platform_main_effect", "three_way_interaction", "dominant_factor_effect", "dominant_factor_ci_low", "dominant_factor_ci_high"],
+      "metric_tolerances": {"unmatched_auc": 0.015, "all_matched_auc": 0.015, "endpoint_main_effect": 0.02, "drug_main_effect": 0.02, "platform_main_effect": 0.02, "three_way_interaction": 0.025, "dominant_factor_effect": 0.02, "dominant_factor_ci_low": 0.04, "dominant_factor_ci_high": 0.04}
+    },
+    "Q03_process_confounding": {
+      "candidate_estimands": ["naive_row_auc", "patient_grouped_auc", "batch_blocked_auc"],
+      "candidate_methods": ["global_permutation", "within_batch_patient_permutation", "parametric_auc_test"],
+      "primary_estimand_id": "batch_blocked_auc",
+      "analysis_method_id": "within_batch_patient_permutation",
+      "required_metrics": ["naive_auc", "patient_grouped_auc", "batch_blocked_auc", "naive_minus_blocked_auc", "batch_outcome_phi", "within_batch_permutation_p", "global_permutation_p"],
+      "metric_tolerances": {"naive_auc": 0.01, "patient_grouped_auc": 0.01, "batch_blocked_auc": 0.015, "naive_minus_blocked_auc": 0.02, "batch_outcome_phi": 0.015, "within_batch_permutation_p": 0.025, "global_permutation_p": 0.025}
+    },
+    "Q04_label_sensitivity": {
+      "candidate_estimands": ["extracted_label_auc", "adjudicated_label_auc", "complete_case_accuracy"],
+      "candidate_methods": ["ignore_disagreement", "ambiguous_label_sensitivity_envelope", "majority_vote_only"],
+      "primary_estimand_id": "adjudicated_label_auc",
+      "analysis_method_id": "ambiguous_label_sensitivity_envelope",
+      "required_metrics": ["reviewer_agreement", "cohen_kappa", "ambiguous_fraction", "extracted_auc", "sensitivity_auc_low", "sensitivity_auc_high", "adjudicated_auc", "adjudication_auc_change"],
+      "metric_tolerances": {"reviewer_agreement": 0.01, "cohen_kappa": 0.02, "ambiguous_fraction": 0.01, "extracted_auc": 0.015, "sensitivity_auc_low": 0.02, "sensitivity_auc_high": 0.02, "adjudicated_auc": 0.015, "adjudication_auc_change": 0.02}
+    },
+    "Q05_decision_sufficiency": {
+      "candidate_estimands": ["auc_only", "intended_use_decision_utility", "training_accuracy"],
+      "candidate_methods": ["row_bootstrap", "site_clustered_bootstrap_with_prevalence_standardisation", "normal_approximation_without_sites"],
+      "primary_estimand_id": "intended_use_decision_utility",
+      "analysis_method_id": "site_clustered_bootstrap_with_prevalence_standardisation",
+      "required_metrics": ["observed_sample_size", "auc", "auc_ci_low", "auc_ci_high", "brier_score", "sensitivity", "specificity", "target_prevalence_ppv", "net_benefit", "required_sample_size"],
+      "metric_tolerances": {"observed_sample_size": 0.0, "auc": 0.015, "auc_ci_low": 0.03, "auc_ci_high": 0.03, "brier_score": 0.015, "sensitivity": 0.02, "specificity": 0.02, "target_prevalence_ppv": 0.025, "net_benefit": 0.02, "required_sample_size": 8.0}
+    }
+  },
+  "acceptance_gates": {
+    "reference_minimum": 95.0,
+    "mechanical_baseline_maximum": 60.0,
+    "strongest_overall_maximum": 85.0,
+    "strongest_ideal_range": [65.0, 80.0],
+    "strongest_quantitative_ideal_range": [60.0, 85.0],
+    "universal_floor_forbidden": true,
+    "minimum_quantitatively_distinct_failure_modes": 3,
+    "schema_or_horizon_primary_gap_forbidden": true,
+    "maximum_single_family_gap_share": 0.30,
+    "ranking_claim_allowed": false
+  }
+}

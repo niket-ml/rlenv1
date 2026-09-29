@@ -1,0 +1,38 @@
+{
+  "schema_version": "uc-bench-mmmvp-execution-1",
+  "partition": "development",
+  "representative_sentinel_condition": "case_02",
+  "condition_order": ["case_01", "case_02", "case_03_signal_collapses", "case_03_signal_remains", "case_04"],
+  "attempts_per_cell": 1,
+  "scientific_episode_count": 50,
+  "compatibility_requests_per_model": 2,
+  "episode_budget": {
+    "maximum_turns": 65,
+    "maximum_completion_tokens_per_turn": 5000,
+    "maximum_total_completion_tokens": 90000,
+    "wall_clock_timeout_seconds": 4200,
+    "minimum_request_interval_seconds": 3.25,
+    "sdk_request_retries": 0,
+    "scientific_episode_retries": 0,
+    "context_policy": "Preserve the complete tool transcript and returned provider reasoning state; no automatic compaction."
+  },
+  "sentinel_stop_rules": {
+    "any_security_or_integrity_failure": true,
+    "any_grader_consistency_failure": true,
+    "widespread_compatibility_failure_count": 3,
+    "widespread_provider_or_infrastructure_failure_count": 3,
+    "systematic_schema_failure_model_count": 5
+  },
+  "cost_plan": {
+    "observed_median_prompt_tokens_per_episode": 519377,
+    "observed_median_completion_tokens_per_episode": 11937,
+    "observed_no_cache_p90_prompt_tokens_per_episode": 609019,
+    "observed_no_cache_p90_completion_tokens_per_episode": 13346,
+    "median_expected_scientific_spend_usd": 48.33,
+    "no_cache_p90_scientific_spend_usd": 56.40,
+    "hard_cumulative_compatibility_and_science_cap_usd": 68.0
+  },
+  "forbidden_partitions": ["heldout"],
+  "forbidden_models": ["openai/gpt-5.6-sol", "anthropic/claude-opus-5", "openai/gpt-5.5", "openai/gpt-6-astra"],
+  "ranking_claim_allowed": false
+}

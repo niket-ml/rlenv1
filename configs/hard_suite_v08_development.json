@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.8-development-1",
+  "status": "unfrozen_mvp_local_validation",
+  "parent_diagnostic": "v0.7.2",
+  "parent_disposition": "archived_development_diagnostic_not_ranking_evidence",
+  "scientific_calls_authorized": false,
+  "heldout_calls_authorized": false,
+  "astra_calls_authorized": false,
+  "headline_metric": "complete_mission_success",
+  "diagnostic_metric": "partial_scientific_quality",
+  "difficulty_classification": {
+    "attempts_required_per_case_state": 3,
+    "three_of_three": "reliably_solved",
+    "one_or_two_of_three": "useful_frontier_or_rl_case",
+    "zero_of_three": "review_for_excess_difficulty_or_demonstration_training"
+  },
+  "eventual_strongest_model_mission_success_target": [0.35, 0.65],
+  "partial_score_target": null,
+  "development_policy": {
+    "development_cases_may_change_after_diagnostic_review": true,
+    "every_run_records_content_hashes": true,
+    "runs_from_different_content_hashes_are_not_pooled": true,
+    "freeze_only_release_candidate": true,
+    "one_success_is_tractability_not_saturation": true
+  },
+  "requirement_classes": [
+    "mission_critical_science",
+    "accepted_professional_alternative",
+    "diagnostic_only"
+  ],
+  "active_mvp_path": "configs/hard_suite_v08_mvp.json",
+  "active_mvp_conditions": [
+    "case_01",
+    "case_02",
+    "case_03_signal_collapses",
+    "case_03_signal_remains",
+    "case_04"
+  ],
+  "portfolio_path": "configs/hard_suite_v08_case_portfolio.json",
+  "portfolio_role": "post_mvp_roadmap_only_not_active_implementation",
+  "forbidden_difficulty_sources": [
+    "hidden wording",
+    "arbitrary filenames",
+    "unexplained conventions",
+    "excessive workflow length",
+    "missing decision-critical evidence",
+    "one privileged statistical implementation",
+    "exact scientific prose"
+  ]
+}

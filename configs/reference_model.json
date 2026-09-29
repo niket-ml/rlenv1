@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1",
+  "model_version": "rank-composite-logistic-v1",
+  "feature_schema_version": "common-gene-within-sample-rank-v1",
+  "candidate_genes": [
+    "TNFRSF11B",
+    "STC1",
+    "PTGS2",
+    "IL13RA2",
+    "IL11"
+  ],
+  "candidate_provenance": "Arijs et al., Gut 2009, PMID 19700435; fixed before sealed validation",
+  "feature_definition": "One minus the mean within-sample percentile rank of the five non-response-associated genes.",
+  "fit": {
+    "estimator": "sklearn.linear_model.LogisticRegression",
+    "penalty": "l2",
+    "C": 1.0,
+    "class_weight": "balanced",
+    "solver": "liblinear",
+    "random_state": 0
+  },
+  "development_design": {
+    "discovery_cohort": "GSE16879",
+    "untouched_replication_cohort": "GSE73661",
+    "final_refit_cohorts": ["GSE16879", "GSE73661"]
+  },
+  "transport_expectation": {
+    "replication_auc_penalty": 0.20,
+    "interval_half_width": 0.15,
+    "minimum_expected_auc": 0.50
+  },
+  "decision_policy": {
+    "advance_minimum_auc": 0.70,
+    "advance_minimum_auc_interval_lower": 0.50,
+    "advance_maximum_permutation_p": 0.05,
+    "otherwise_if_valid": "insufficient_evidence",
+    "hard_integrity_failure": "stop"
+  },
+  "bootstrap_resamples": 2000,
+  "permutation_count": 10000,
+  "random_seed": 20260906
+}

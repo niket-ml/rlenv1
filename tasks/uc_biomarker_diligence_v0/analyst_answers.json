@@ -1,0 +1,5 @@
+{
+  "cohort_endpoint": "Development response is mucosal healing at week 4-6 after infliximab. Sealed response is week-6 clinical response after golimumab. Treat endpoint and drug transfer as explicit uncertainty, not equivalence.",
+  "platform_processing": "The three cohorts use different Affymetrix platforms and cohort-native public normalization. Use platform-robust features; absolute expression values are not directly exchangeable.",
+  "intended_use": "This is pre-MVP technical diligence. The valid outputs are advance to another research experiment, stop this line of evidence, or insufficient evidence with a resolving next action. It is not a treatment-selection tool."
+}

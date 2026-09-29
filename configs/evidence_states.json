@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.1",
+  "reporting_policy": {
+    "authentic_and_controlled_separate": true,
+    "controlled_states_support_biology_claims": false
+  },
+  "sufficient_evidence_positive_control": {
+    "target_auc": 0.80,
+    "n": 240,
+    "seed": 20260907,
+    "bootstrap_resamples": 1000,
+    "permutations": 2000
+  },
+  "states": [
+    {
+      "id": "authentic_weak_evidence",
+      "family": "authentic_weak_evidence",
+      "source": "real_gse92415_sealed_transfer",
+      "expected_decision": "insufficient_evidence",
+      "expected_diagnostic_codes": ["underpowered_validation", "endpoint_mismatch", "platform_shift", "drug_transfer"],
+      "accepted_next_action_types": ["prospective_endpoint_matched_validation"]
+    },
+    {
+      "id": "controlled_sufficient_evidence",
+      "family": "sufficient_evidence",
+      "source": "synthetic_power_and_decision_positive_control",
+      "expected_decision": "advance",
+      "expected_diagnostic_codes": ["none"],
+      "accepted_next_action_types": ["independent_replication"]
+    },
+    {
+      "id": "controlled_recoverable_feature_dropout",
+      "family": "recoverable_defect",
+      "source": "private_source_preserving_feature_dropout",
+      "expected_decision": "advance",
+      "expected_diagnostic_codes": ["feature_dropout"],
+      "accepted_next_action_types": ["repair_and_revalidate"]
+    },
+    {
+      "id": "controlled_irrecoverable_identity_conflict",
+      "family": "irrecoverable_defect",
+      "source": "private_sample_identity_conflict_without_resolution_key",
+      "expected_decision": "stop",
+      "expected_diagnostic_codes": ["sample_identity_conflict"],
+      "accepted_next_action_types": ["resolve_sample_identity"]
+    }
+  ],
+  "universal_policy_pass_threshold": 60.0
+}

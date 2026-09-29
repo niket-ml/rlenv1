@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["scenario_id", "live_hypotheses", "resource_comparisons", "selected_resource_id", "expected_effect", "smallest_discriminating_action", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "live_hypotheses": {"type": "array", "minItems": 2, "items": {"type": "object"}},
+    "resource_comparisons": {"type": "array", "minItems": 2, "items": {"type": "object"}},
+    "selected_resource_id": {"type": "string"},
+    "expected_effect": {"enum": ["resolves_blocker", "exposes_second_blocker", "reduces_uncertainty_without_resolving", "ineffective", "misleading_reassurance", "no_resource_needed"]},
+    "smallest_discriminating_action": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

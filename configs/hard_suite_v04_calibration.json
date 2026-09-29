@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.4",
+  "status": "frozen_pre_development_calibration",
+  "purpose": "One-seed v0.4 biomedical-statistical development calibration; not a stable ranking.",
+  "models": [
+    {"model_id": "openai/gpt-5.6-sol", "input_usd_per_million_tokens": 2.0, "output_usd_per_million_tokens": 10.0, "planning_guard_per_task_usd": 1.0},
+    {"model_id": "openai/gpt-5.4", "input_usd_per_million_tokens": 2.5, "output_usd_per_million_tokens": 15.0, "planning_guard_per_task_usd": 1.0},
+    {"model_id": "openai/gpt-5.2", "input_usd_per_million_tokens": 1.75, "output_usd_per_million_tokens": 14.0, "planning_guard_per_task_usd": 1.0}
+  ],
+  "variant_ids": [
+    "dev4_identity_control",
+    "dev4_identity_reconciled",
+    "dev4_transport_control",
+    "dev4_transport_matched",
+    "dev4_process_control",
+    "dev4_process_repaired",
+    "dev4_labels_control",
+    "dev4_labels_adjudicated",
+    "dev4_evidence_control",
+    "dev4_evidence_replicated"
+  ],
+  "attempts_per_cell": 1,
+  "trajectory_budget": {
+    "maximum_turns": 40,
+    "maximum_completion_tokens_per_turn": 3500,
+    "maximum_total_completion_tokens": 50000,
+    "wall_clock_timeout_seconds": 2400,
+    "minimum_request_interval_seconds": 3.25
+  },
+  "cost_planning": {
+    "trajectory_count": 30,
+    "maximum_incremental_spend_usd": 30.0,
+    "inter_task_cooldown_seconds": 20
+  },
+  "evaluation_policy": {
+    "complete_frozen_matrix_unless_cost_or_infrastructure_stops_it": true,
+    "tune_mid_run": false,
+    "astra_requests": 0,
+    "ranking_claim_allowed": false
+  }
+}

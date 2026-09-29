@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.5",
+  "status": "frozen_bounded_development_pilot_not_ranking",
+  "purpose": "One-seed six-state v0.5 workflow calibration; no stable ranking claim.",
+  "models": [
+    {"model_id": "openai/gpt-5.6-sol", "input_usd_per_million_tokens": 2.0, "output_usd_per_million_tokens": 10.0, "planning_guard_per_episode_usd": 1.5},
+    {"model_id": "openai/gpt-5.4", "input_usd_per_million_tokens": 2.5, "output_usd_per_million_tokens": 15.0, "planning_guard_per_episode_usd": 1.5},
+    {"model_id": "openai/gpt-5.2", "input_usd_per_million_tokens": 1.75, "output_usd_per_million_tokens": 14.0, "planning_guard_per_episode_usd": 1.5}
+  ],
+  "scenario_ids": [
+    "dev5_clean_progression",
+    "dev5_identity_dependence",
+    "dev5_endpoint_ambiguity",
+    "dev5_preprocessing_leakage",
+    "dev5_transport_failure",
+    "dev5_irreducible_external"
+  ],
+  "attempts_per_cell": 1,
+  "trajectory_budget": {
+    "maximum_turns": 55,
+    "maximum_completion_tokens_per_turn": 4000,
+    "maximum_total_completion_tokens": 75000,
+    "wall_clock_timeout_seconds": 3600,
+    "minimum_request_interval_seconds": 3.25
+  },
+  "cost_planning": {
+    "trajectory_count": 18,
+    "maximum_incremental_spend_usd": 20.0,
+    "inter_episode_cooldown_seconds": 20
+  },
+  "evaluation_policy": {
+    "local_gates_required": true,
+    "freeze_manifest_required": true,
+    "tune_mid_run": false,
+    "astra_requests": 0,
+    "ranking_claim_allowed": false,
+    "heldout_partition_allowed": false
+  }
+}

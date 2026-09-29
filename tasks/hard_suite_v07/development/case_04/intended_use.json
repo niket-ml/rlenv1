@@ -1,0 +1,18 @@
+{
+  "advance_criteria": {
+    "auc_ci_lower_minimum": 0.58,
+    "auc_minimum": 0.7,
+    "brier_maximum": 0.23,
+    "ece_maximum": 0.12,
+    "net_benefit_minimum": 0.0
+  },
+  "claim": "prognostic probability for research-use triage",
+  "endpoint": "clinical response at day 42, window 35-49",
+  "input_time": "baseline before treatment",
+  "not_supported_by_contract": [
+    "individual treatment effect",
+    "clinical deployment"
+  ],
+  "population": "adults with moderate-to-severe ulcerative colitis before first infliximab",
+  "threshold": 0.5
+}

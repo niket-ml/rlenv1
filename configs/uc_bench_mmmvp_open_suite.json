@@ -1,0 +1,26 @@
+{
+  "schema_version": "uc-bench-open-mmmvp-suite-1",
+  "suite_id": "uc_anti_tnf_predictor_diligence_open_mmmvp",
+  "status": "unfrozen_release_candidate",
+  "source_scientific_version": "v0.8",
+  "scientific_cases_changed": false,
+  "condition_ids": [
+    "case_01",
+    "case_02",
+    "case_03_signal_collapses",
+    "case_03_signal_remains",
+    "case_04"
+  ],
+  "headline_results": [
+    "complete_missions_passed_out_of_five",
+    "partial_scientific_quality",
+    "decision_and_evidence_chain_failures"
+  ],
+  "diagnostic_only_components": [
+    "resource_selection"
+  ],
+  "resource_selection_positioning": "A consequential workflow component, but not a standalone headline capability because a no-purchase policy is valid in multiple evidence states.",
+  "heldout_included": false,
+  "astra_included": false,
+  "ranking_claim_allowed": false
+}

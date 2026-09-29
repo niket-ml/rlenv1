@@ -1,0 +1,222 @@
+{
+  "schema_version": "0.1",
+  "last_updated": "2026-09-09",
+  "findings": [
+    {
+      "id": "AF-001",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 2,
+      "finding": "No GEO matrices or verified patient-level cohort manifest exist in the workspace.",
+      "required_resolution": "Reconstruct baseline cohorts from source files and verify counts, arms, timepoints, outcomes, and checksums."
+    },
+    {
+      "id": "AF-002",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 2,
+      "finding": "Independence of the GSE16879 and GSE73661 infliximab patients has not been checked at sample or expression level.",
+      "required_resolution": "Perform metadata identity and expression-fingerprint overlap checks before assigning discovery or replication roles."
+    },
+    {
+      "id": "AF-003",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 6,
+      "finding": "Existing variants mostly degrade evidence and do not include a sufficient-evidence state that penalizes universal abstention.",
+      "required_resolution": "Add a realistic positive evidence ladder with a defensible advance decision and verify symmetric abstention penalties."
+    },
+    {
+      "id": "AF-004",
+      "severity": "high",
+      "status": "closed",
+      "stage": 3,
+      "finding": "The environment has not been reference-solved on real data from the same start state intended for agents.",
+      "required_resolution": "Complete and replay an expert reference episode plus a deliberately mediocre comparison."
+    },
+    {
+      "id": "AF-005",
+      "severity": "high",
+      "status": "open",
+      "stage": 8,
+      "finding": "One-attempt calibration shows a strict combined directional gradient, but no repeated held-out runs yet establish rank stability or uncertainty.",
+      "required_resolution": "Freeze held-out variants, repeat discriminating model-by-task cells with task-clustered uncertainty, and verify that the order is not a single-seed artifact."
+    },
+    {
+      "id": "AF-006",
+      "severity": "high",
+      "status": "closed",
+      "stage": 1,
+      "finding": "The current public score taxonomy predates the explicit graceful-failure objective.",
+      "required_resolution": "Map all score components to detection, containment, diagnosis, recovery, calibration, decision quality, and reproducibility."
+    },
+    {
+      "id": "AF-007",
+      "severity": "high",
+      "status": "closed",
+      "stage": 7,
+      "finding": "The Docker-isolated Verifiers runner, OpenRouter key, and pinned model matrix were configured, but no model had completed a valid real episode.",
+      "required_resolution": "Closed after the clean nine-attempt end-to-end smoke and two frozen multi-model diagnostic calibrations produced valid isolated episodes with provider failures classified separately."
+    },
+    {
+      "id": "AF-008",
+      "severity": "high",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Both calibration slices retain frontier ceiling effects: GPT-5.6 Sol and GPT-5.4 tie on executable data tasks, while GPT-5.4 and GPT-5.2 tie on decision packets.",
+      "required_resolution": "Closed by the separately frozen v0.5 workflow pilot: all three ceiling rates were zero and weakest-model floor rate was 16.7%. This resolves the earlier ceiling diagnosis but does not override v0.5's separate family-concentration and construct-validity no-go."
+    },
+    {
+      "id": "AF-009",
+      "severity": "high",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Current results identify procedural completion and evidence-diagnosis failures, but do not identify LLM pretraining undersampling or show that expert SFT/RLHF is required.",
+      "required_resolution": "Closed by running the frozen playbook pair and biological breaking curves, observing heterogeneous playbook effects, and explicitly prohibiting causal training-data or model-adaptation claims without a matched intervention test."
+    },
+    {
+      "id": "AF-010",
+      "severity": "high",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Hard suite v0.2 produced apparent difficulty through a 20-turn execution floor rather than scientific composition.",
+      "required_resolution": "Closed by preserving v0.2 as a no-go, increasing the horizon to 32 turns, and moving difficulty to irreversible resource selection with competing scientific explanations."
+    },
+    {
+      "id": "AF-011",
+      "severity": "high",
+      "status": "open",
+      "stage": 9,
+      "finding": "Hard suite v0.3 is a controlled biological evidence simulation; no separately reported authentic-cohort hard-suite matrix exists.",
+      "required_resolution": "Package and run an authentic cohort partition under the same integrity boundary before claiming real-world failure prevalence or commercial biomarker performance."
+    },
+    {
+      "id": "AF-012",
+      "severity": "high",
+      "status": "closed",
+      "stage": 8,
+      "finding": "The frozen v0.3 one-seed development matrix and its predeclared family-gap and failure-domain acceptance checks are incomplete.",
+      "required_resolution": "Closed by pausing v0.3 at 16/30 usable cells, preserving its raw checkpoint, documenting Sol's 98.4 quantitative ceiling, prohibiting resume, and superseding it with the pre-evaluation v0.4 design."
+    },
+    {
+      "id": "AF-013",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Hard suite v0.4 passes zero-cost controls but has no model calibration yet, so its ceiling, floor, failure gradient, family-gap concentration, and intervention recoveries are unknown.",
+      "required_resolution": "Closed by freezing before exposure, completing all 30 usable development cells under cap, applying the predeclared gates, preserving one excluded DNS failure, and issuing a no-go without an Astra request when the family-gap gate failed."
+    },
+    {
+      "id": "AF-014",
+      "severity": "critical",
+      "status": "open",
+      "stage": 8,
+      "finding": "Hard suite v0.4 produces a directional 80.50 > 77.65 > 70.35 gradient and non-schema failures, but Q03 explains 43.6% of the Sol-to-GPT-5.2 gap and Sol quantitative reasoning remains at 99.59.",
+      "required_resolution": "Do not tune v0.4 or run Astra. Create a separately versioned and pre-exposure-frozen successor whose genuine quantitative difficulty is distributed across at least four families, then require repeated seeds and uncertainty analysis before any stable ranking."
+    },
+    {
+      "id": "AF-015",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "The frozen v0.5 grader penalized scientifically valid semantic descriptions in two Sol cells because small vocabulary matchers did not recognize a fingerprint-group uncertainty unit and a frozen discovery-only preprocessing fit scope.",
+      "required_resolution": "Closed locally by preserving v0.5 unchanged and implementing v0.6 parsed-property grading, ten independent artifact invariants, a 100-point alternative-method solver, and a zero-difference professional paraphrase control before model exposure."
+    },
+    {
+      "id": "AF-016",
+      "severity": "critical",
+      "status": "open",
+      "stage": 8,
+      "finding": "The v0.5 one-seed matrix has a directional 76.77 > 75.08 > 60.04 result, but the underpowered/irreducible state explains 67.25% of the Sol-to-GPT-5.2 absolute gap after GPT-5.2 reached the 55-turn limit without a final submission.",
+      "required_resolution": "Do not run Astra or publish a ranking. Build a separately versioned successor with semantic artifact contracts, distribute long-horizon and recovery load across states, retain usable unsubmitted attempts as zero, and reapply the 30% family-concentration gate before repeated seeds."
+    },
+    {
+      "id": "AF-017",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "All five proposed v0.6 exact models passed the non-scored cross-provider compatibility gate on pinned native routes. Kimi required automatic rather than specified tool choice while thinking; Claude required ordinary workflow wording after explicit conformance-test language triggered its policy filter.",
+      "required_resolution": "Closed under the exact $3 cap with conservative response-reported spend of $0.04574225, retained failed attempts, zero scientific scores, and zero Astra requests. Carry the documented provider adapters into the scientific runner before freeze."
+    },
+    {
+      "id": "AF-018",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "The frozen v0.6 sentinel produced no model response: its first Sol cell failed at the gateway with a missing authentication header and then a 404 parameter-filter rejection. The compatibility canary did not exercise the exact scientific adapter payload, and the frozen classifier recorded the parameter-routing failure as unknown rather than provider-adapter failure.",
+      "required_resolution": "Closed through separately versioned v0.6.1-v0.6.3 infrastructure repairs, exact-payload controls, immutable successor freezes, and a complete ten-cell v0.6.3 cross-provider sentinel. Frozen v0.6 remains an infrastructure no-go and was never resumed."
+    },
+    {
+      "id": "AF-019",
+      "severity": "critical",
+      "status": "open",
+      "stage": 8,
+      "finding": "Frozen v0.6.3 is a ceiling and construct-validity no-go: Sol averaged 82.80, GPT-5.2 averaged 84.44, one Gemini clean cell did not submit, final decision/recovery exceeded the 30% family concentration gate, and shallow universal policies retained approximately 92-95 artifact-science points.",
+      "required_resolution": "Do not resume v0.6.3, run its remaining development cells, expose held-out states, or run Astra. Calibrate only a separately frozen successor after its scientific score cannot be dominated by procedural work, alternative expert policies are accepted, and shallow/template policies fail the headline construct score."
+    },
+    {
+      "id": "AF-020",
+      "severity": "high",
+      "status": "open",
+      "stage": 8,
+      "finding": "The reset v0.7 four-case vertical environment passes internally authored scientific, state-machine, anti-gaming, alternative-workflow, counterfactual, and graceful-recovery controls, but real-model difficulty, completion reliability, unanticipated valid workflows, and external expert validity remain unproven.",
+      "required_resolution": "Frozen v0.7 stopped before any model response because of AF-021. Do not interpret it scientifically or resume it. Any separately authorized successor must preserve the v0.7 tasks and results, repair and test the client credential lifecycle, pass a non-scored full-lifecycle canary, and receive a new immutable freeze and explicit execution authorization. Do not create held-out cases or run Astra. Independent expert review remains required before strong public or commercial claims."
+    },
+    {
+      "id": "AF-021",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Frozen v0.7 produced no model response. Its first Sol/Case 1 request returned HTTP 401 Missing Authentication header because the audited client was constructed before the temporary key context. The runner stopped with zero spend and no scientific evidence; no other cell ran.",
+      "required_resolution": "Closed by preserving v0.7 unchanged; creating separately frozen v0.7.1 with an explicit key and base URL passed to the native constructor; passing ten permanent regressions, 442 repository tests and a one-request $0.00033 production-path canary; and completing five Sol cells with zero authentication or infrastructure failures."
+    },
+    {
+      "id": "AF-022",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Frozen v0.7.1 completed five valid Sol episodes but produced an artificial common floor: all five headline scores were capped at 15 after the deterministic grader failed to recognize ordinary nested row counts, explanatory patient-unit records, declared primary metric containers, structured belief revisions and nested or negated STOP decisions. The task explicitly allowed nested explanatory records, so the frozen scores are not valid capability estimates.",
+      "required_resolution": "Do not run GPT-5.2, held-out states or Astra and do not post-hoc rescore v0.7.1. Before any separately authorized successor, convert the five preserved traces into fixed semantic-preservation tests covering count aliases, nested estimates and intervals, primary-versus-sensitivity selection, decision negation, structured belief updates and alternative expert prose; then rerun reference, mediocre, paraphrase, anti-template and cap-dominance controls before model exposure."
+    },
+    {
+      "id": "AF-023",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Frozen v0.7.2 passes its zero-cost interface, semantic-invariance, artifact-recomputation, altered-input, anti-gaming, exact-payload, Docker and five-trace replay gates, but no new scientific model episode has tested whether the repaired interface and grader measure a live trajectory without representation-driven loss.",
+      "required_resolution": "Closed by running exactly the two authorized development checks for $0.6688983 response-reported spend, stopping automatically, and completing the mandatory manual review. The review confirmed multiple grader-validity failures and a signal-collapse ceiling, recorded separately as AF-024."
+    },
+    {
+      "id": "AF-024",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "Frozen v0.7.2 is a grader/construct no-go. A minor alternative site-sensitivity convention invalidated otherwise verified Case 1 artifacts; follow-up recomputation ignored both agents' committed ECE-bin count; a corrected rejected checkpoint was falsely treated as an event/action disagreement; and Case 3 simultaneously had a decision-critical failure and strict mission success. The earlier characterization of one successful Case 3 run as a ceiling failure was not justified and is withdrawn.",
+      "required_resolution": "Closed by archiving v0.7.2 without patching or rescoring; explicitly recording that one success demonstrates tractability rather than saturation; and implementing an unfrozen v0.8 verifier that repairs the four observed grading failures and replays both preserved trajectories faithfully at zero API cost."
+    },
+    {
+      "id": "AF-025",
+      "severity": "high",
+      "status": "closed",
+      "stage": 8,
+      "finding": "The unfrozen v0.8 MVP now maps the original four case packets and five conditions without changing their scientific purpose. All five manually confirmed legacy replays and 35 reference, alternative-workflow, scientific-error, hard-coded, altered-input, unsupported-decision and optional-diagnostic controls pass their expected classifications. However, the native v0.8 paid runner has not been exercised, no repeated v0.8 attempt establishes mission-success difficulty, and no untouched final cases exist.",
+      "required_resolution": "Closed by implementing the native numeric-belief, explicit-decision and saved-follow-up-analysis runner; passing 502 tests, lint, doctor, audit, Docker, credential and 35-control gates; creating a 145-file execution snapshot; and starting the authorized tranche. The first completed live case exposed the separate grader-contamination finding AF-026, so execution stopped without a retry or successor version."
+    },
+    {
+      "id": "AF-026",
+      "severity": "critical",
+      "status": "closed",
+      "stage": 8,
+      "finding": "The snapshotted v0.8 verifier rejected Sol's complete Case 2 PAUSE decision object because decision.prohibited_use used clear professional descriptions rather than private truth claim-ID strings. The public contract describes these scope fields as semantic lists and reserves exact claim IDs for claims.prohibited, which the agent supplied correctly and which passed. The reported 95 partial score and failed mission are grader-contaminated and cannot be interpreted as model performance.",
+      "required_resolution": "Closed by preserving snapshot 01 and all raw runs; auditing every mission requirement; assigning one non-prose authority to every scored property; removing nine duplicate/prose scoring paths; regrading the exact Case 2 submission as a 100/pass development replay; passing 35 original controls, four naturalistic-language fixtures and 511 repository tests; and creating v0.8 development snapshot 02 with zero API calls. The historical 95/fail remains immutable and is not retroactively replaced."
+    },
+    {
+      "id": "AF-027",
+      "severity": "high",
+      "status": "open",
+      "stage": 8,
+      "finding": "The v0.8 verifier architecture now passes its zero-cost single-source and natural-language invariance gates, but the interrupted Case 3 signal-remains attempt cannot be resumed exactly because complete message bodies, tool results, event state and serialized runner state were not persisted. Case 4 remains unrun, and no repeated or cross-model v0.8 calibration exists.",
+      "required_resolution": "Do not resume the interrupted attempt or treat its partial workspace as a scored trajectory. If separately authorized, start a fresh Case 3 signal-remains attempt and one Case 4 attempt from immutable snapshot 02 under a minimum responsible $4.78 combined cap, then stop for review. Preserve the existing incomplete attempt as diagnostic evidence. Repeated attempts, multiple model families, untouched final cases and external specialist review remain required before ranking or public validity claims."
+    }
+  ]
+}

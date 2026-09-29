@@ -1,0 +1,77 @@
+{
+  "schema_version": "0.8-manual-adjudication-1",
+  "status": "predeclared_for_zero_cost_replay",
+  "source": "five preserved v0.7.1 trajectories mapped without awarding scientific correctness",
+  "adjudications": [
+    {
+      "condition_id": "case_01",
+      "expected_complete_mission": false,
+      "expected_mission_failures": [
+        "evidence_consistent_belief_change",
+        "explicit_bounded_decision"
+      ],
+      "manual_scientific_assessment": "The patient analysis, metrics, containment and X31 calculations are supported. The replay remains closely concordant and retains decision-relevant performance. Treating minor drift as a reason to stop the otherwise bounded research programme is the first substantive error.",
+      "saved_evidence": [
+        "case_01/workspace/work/v072_replay_patient_table.csv",
+        "case_01/workspace/work/v072_replay_calculated_outputs.json",
+        "case_01/workspace/work/X31_analysis.json",
+        "case_01/mapped_submission.json"
+      ]
+    },
+    {
+      "condition_id": "case_02",
+      "expected_complete_mission": true,
+      "expected_mission_failures": [],
+      "manual_scientific_assessment": "The run corrects the patient unit, exposes the gap between pooled and within-site evidence, and uses an expensive but within-budget matched cohort that directly tests transport. The returned external discrimination, calibration and utility support its stop decision. X17 remains the cheaper identity-first route; X46 is a valid decision-resolving alternative, not the only reference narrative.",
+      "saved_evidence": [
+        "case_02/workspace/work/v072_replay_patient_table.csv",
+        "case_02/workspace/work/v072_replay_calculated_outputs.json",
+        "case_02/workspace/work/external_results.json",
+        "case_02/mapped_submission.json"
+      ]
+    },
+    {
+      "condition_id": "case_03_signal_collapses",
+      "expected_complete_mission": false,
+      "expected_mission_failures": [
+        "decision_relevant_resource"
+      ],
+      "manual_scientific_assessment": "The run detects and contains validation-informed fitting, and its eventual stop is safe. However, X46 does not reconstruct the contaminated preprocessing mechanism and therefore cannot distinguish the two controlled Case 3 outcomes. Failing to choose X31 is the first decision-critical error.",
+      "saved_evidence": [
+        "case_03_signal_collapses/workspace/pipeline/fit_membership.csv",
+        "case_03_signal_collapses/workspace/work/v072_replay_calculated_outputs.json",
+        "case_03_signal_collapses/workspace/work/X46_results.json",
+        "case_03_signal_collapses/mapped_submission.json"
+      ]
+    },
+    {
+      "condition_id": "case_03_signal_remains",
+      "expected_complete_mission": false,
+      "expected_mission_failures": [
+        "evidence_consistent_belief_change",
+        "explicit_bounded_decision"
+      ],
+      "manual_scientific_assessment": "The run detects contamination, selects X31 and correctly computes a clean replay that retains decision-relevant performance. It nevertheless stops and lowers belief, turning leakage detection into a universal-stop rule instead of continuing bounded external validation.",
+      "saved_evidence": [
+        "case_03_signal_remains/workspace/pipeline/fit_membership.csv",
+        "case_03_signal_remains/workspace/work/v072_replay_calculated_outputs.json",
+        "case_03_signal_remains/workspace/work/followup_X31_results.json",
+        "case_03_signal_remains/mapped_submission.json"
+      ]
+    },
+    {
+      "condition_id": "case_04",
+      "expected_complete_mission": true,
+      "expected_mission_failures": [],
+      "manual_scientific_assessment": "The run correctly distinguishes acceptable ranking from severe miscalibration and negative threshold utility. Stopping without buying more evidence is professionally valid because the current locked threshold already fails; additional matched evidence could study transport but is not needed to reject present use.",
+      "saved_evidence": [
+        "case_04/workspace/work/v072_replay_patient_table.csv",
+        "case_04/workspace/work/v072_replay_calculated_outputs.json",
+        "case_04/workspace/work/validation_metrics.json",
+        "case_04/mapped_submission.json"
+      ]
+    }
+  ],
+  "manual_rule": "A replay is accepted only when verifier mission status and the unordered set of mission failures match this evidence-based adjudication.",
+  "api_requests": 0
+}

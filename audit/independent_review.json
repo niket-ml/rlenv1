@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1",
+  "status": "pending",
+  "reviewer": null,
+  "reviewed_at": null,
+  "scientific_claims_approved": false,
+  "reward_hacking_review_approved": false,
+  "notes": "Complete only after Stages 7 through 9 pass. The benchmark author cannot self-approve this gate."
+}

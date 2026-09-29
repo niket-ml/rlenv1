@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1",
+  "headline_conditions": ["full_data", "data_withheld"],
+  "headline_scenario_family": "authentic_weak_evidence",
+  "models": ["UC_BENCH_MODEL_A", "UC_BENCH_MODEL_B", "UC_BENCH_MODEL_C"],
+  "seeds_per_model_per_headline_condition": 10,
+  "headline_trajectory_count": 60,
+  "controlled_results_are_headline": false,
+  "controlled_seeds_per_model_per_state": 3,
+  "bootstrap_resamples": 5000,
+  "bootstrap_cluster": "seed",
+  "primary_metric": "graceful_failure_score",
+  "secondary_metrics": [
+    "contract_valid_rate",
+    "decision_accuracy",
+    "infrastructure_failure_rate",
+    "component_scores",
+    "full_vs_withheld_lift",
+    "rank_first_probability",
+    "floor_rate",
+    "ceiling_rate"
+  ],
+  "minimum_score_gap_for_claim": 12.0,
+  "floor_threshold": 20.0,
+  "ceiling_threshold": 95.0,
+  "predeclared_exclusions": ["provider_outage", "sandbox_creation_failure"],
+  "scientific_failures_are_excluded": false
+}

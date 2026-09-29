@@ -1,0 +1,650 @@
+{
+  "schema_version": "0.8-case-portfolio-1",
+  "status": "post_mvp_roadmap_only_implementation_not_authorized",
+  "active_mvp": false,
+  "roadmap_note": "Preserve these designs for later. The active v0.8 MVP reuses the original four v0.7 case packets and five controlled conditions; none of D02-D08 is being implemented now.",
+  "portfolio_summary": {
+    "investigations": 8,
+    "new_investigations": 7,
+    "preserved_tractability_anchor": "V08-D01",
+    "controlled_states": 16,
+    "public_development_cases_separate_from_final_cases": true,
+    "final_cases_created": false
+  },
+  "cases": [
+    {
+      "case_id": "V08-D01",
+      "title": "Validation-contaminated preprocessing with clean replay",
+      "origin": "Preserved Case 3 tractability anchor",
+      "important_failure": "The apparent validation result used reference fitting that included validation information; the agent must contain it and use a clean replay before deciding.",
+      "professional_importance": "A model can appear perfect when normalization or feature construction sees validation data. Diligence must separate an invalid result from the recoverability of the underlying asset.",
+      "available_evidence": [
+        "locked predictions and patient metadata",
+        "preprocessing code and fit-membership ledger",
+        "outcome-import and execution chronology",
+        "sealed clean-replay predictions purchasable under budget"
+      ],
+      "required_calculations": [
+        "patient-level discrimination, calibration and net benefit for the original export",
+        "the same metrics for the clean replay",
+        "patient and site sensitivities using the committed method"
+      ],
+      "consequential_choice": "Whether to buy the pipeline replay and whether to stop or continue bounded research development after it returns.",
+      "defensible_choices": [
+        "pause and buy the inexpensive clean replay",
+        "stop immediately only if the decision contract makes recovery valueless",
+        "continue conditionally if the clean replay remains valid and claims stay bounded"
+      ],
+      "real_harm_from_error": "Contaminated evidence advances a non-performing asset, or a recoverable signal is discarded without testing.",
+      "verifier_recomputation": "Rebuild patient rows from raw identifiers, inspect actual fit membership and event order, and recompute both original and replay metrics with the agent's committed aggregation, ECE bins and uncertainty settings.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "detect validation information in preprocessing",
+          "mark the original result ineligible",
+          "analyse the clean replay",
+          "revise the decision in the direction supported by the replay"
+        ],
+        "accepted_professional_alternative": [
+          "patient bootstrap or defensible hierarchical uncertainty",
+          "fixed-bin ECE or calibration intercept/slope if prospectively declared",
+          "stop rather than purchase when the written business contract makes recovery immaterial"
+        ],
+        "diagnostic_only": [
+          "optional equal-site versus patient-weighted sensitivity",
+          "exact prose used to describe leakage",
+          "number of intermediate plots"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "clean_replay_collapses",
+          "shared_start_state_id": "V08-D01-start",
+          "revealed_difference": "The clean replay loses discrimination, calibration and utility.",
+          "supported_final_action": "STOP_CURRENT_PREDICTOR"
+        },
+        {
+          "variant_id": "clean_replay_survives",
+          "shared_start_state_id": "V08-D01-start",
+          "revealed_difference": "The clean replay retains decision-relevant performance.",
+          "supported_final_action": "CONTINUE_RESEARCH_VALIDATION_WITH_GATES"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "did not detect contaminated fitting",
+          "candidate_resource": "automated fit-membership/provenance check",
+          "intervention_class": "tool_or_process",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "detected leakage but could not design a clean replay",
+          "candidate_resource": "transcriptomics preprocessing specialist",
+          "intervention_class": "expert_input",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "contamination detection plus belief revision after counterfactual replay"
+      }
+    },
+    {
+      "case_id": "V08-D02",
+      "title": "Repeated biopsies and the patient analysis unit",
+      "origin": "New development investigation",
+      "important_failure": "Biopsy rows are treated as independent patients, inflating effective sample size and potentially discrimination.",
+      "professional_importance": "Repeated tissue samples are common in translational studies. Incorrect independence assumptions produce false precision and can change model-selection decisions.",
+      "available_evidence": [
+        "biopsy manifest with reported and fingerprint-derived identities",
+        "visit timing",
+        "locked row-level predictions",
+        "sealed patient outcomes"
+      ],
+      "required_calculations": [
+        "sample and unique-patient counts",
+        "row-level versus patient-level AUC",
+        "patient-clustered uncertainty",
+        "sensitivity to defensible within-patient aggregation"
+      ],
+      "consequential_choice": "Whether the evidence can advance at patient level or must pause for identity reconciliation.",
+      "defensible_choices": [
+        "aggregate repeated baseline biopsies prospectively",
+        "fit a defensible repeated-measures model",
+        "pause when patient identity cannot be resolved"
+      ],
+      "real_harm_from_error": "Pseudoreplicated evidence is presented as independent validation and a weak predictor is advanced.",
+      "verifier_recomputation": "Reconstruct fingerprint-defined patient clusters, independently aggregate locked predictions, bootstrap patients rather than rows, and compare row and patient estimates.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "identify the patient as the decision unit",
+          "preserve within-patient dependence",
+          "base the decision on patient-level results"
+        ],
+        "accepted_professional_alternative": [
+          "mean, median or prespecified first locked biopsy",
+          "cluster bootstrap or hierarchical repeated-measures model"
+        ],
+        "diagnostic_only": [
+          "row-level AUC when clearly labelled descriptive",
+          "choice of plotting library"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "row_signal_disappears_by_patient",
+          "shared_start_state_id": "V08-D02-start",
+          "revealed_difference": "Patient aggregation removes the apparent performance advantage.",
+          "supported_final_action": "PAUSE_FOR_VALID_PATIENT_EVIDENCE"
+        },
+        {
+          "variant_id": "signal_survives_patient_analysis",
+          "shared_start_state_id": "V08-D02-start",
+          "revealed_difference": "Patient-level estimates remain adequate with honest uncertainty.",
+          "supported_final_action": "CONTINUE_RESEARCH_VALIDATION_WITH_GATES"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "patient clusters cannot be reconstructed",
+          "candidate_resource": "source-record identity crosswalk",
+          "intervention_class": "better_metadata",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "agent calculates row-level uncertainty despite known repeats",
+          "candidate_resource": "cluster-aware analysis tool and checklist",
+          "intervention_class": "tool_or_process",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "choosing and executing the correct biological unit of analysis"
+      }
+    },
+    {
+      "case_id": "V08-D03",
+      "title": "Hospital/site confounding versus transportable signal",
+      "origin": "New development investigation",
+      "important_failure": "Pooled performance is driven by hospital-specific prevalence, acquisition or batch structure rather than within-site biology.",
+      "professional_importance": "Clinical biomarker studies frequently confound site, prevalence and assay batch. A pooled AUC can look strong while failing at every deployable site.",
+      "available_evidence": [
+        "site, batch and platform metadata",
+        "patient predictions and outcomes",
+        "site sample sizes and prevalence",
+        "one constrained external-site or same-site enlargement option"
+      ],
+      "required_calculations": [
+        "pooled and within-site performance",
+        "site-stratified uncertainty",
+        "calibration and utility by site",
+        "sensitivity to site-balanced evaluation"
+      ],
+      "consequential_choice": "Whether to buy evidence from a new site, enlarge the same sites, or conclude that current evidence is sufficient.",
+      "defensible_choices": [
+        "hierarchical site model",
+        "site-stratified estimates with explicit uncertainty",
+        "matched external-site validation when current sites cannot distinguish transport"
+      ],
+      "real_harm_from_error": "A hospital identifier masquerades as biological signal and fails at deployment.",
+      "verifier_recomputation": "Recompute patient-level pooled, within-site and site-balanced metrics and test whether outcome/prediction structure is explained by site composition.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "inspect site-outcome-prediction dependence",
+          "avoid advancing on pooled performance alone",
+          "choose evidence that can test transport"
+        ],
+        "accepted_professional_alternative": [
+          "hierarchical partial pooling",
+          "site-stratified estimates",
+          "leave-one-site-out analysis"
+        ],
+        "diagnostic_only": [
+          "one preferred heterogeneity statistic",
+          "exact site ordering in tables"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "pooled_signal_is_site_mix",
+          "shared_start_state_id": "V08-D03-start",
+          "revealed_difference": "New-site and within-site performance are poor despite strong pooled AUC.",
+          "supported_final_action": "STOP_OR_REDEVELOP_FOR_TRANSPORT"
+        },
+        {
+          "variant_id": "within_site_signal_transports",
+          "shared_start_state_id": "V08-D03-start",
+          "revealed_difference": "Within-site and new-site estimates remain directionally consistent.",
+          "supported_final_action": "CONTINUE_RESEARCH_VALIDATION_WITH_GATES"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "site transport remains unidentified",
+          "candidate_resource": "endpoint-matched independent site",
+          "intervention_class": "additional_data",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "agent pools sites without diagnostics",
+          "candidate_resource": "biostatistician site-heterogeneity review",
+          "intervention_class": "expert_input",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "separating pooled association from within-site transportability"
+      }
+    },
+    {
+      "case_id": "V08-D04",
+      "title": "Endpoint, visit and label-provenance reconciliation",
+      "origin": "New development investigation",
+      "important_failure": "Training and validation labels refer to different clinical constructs or time windows, with ambiguous patient/visit linkage.",
+      "professional_importance": "Response, remission and mucosal healing are not interchangeable, and biopsy-to-visit joins can silently attach a valid outcome to the wrong intended use.",
+      "available_evidence": [
+        "intended-use endpoint contract",
+        "patient/visit map",
+        "source and adjudication label ledger",
+        "assessment dates and treatment dates",
+        "bounded source-record or clinical-adjudication resource"
+      ],
+      "required_calculations": [
+        "eligible patient count under the intended window",
+        "label agreement and reclassification table",
+        "performance under each defensible endpoint construction",
+        "decision sensitivity to unresolved labels"
+      ],
+      "consequential_choice": "Whether metadata reconciliation is enough, clinical adjudication is needed, or the existing endpoint cannot support the claim.",
+      "defensible_choices": [
+        "use the prospectively contracted endpoint",
+        "report multiple endpoint constructions without selecting after outcomes",
+        "abstain when no endpoint is clinically aligned"
+      ],
+      "real_harm_from_error": "A predictor for a different clinical outcome is represented as treatment-response evidence.",
+      "verifier_recomputation": "Rebuild patient/visit joins from source dates, reconstruct each disclosed endpoint, and recompute performance and decision rules under the eligible definitions.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "identify endpoint and time-window compatibility",
+          "reconcile labels at the patient/visit level",
+          "limit claims to the supported endpoint"
+        ],
+        "accepted_professional_alternative": [
+          "dual-review adjudication",
+          "prespecified composite endpoint",
+          "parallel sensitivity endpoints with no post-hoc promotion"
+        ],
+        "diagnostic_only": [
+          "preferred clinical terminology when definitions are explicit",
+          "format of the reclassification table"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "metadata_resolves_same_endpoint",
+          "shared_start_state_id": "V08-D04-start",
+          "revealed_difference": "Source reconciliation shows the apparent mismatch was a visit-key alias and the contracted endpoint is recoverable.",
+          "supported_final_action": "CONTINUE_RESEARCH_VALIDATION_WITH_GATES"
+        },
+        {
+          "variant_id": "true_endpoint_mismatch",
+          "shared_start_state_id": "V08-D04-start",
+          "revealed_difference": "Clinical adjudication confirms a different endpoint construct and window.",
+          "supported_final_action": "PAUSE_FOR_ENDPOINT_MATCHED_EVIDENCE"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "visit linkage is ambiguous",
+          "candidate_resource": "patient/visit crosswalk",
+          "intervention_class": "better_metadata",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "clinical meaning remains ambiguous after linkage",
+          "candidate_resource": "IBD clinical endpoint adjudication",
+          "intervention_class": "expert_input",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "distinguishing resolvable metadata error from a clinically different endpoint"
+      }
+    },
+    {
+      "case_id": "V08-D05",
+      "title": "Cross-platform transcriptomic transport",
+      "origin": "New development investigation",
+      "important_failure": "A predictor is transferred across assay platforms with incompatible feature mappings, preprocessing references or dynamic range.",
+      "professional_importance": "Gene-level overlap does not guarantee that a locked score transports across probes, library preparation or normalization systems.",
+      "available_evidence": [
+        "source and target platform manifests",
+        "feature/probe mapping table",
+        "bridge samples assayed on both platforms",
+        "locked predictions and target outcomes",
+        "platform-specialist or additional bridge-sample resource"
+      ],
+      "required_calculations": [
+        "feature coverage and ambiguity",
+        "bridge-sample concordance and calibration drift",
+        "target-platform performance",
+        "performance after a training-only bridge transformation"
+      ],
+      "consequential_choice": "Whether the current locked predictor can be evaluated as transported, needs a bridge study, or must be redeveloped on the target platform.",
+      "defensible_choices": [
+        "training-only bridge calibration",
+        "probe-level mapping with ambiguity exclusions",
+        "platform-specific redevelopment when mapping is not identifiable"
+      ],
+      "real_harm_from_error": "Technical scale differences are mistaken for patient biology, producing misleading external validation.",
+      "verifier_recomputation": "Reapply the declared feature map and bridge fit using training/bridge data only, confirm no target outcomes enter it, and recompute concordance, calibration and target metrics.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "audit feature and preprocessing compatibility",
+          "keep target outcomes out of the bridge fit",
+          "condition transport claims on bridge evidence"
+        ],
+        "accepted_professional_alternative": [
+          "gene-level aggregation",
+          "locked affine bridge",
+          "platform-specific recalibration with an independent validation split"
+        ],
+        "diagnostic_only": [
+          "choice of concordance plot",
+          "unambiguous unused features"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "bridge_restores_transport",
+          "shared_start_state_id": "V08-D05-start",
+          "revealed_difference": "A training-only bridge restores calibration and preserves ranking on target samples.",
+          "supported_final_action": "CONTINUE_PLATFORM_VALIDATION_WITH_GATES"
+        },
+        {
+          "variant_id": "biological_signal_does_not_transport",
+          "shared_start_state_id": "V08-D05-start",
+          "revealed_difference": "Technical concordance is adequate but target-platform clinical signal collapses.",
+          "supported_final_action": "STOP_OR_REDEVELOP_FOR_PLATFORM"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "platform mapping is underidentified",
+          "candidate_resource": "additional paired bridge samples",
+          "intervention_class": "additional_data",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "feature lineage is misinterpreted",
+          "candidate_resource": "transcriptomics/platform specialist",
+          "intervention_class": "expert_input",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "separating technical bridge failure from biological non-transport"
+      }
+    },
+    {
+      "case_id": "V08-D06",
+      "title": "High discrimination with poor calibration or harmful utility",
+      "origin": "New development investigation",
+      "important_failure": "An impressive AUC is treated as sufficient despite miscalibrated probabilities or negative utility at the proposed treatment threshold.",
+      "professional_importance": "Clinical decisions consume probabilities and thresholds, not rankings alone. A model can rank well and still worsen decisions.",
+      "available_evidence": [
+        "locked patient probabilities and outcomes",
+        "intended threshold and action-cost contract",
+        "site and prevalence metadata",
+        "training-only recalibration or matched external-evidence option"
+      ],
+      "required_calculations": [
+        "AUC and uncertainty",
+        "Brier score and calibration assessment",
+        "confusion counts and net benefit or expected utility",
+        "recalibration and prevalence-shift sensitivity"
+      ],
+      "consequential_choice": "Whether recalibration is enough, threshold use must pause, or ranking-only research can continue.",
+      "defensible_choices": [
+        "recalibrate using independent training data",
+        "change the threshold only under a declared utility contract",
+        "continue ranking research while prohibiting probability or threshold claims"
+      ],
+      "real_harm_from_error": "Patients receive a harmful decision rule despite an attractive retrospective AUC.",
+      "verifier_recomputation": "Recompute discrimination, calibration, confusion counts and utility from patient artifacts, then independently apply the declared recalibration or threshold policy without validation refitting.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "evaluate calibration and utility with discrimination",
+          "respect the prespecified action-cost contract",
+          "bound claims when only ranking is supported"
+        ],
+        "accepted_professional_alternative": [
+          "net benefit or explicit expected utility",
+          "calibration curve plus intercept/slope or prespecified ECE",
+          "pause threshold use while continuing ranking research"
+        ],
+        "diagnostic_only": [
+          "preferred calibration visualization",
+          "secondary discrimination metrics"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "locked_recalibration_rescues_utility",
+          "shared_start_state_id": "V08-D06-start",
+          "revealed_difference": "Training-only recalibration restores decision utility on untouched validation data.",
+          "supported_final_action": "CONTINUE_CALIBRATED_RESEARCH_VALIDATION"
+        },
+        {
+          "variant_id": "utility_remains_harmful",
+          "shared_start_state_id": "V08-D06-start",
+          "revealed_difference": "Calibration or prevalence shift leaves negative utility across the defensible threshold range.",
+          "supported_final_action": "STOP_THRESHOLD_USE"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "probability scale is wrong but ranking is stable",
+          "candidate_resource": "independent calibration sample",
+          "intervention_class": "additional_data",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "agent equates AUC with clinical usefulness",
+          "candidate_resource": "decision-curve tool and clinical utility contract",
+          "intervention_class": "tool_or_process",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "integrating ranking, probability accuracy and decision consequences"
+      }
+    },
+    {
+      "case_id": "V08-D07",
+      "title": "Sample identity and label-provenance integrity",
+      "origin": "New development investigation",
+      "important_failure": "Swapped samples, duplicated exports or ambiguous source labels make prediction-outcome joins unreliable.",
+      "professional_importance": "A statistically correct analysis is meaningless if molecular samples and clinical outcomes do not refer to the same people and visits.",
+      "available_evidence": [
+        "reported IDs and molecular fingerprints",
+        "chain-of-custody and accession logs",
+        "visit and treatment chronology",
+        "label-source and adjudication ledger",
+        "bounded curator crosswalk or re-assay option"
+      ],
+      "required_calculations": [
+        "identity collision and discordance counts",
+        "join coverage and unresolved fraction",
+        "performance before and after defensible quarantine/reconciliation",
+        "worst-case decision sensitivity for unresolved records"
+      ],
+      "consequential_choice": "Whether to quarantine records, buy source reconciliation, re-assay samples, or stop because identity cannot be recovered.",
+      "defensible_choices": [
+        "quarantine only affected records with sensitivity bounds",
+        "use a source-record crosswalk",
+        "stop when identity uncertainty can reverse the decision"
+      ],
+      "real_harm_from_error": "Predictions are validated against another patient's outcome and the resulting evidence cannot be trusted.",
+      "verifier_recomputation": "Reconstruct the identity graph from fingerprints and logs, verify one-to-one patient/visit joins, and recompute results after each defensible reconciliation or quarantine set.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "detect identity or label provenance conflicts",
+          "prevent unresolved joins from entering confirmatory metrics",
+          "quantify whether uncertainty changes the decision"
+        ],
+        "accepted_professional_alternative": [
+          "quarantine with bounds",
+          "probabilistic linkage with a prespecified confidence rule",
+          "full source reconciliation"
+        ],
+        "diagnostic_only": [
+          "harmless duplicate file exports",
+          "cosmetic accession formatting"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "crosswalk_resolves_swaps",
+          "shared_start_state_id": "V08-D07-start",
+          "revealed_difference": "The curator crosswalk resolves every consequential mismatch and corrected evidence remains valid.",
+          "supported_final_action": "CONTINUE_RESEARCH_VALIDATION_WITH_GATES"
+        },
+        {
+          "variant_id": "identity_remains_nonidentifiable",
+          "shared_start_state_id": "V08-D07-start",
+          "revealed_difference": "Several high-leverage samples cannot be assigned to patients and decision bounds cross the threshold.",
+          "supported_final_action": "PAUSE_OR_STOP_FOR_REASSAY"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "source identifiers can be reconciled",
+          "candidate_resource": "data-curator identity crosswalk",
+          "intervention_class": "expert_input",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "physical identity is not recoverable",
+          "candidate_resource": "independent re-assay or new specimens",
+          "intervention_class": "additional_data",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "propagating identity uncertainty into the scientific decision"
+      }
+    },
+    {
+      "case_id": "V08-D08",
+      "title": "Competing explanations, constrained value of information and justified action",
+      "origin": "New development investigation",
+      "important_failure": "The agent notices weak evidence but cannot choose the smallest affordable experiment that distinguishes the live explanations; in the sufficient branch it escalates unnecessarily.",
+      "professional_importance": "Diligence is an investment decision. Buying more of the wrong evidence wastes time, while universal caution can be as damaging as reckless advancement.",
+      "available_evidence": [
+        "current patient-level performance and uncertainty",
+        "endpoint, site and platform diagnostics supporting two live mechanisms",
+        "resource catalog with costs, delays, returned artifacts and limitations",
+        "sealed resource returns"
+      ],
+      "required_calculations": [
+        "decision bounds under each live explanation",
+        "which resource result would change the action",
+        "cost- and delay-aware value-of-information comparison",
+        "post-resource metric or reconciliation analysis"
+      ],
+      "consequential_choice": "Buy one constrained resource or buy nothing, then advance, pause or stop at a clearly stated development stage.",
+      "defensible_choices": [
+        "any resource on the predeclared near-optimal decision-value frontier",
+        "buy nothing when current evidence already determines the bounded action",
+        "stop early when every affordable resource is non-resolving"
+      ],
+      "real_harm_from_error": "The program buys reassuring but irrelevant evidence, or misses a time-sensitive valid opportunity through unnecessary abstention.",
+      "verifier_recomputation": "Recompute the quantities each resource can affect, compare actions under every returned result, verify event order and budget, and evaluate the final explicit decision object against the complete evidence chain.",
+      "requirement_classes": {
+        "mission_critical_science": [
+          "retain at least two live explanations",
+          "choose a resource that can distinguish them or justify none",
+          "predeclare result-contingent actions",
+          "revise the final decision according to returned evidence"
+        ],
+        "accepted_professional_alternative": [
+          "formal expected value of sample information",
+          "qualitative dominance/Pareto analysis with explicit assumptions",
+          "no purchase when no affordable result can change the action"
+        ],
+        "diagnostic_only": [
+          "exact numerical utility scale",
+          "ordering among decision-equivalent near-optimal resources"
+        ]
+      },
+      "hidden_variants": [
+        {
+          "variant_id": "resolvable_second_blocker",
+          "shared_start_state_id": "V08-D08-start",
+          "revealed_difference": "The near-optimal resource resolves the first hypothesis but exposes a consequential second blocker.",
+          "supported_final_action": "PAUSE_FOR_NAMED_SECOND_BLOCKER"
+        },
+        {
+          "variant_id": "evidence_already_sufficient",
+          "shared_start_state_id": "V08-D08-start",
+          "revealed_difference": "All decision-critical evidence is already present; available resources only repeat or delay it.",
+          "supported_final_action": "CONTINUE_BOUNDED_DEVELOPMENT_WITHOUT_PURCHASE"
+        }
+      ],
+      "failure_interventions": [
+        {
+          "observed_failure": "resource choice does not distinguish hypotheses",
+          "candidate_resource": "experimental-design/value-of-information worksheet",
+          "intervention_class": "tool_or_process",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "agent cannot translate evidence into the next experiment",
+          "candidate_resource": "experimental-design expert",
+          "intervention_class": "expert_input",
+          "demonstrated_only_if_paired": true
+        },
+        {
+          "observed_failure": "correct calculations but repeated failure to execute contingent decisions",
+          "candidate_resource": "tool-use training or workflow memory",
+          "intervention_class": "model_adaptation",
+          "demonstrated_only_if_paired": true
+        }
+      ],
+      "contract_trap_audit": {
+        "requires_exact_prose": false,
+        "requires_hidden_filename": false,
+        "requires_one_statistical_method": false,
+        "withholds_decision_critical_evidence": false,
+        "difficulty_source": "choosing and acting on the smallest decision-relevant experiment under genuine ambiguity"
+      }
+    }
+  ]
+}

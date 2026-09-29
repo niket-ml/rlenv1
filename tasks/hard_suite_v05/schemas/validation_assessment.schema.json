@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V0.5 initial validation assessment",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["scenario_id", "metrics", "claim_statuses", "provisional_decision", "dominant_uncertainty", "resource_request", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string", "minLength": 1},
+    "metrics": {"$ref": "#/$defs/metrics"},
+    "claim_statuses": {"$ref": "#/$defs/statuses"},
+    "provisional_decision": {"enum": ["advance", "conditional_advance", "pause", "stop", "insufficient_evidence"]},
+    "dominant_uncertainty": {"type": "string", "minLength": 2},
+    "resource_request": {
+      "type": "object",
+      "required": ["resource_id", "expected_effect", "hypotheses_discriminated"],
+      "properties": {
+        "resource_id": {"enum": ["none", "R1", "R2", "R3", "R4", "R5", "R6"]},
+        "expected_effect": {"type": "string", "minLength": 2},
+        "hypotheses_discriminated": {"type": "array", "items": {"type": "string", "minLength": 2}, "minItems": 1}
+      }
+    },
+    "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 2, "uniqueItems": true}
+  },
+  "$defs": {
+    "metrics": {
+      "type": "object",
+      "required": ["n_patients", "auc", "auc_ci_low", "auc_ci_high", "brier", "sensitivity", "specificity", "net_benefit", "reviewer_disagreement_rate", "reviewer_auc_low", "reviewer_auc_high"],
+      "properties": {
+        "n_patients": {"type": "number", "minimum": 0},
+        "auc": {"type": "number", "minimum": 0, "maximum": 1},
+        "auc_ci_low": {"type": "number", "minimum": 0, "maximum": 1},
+        "auc_ci_high": {"type": "number", "minimum": 0, "maximum": 1},
+        "brier": {"type": "number", "minimum": 0, "maximum": 1},
+        "sensitivity": {"type": "number", "minimum": 0, "maximum": 1},
+        "specificity": {"type": "number", "minimum": 0, "maximum": 1},
+        "net_benefit": {"type": "number"},
+        "reviewer_disagreement_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "reviewer_auc_low": {"type": "number", "minimum": 0, "maximum": 1},
+        "reviewer_auc_high": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "statuses": {
+      "type": "object",
+      "required": ["identity", "endpoint", "preprocessing", "transport", "evidence"],
+      "properties": {
+        "identity": {"enum": ["admissible", "conditional", "blocked", "invalid"]},
+        "endpoint": {"enum": ["admissible", "conditional", "blocked", "invalid"]},
+        "preprocessing": {"enum": ["admissible", "conditional", "blocked", "invalid"]},
+        "transport": {"enum": ["admissible", "conditional", "blocked", "invalid"]},
+        "evidence": {"enum": ["admissible", "conditional", "blocked", "invalid"]}
+      }
+    }
+  }
+}

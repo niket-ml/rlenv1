@@ -1,0 +1,162 @@
+\reportcase{1}{Can the study proceed with its current records?}
+
+The first case asks the agent to make a limited research decision. Does the study justify another stage of testing, or must the team obtain more information first? It does not ask whether the predictor is ready for patient care.
+
+The packet contains 134 records from 124 people. Some people therefore contribute more than one record. The agent must identify those records so that it does not count one person several times. One included patient's response also has uncertain documentation. The question is whether the recorded response has a sufficiently supported source.
+
+\reporthead{Illustrative extension}
+The added scenario retains this task and sample size. It introduces an outdated guide that treats every row as a separate patient. The specimen log contradicts that guide and links patient aliases. A response spreadsheet also mixes two-week and six-week assessments. Dated clinical records and the signed protocol let the agent identify the mismatch. These additions are proposed scenario content, not findings from the recorded runs.
+
+\reporthead{The work behind the decision}
+The agent first chooses which patients to include and how to handle repeated records. It records those choices before it receives the response results. It then checks whether the predicted chances distinguish responders from nonresponders and whether results vary across study sites. It also checks how uncertain the estimates are and what errors the proposed decision rule would make.
+
+\begin{center}
+\begin{tikzpicture}[node distance=5mm]
+\node[box] (a) {134 records from 124 people\\Identify repeated records and check the response documentation};
+\node[box,below=of a] (audit) {In the added scenario, compare the guide with the specimen log\\Check assessment dates against the signed protocol};
+\node[gate,below=of audit] (b) {Record patient selection and analysis rules\\Then receive the patients' actual responses};
+\node[box,below=of b] (c) {Save predictions, responses and reproducible calculations\\Check ranking, predicted chances, uncertainty and site results};
+\coordinate (split) at ($(c.south)+(0,-.4)$);
+\node[box,text width=5.25cm,minimum height=16mm,anchor=north]
+(d) at ($(split)+(-3.2,-.35)$) {The included patients have adequate response documentation};
+\node[box,text width=5.25cm,minimum height=16mm,anchor=north]
+(e) at ($(split)+(3.2,-.35)$) {An included patient's response still needs a source-record check};
+\node[gate,text width=5.25cm,minimum height=18mm,below=5mm of d]
+(f) {Buy nothing if existing results support the next research step};
+\node[gate,text width=5.25cm,minimum height=18mm,below=5mm of e]
+(g) {Request a response-record review if its answer could change that step};
+\coordinate (merge) at ($(f.south)!0.5!(g.south)+(0,-.4)$);
+\node[result,anchor=north] (h) at ($(merge)+(0,-.35)$)
+{Check what the additional information changes\\Submit the recommendation and its supporting calculations};
+\draw[arr] (a.south)--(audit.north);
+\draw[arr] (audit.south)--(b.north);
+\draw[arr] (b.south)--(c.north);
+\draw[Ink!80,thick] (c.south)--(split);
+\draw[arr] (split)-|(d.north);
+\draw[arr] (split)-|(e.north);
+\draw[arr] (d.south)--(f.north);
+\draw[arr] (e.south)--(g.north);
+\draw[Ink!80,thick] (f.south)|-(merge);
+\draw[Ink!80,thick] (g.south)|-(merge);
+\draw[arr] (merge)--(h.north);
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 2. Workflow with the illustrative document checks.}
+
+A response-record review checks the source behind the recorded responder/nonresponder result. It can resolve a documentation problem without changing that result. This matters because an unchanged number can become better supported.
+
+Both successful agents justified a 123-person analysis before seeing responses. They did not need an additional purchase for their immediate decision. An agent that retains all 124 people can instead justify the response-record review. The task does not require one patient selection or one purchase.
+
+The final recommendation must remain limited. Support for another research study does not establish support for treatment selection, routine clinical use or use in a different population.
+
+\newpage
+\reportcase{1}{Recorded results and illustrative extension}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\foreach \x in {0,2.5,5,7.5,10} \draw[black!12] (\x,-.35)--(\x,3.45);
+\foreach \y/\name/\actual/\demo/\col in {3/Model 1/100/62/Blue,2/Model 2/100/57/Teal} {
+ \node[anchor=east,font=\small] at (-.2,\y) {\name};
+ \fill[black!30] (0,{\y+.04}) rectangle ({\actual/10},{\y+.27});
+ \node[anchor=west,font=\scriptsize] at ({\actual/10+.1},{\y+.155}) {\actual};
+ \fill[\col!80] (0,{\y-.27}) rectangle ({\demo/10},{\y-.04});
+ \node[anchor=west,font=\scriptsize] at ({\demo/10+.1},{\y-.155}) {\demo};
+}
+\node[anchor=east,font=\small] at (-.2,1) {Model 3};
+\fill[black!30] (0,.9) rectangle (3.7,1.13);
+\node[anchor=west,font=\small] at (3.8,1.015) {37};
+\node[anchor=east,font=\small] at (-.2,0) {Model 4};
+\node[anchor=west,font=\small,color=Muted] at (.08,0) {Recorded: no score, no final submission};
+\draw[Ink] (0,-.45)--(10,-.45);
+\foreach \x/\label in {0/0,2.5/25,5/50,7.5/75,10/100}
+ \node[below,font=\small] at (\x,-.45) {\label};
+\node[below,font=\small] at (5,-.9) {Work score};
+\node[anchor=west,font=\scriptsize] at (0,-1.5)
+{Grey: recorded results. Coloured: illustrative added-scenario scores.};
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 3. Recorded scores and illustrative extension scores.}
+
+In the recorded runs, Models 1 and 2 passed with scores of 100. Model 3 scored 37 and submitted a recommendation but failed essential checks. Model 4 did not submit. The Case 1 scoring method does not assign a work score to that unfinished attempt. A missing bar does not mean zero scientific ability. The separate scores of 62 and 57 illustrate hypothetical failures in the added scenario. They do not replace the recorded scores or establish performance on that scenario.
+
+\begingroup\footnotesize
+\begin{tabularx}{\textwidth}{@{}Ylrrrrr@{}}\toprule
+Agent & Recorded outcome & Score & Input tokens & Output tokens & Requests & USD \\\midrule
+Model 1 & Passed & 100 & 2,260,068 & 21,852 & 47 & 0.58 \\
+Model 2 & Passed & 100 & 2,490,497 & 37,101 & 48 & 0.79 \\
+Model 3 & Submitted, failed & 37 & 2,824,427 & 30,802 & 62 & 8.94 \\
+Model 4 & Did not submit & -- & 1,496,062 & 17,609 & 65 & 1.05 \\\bottomrule
+\end{tabularx}
+\endgroup
+\reportcaption{Table 1. Recorded outcomes, token usage and inference cost.}
+
+Input-token totals include context sent on successive requests. Costs are the recorded charges, not estimates for the illustrative extension.
+
+\reporthead{What the successful agents found}
+Both successful agents analysed 123 people. Both found that responders usually received higher predicted chances than nonresponders. This ranking ability is measured by \textbf{AUC}. An AUC of 0.50 corresponds to chance ranking, while 1.00 indicates perfect ranking. Both agents calculated 0.785.
+
+A study of this size does not determine the ranking score exactly. Model 1 reported a 90\% uncertainty interval of 0.720--0.849. Model 2 used a 95\% interval and obtained 0.697--0.855. These intervals differ because the agents committed to different valid settings.
+
+\begin{tabularx}{\textwidth}{@{}Yrr@{}}\toprule
+Question answered by the calculation & Model 1 & Model 2 \\\midrule
+How well did the predictor rank patients? AUC & 0.785 & 0.785 \\
+How wrong were its probabilities? Brier score & 0.191 & 0.191 \\
+How closely did chances match response rates? Calibration error & 0.062 & 0.096 \\
+How did the 50\% cutoff perform? Net benefit & 0.171 & 0.171 \\
+How well did it rank patients at the weakest site? AUC & 0.694 & 0.694 \\\bottomrule
+\end{tabularx}
+\reportcaption{Table 2. Results from the two successful investigations.}
+
+The \textbf{Brier score} measures squared probability error, with smaller values indicating less error. \textbf{Calibration} asks whether predicted chances match observed response rates. For example, about 80\% of patients assigned an 80\% chance should respond. The agents used different accepted calibration settings.
+
+\textbf{Net benefit} evaluates a rule that flags patients above a chosen probability cutoff. It rewards correct positive predictions and penalizes incorrect ones under a stated cost rule. Positive values here are relative to flagging nobody. They do not establish clinical benefit.
+
+Both agents recommended further research and bought no additional information. Neither recommended unrestricted clinical use.
+
+\newpage
+\reportcase{1}{Why the other investigations did not pass}
+The next map shows what the evaluator checked, not ten unrelated administrative requirements. Each row describes a step needed to support the recommendation. A failed result can follow from an earlier missing link.
+
+\begin{tabularx}{\textwidth}{@{}Yccc@{}}\toprule
+What the evaluator checked & Model 1 & Model 2 & Model 3 \\\midrule
+Kept the plan fixed after seeing responses & \reportmet & \reportmet & \reportmet \\
+Linked results to the correct saved calculations & \reportmet & \reportmet & \reportfailed \\
+Handled repeated records from the same patient & \reportmet & \reportmet & \reportmet \\
+Supported patient ranking and its uncertainty & \reportmet & \reportmet & \reportfailed \\
+Supported the checks of predicted chances & \reportmet & \reportmet & \reportfailed \\
+Supported the check of the 50\% cutoff & \reportmet & \reportmet & \reportfailed \\
+Supported the results for each study site & \reportmet & \reportmet & \reportfailed \\
+Interpreted the purchased information correctly & \reportmet & \reportmet & \reportfailed \\
+Kept stated confidence consistent with the findings & \reportmet & \reportmet & \reportmet \\
+Supported the proposed next research step & \reportmet & \reportmet & \reportfailed \\\bottomrule
+\end{tabularx}
+\reportcaption{Figure 4. Recorded checks on completed Case 1 investigations.}
+
+Green means the check passed. Amber means it failed. Model 4 has no completed scientific assessment and does not appear in this map. A failed numerical check does not necessarily mean incorrect arithmetic. The evaluator must also be able to find and reproduce the calculation.
+
+\reporthead{Model 3: a recommendation that could not be reproduced}
+Model 3 saved a valid patient table. However, it linked required numerical results to the wrong saved files. This was the first important error. The evaluator could not reproduce the calculations referenced by the recommendation.
+
+\begin{center}
+\begin{tikzpicture}[node distance=5mm]
+\node[box] (a) {The patient table exists, but result links point to the wrong files};
+\node[box,below=of a] (b) {The evaluator cannot reproduce several decision-supporting calculations};
+\node[result,below=of b] (c) {The recommendation lacks a checkable numerical basis};
+\draw[arr] (a)--(b);\draw[arr] (b)--(c);
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 5. One error caused several downstream failures.}
+
+The agent also used incorrect parameter fields for some calculations. Separately, it purchased a response-record review and then said the review changed nothing important. The response labels stayed unchanged, but the review resolved the uncertainty about their source. That was a mistake about the information's meaning, not its arithmetic.
+
+\reporthead{Model 4: the investigation did not reach a recommendation}
+Model 4 continued correcting its calculations until it reached the response limit. It did not submit the required final recommendation. The record identifies a completion failure. It does not identify a specific misunderstanding of the biology.
+
+\reporthead{Illustrative failure paths for Models 1 and 2}
+The proposed 62-point example has Model 1 handle patient identities correctly but trust the incorrect response-time description. Its mixed-time analysis does not support the intended six-week claim. A review of the explicitly flagged record does not resolve that separate problem.
+
+The proposed 57-point example has Model 2 select six-week responses but miss patient aliases. It treats repeated records as independent patients and overstates precision. These are hypothetical explanations for the illustrative scores, not observations from the recorded trajectories.
+
+\reporthead{What the recorded runs establish}
+Case 1 shows that two agents can complete the task without unnecessary purchases. It also shows a failure to maintain reproducible results and a separate failure to interpret a record review. A file-link checker or targeted expert review could help, but neither remedy was tested.
+
+These are four individual attempts, not estimates of long-run success rates. Case 2 next examines whether an apparently useful result survives a more difficult patient and site analysis.

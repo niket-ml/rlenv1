@@ -1,0 +1,81 @@
+{
+  "schema_version": "uc-bench-mmmvp-open-cost-plan-1",
+  "status": "planning_only_no_scientific_authorization",
+  "calculated_at": "2026-09-09T09:00:00-07:00",
+  "api_spend_during_this_open_endedness_repair_usd": 0.0,
+  "read_only_catalog_requests": true,
+  "funding": {
+    "key_usage_usd": 59.81531384,
+    "key_limit_usd": 130.0,
+    "account_and_key_headroom_usd": 70.18468616
+  },
+  "token_basis": {
+    "source": "five preserved v0.7.1 Sol trajectories; used only for workload sizing",
+    "median_aggregate_prompt_tokens_per_episode": 610743,
+    "median_cached_prompt_tokens_per_episode": 556646,
+    "median_cache_write_tokens_per_episode": 63285,
+    "median_completion_tokens_per_episode": 15235,
+    "no_cache_p90_prompt_tokens_per_episode": 713155,
+    "no_cache_p90_completion_tokens_per_episode": 22368,
+    "median_requests_per_episode": 20,
+    "p90_requests_per_episode": 21,
+    "caveat": "The open interface has not been exposed; these are conservative planning estimates, not observed successor costs."
+  },
+  "estimated_costs": {
+    "ten_model_one_condition_sentinel": {
+      "cache_assisted_median_usd": 5.45,
+      "no_cache_p90_usd": 22.41,
+      "hard_cap_usd": 25.0
+    },
+    "remaining_forty_episode_matrix": {
+      "cache_assisted_median_usd": 21.8,
+      "no_cache_p90_usd": 89.63
+    },
+    "complete_fifty_episode_matrix": {
+      "cache_assisted_median_usd": 27.25,
+      "no_cache_p90_usd": 112.04,
+      "proposed_hard_cap_usd": 115.0
+    },
+    "compatibility_canaries": {
+      "episodes": 10,
+      "hard_cap_usd": 0.5
+    }
+  },
+  "stages": [
+    {
+      "stage": 0,
+      "name": "provider_compatibility",
+      "scientific_cases_exposed": 0,
+      "hard_cap_usd": 0.5,
+      "continuation_gate": "all adapters individually classified; widespread incompatibility or identity drift stops execution"
+    },
+    {
+      "stage": 1,
+      "name": "balanced_case_02_sentinel",
+      "scientific_episodes": 10,
+      "hard_cumulative_cap_usd": 25.0,
+      "continuation_gate": "no grader contamination, hidden wording dependency, widespread schema failure, route drift or infrastructure fault"
+    },
+    {
+      "stage": 2,
+      "name": "remaining_four_conditions_per_compatible_model",
+      "scientific_episodes": 40,
+      "hard_cumulative_cap_usd": 115.0,
+      "continuation_gate": "full suite and panel remain immutable; incompatible cells stay excluded rather than replaced"
+    }
+  ],
+  "funding_requirement": {
+    "existing_headroom_covers_compatibility_and_sentinel": true,
+    "existing_headroom_covers_full_hard_cap": false,
+    "minimum_additional_headroom_for_full_hard_cap_usd": 45.31531384,
+    "recommended_account_top_up_usd": 50.0,
+    "minimum_key_limit_usd": 175.31531384,
+    "recommended_key_limit_usd": 180.0,
+    "account_change_authorized": false
+  },
+  "wall_clock_estimate": {
+    "compatibility_hours": [0.2, 1.0],
+    "sentinel_hours_serial": [1.0, 4.0],
+    "full_matrix_hours_with_safe_bounded_parallelism": [4.0, 12.0]
+  }
+}

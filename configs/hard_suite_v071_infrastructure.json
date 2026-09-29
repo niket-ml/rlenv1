@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.7.1-infrastructure-successor-1",
+  "status": "pre_freeze",
+  "parent_version": "0.7",
+  "change_scope": [
+    "authentication_client_lifecycle",
+    "credential_redaction",
+    "infrastructure_failure_reporting",
+    "versioned_freeze_checkpoint_and_run_paths"
+  ],
+  "scientific_content_source": "immutable_v0.7_freeze",
+  "scientific_content_changes_allowed": false,
+  "compatibility_request": {
+    "model_id": "openai/gpt-5.6-sol",
+    "non_scientific": true,
+    "maximum_incremental_spend_usd": 0.25,
+    "maximum_completion_tokens": 128,
+    "maximum_requests": 1,
+    "required_tool_call_count": 1
+  },
+  "scientific_execution": {
+    "contract_path": "configs/hard_suite_v07_execution.json",
+    "model_panel_path": "configs/hard_suite_v07_model_panel.json",
+    "cost_plan_path": "artifacts/diagnostics/hard_suite_v07_cost_plan.json",
+    "maximum_incremental_spend_usd": 45.0
+  },
+  "combined_maximum_incremental_spend_usd": 45.25,
+  "freeze_path": "artifacts/diagnostics/hard_suite_v071_freeze.json",
+  "checkpoint_path": "artifacts/diagnostics/hard_suite_v071_calibration_runs.json",
+  "run_root": "build/hard_suite_v071_runs",
+  "forbidden": [
+    "retry_v0.7",
+    "modify_v0.7_freeze",
+    "heldout",
+    "additional_seeds",
+    "intervention_experiments",
+    "anthropic",
+    "google",
+    "moonshot",
+    "astra",
+    "gpt-6"
+  ]
+}

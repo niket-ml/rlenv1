@@ -1,0 +1,30 @@
+.DS_Store
+.env
+.env.*
+.venv/
+.venv.nosync/
+.venv.offloaded-backup.nosync/
+.venv 2
+/.git-upload.nosync/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Large or private benchmark material
+data/raw/
+data/processed/
+grader_private/*
+!grader_private/README.md
+trajectories/*.jsonl
+reports/generated/
+
+# Local evaluation evidence and generated development workspaces
+/artifacts/
+/development/

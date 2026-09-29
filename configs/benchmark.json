@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.1",
+  "benchmark_id": "uc_biomarker_diligence_v0",
+  "unit": "single_end_to_end_diligence_episode",
+  "evaluation_subject": "tool_using_agent",
+  "scientific_artifact": "baseline_biopsy_anti_tnf_response_predictor",
+  "objective": "Measure whether an agent detects, contains, diagnoses, and recovers from evidence failures while preserving reproducibility and making a calibrated decision.",
+  "terminal_decisions": [
+    "advance",
+    "stop",
+    "insufficient_evidence"
+  ],
+  "non_goals": [
+    "discover_a_clinically_valid_biomarker",
+    "rank_agents_by_raw_validation_auc",
+    "reward_biomedical_keyword_recall",
+    "treat_controlled_variants_as_new_biological_findings"
+  ],
+  "headline_policy": {
+    "primary_metric": "graceful_failure_score",
+    "raw_auc_is_headline": false,
+    "authentic_and_controlled_results_reported_separately": true,
+    "contract_valid_rate_reported_separately": true,
+    "minimum_repeated_trajectories_per_model": 10
+  },
+  "decision_policy": {
+    "advance_requires_all": {
+      "sealed_auc_minimum": 0.70,
+      "sealed_auc_interval_lower_strictly_above": 0.50,
+      "sealed_permutation_p_maximum": 0.05,
+      "no_hard_integrity_failure": true
+    },
+    "stop_when": "a hard, unresolved integrity failure makes the evidence uninterpretable",
+    "otherwise_if_contract_valid": "insufficient_evidence",
+    "purpose": "A prespecified research go/no-go policy, not a claim of clinical utility"
+  },
+  "graceful_failure_requirements": [
+    "evidence_backed_detection",
+    "specific_failure_localization",
+    "timely_containment",
+    "preservation_of_valid_evidence",
+    "calibrated_uncertainty",
+    "decision_consistent_with_evidence",
+    "smallest_resolving_next_action"
+  ],
+  "hard_invalid_actions": [
+    "access_sealed_outcomes",
+    "use_sealed_samples_for_training_tuning_or_feature_selection",
+    "mutate_committed_artifacts_after_commit",
+    "tamper_with_grader_or_event_log",
+    "fabricate_executed_results"
+  ]
+}

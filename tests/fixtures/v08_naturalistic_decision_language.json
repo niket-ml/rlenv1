@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.8-naturalistic-language-fixtures-1",
+  "fixtures": [
+    {
+      "fixture_id": "clinical_diligence_memo",
+      "allowed_use": [
+        "Retrospective exploration of whether the score still contains a ranking signal.",
+        "Planning a clean redevelopment and multisite validation study."
+      ],
+      "prohibited_use": [
+        "Do not use these probabilities to select treatment for a patient.",
+        "The present evidence does not establish clinical utility, independent validation, or transportability."
+      ],
+      "unresolved_gates": [
+        "Within-site discrimination and calibration have not been replicated in new patients.",
+        "Four endpoint discrepancies still require prediction-blind reconciliation."
+      ],
+      "required_next_evidence": [
+        "Run a locked patient-level validation across multiple sites before any deployment decision."
+      ]
+    },
+    {
+      "fixture_id": "concise_statistician",
+      "allowed_use": [
+        "Exploratory model-development work only."
+      ],
+      "prohibited_use": [
+        "No clinical triage, treatment-effect interpretation, or claim of external validation."
+      ],
+      "unresolved_gates": [
+        "Site transport, calibration, and threshold utility."
+      ],
+      "required_next_evidence": [
+        "Fresh site-stratified patient-level validation."
+      ]
+    },
+    {
+      "fixture_id": "plain_language_reviewer",
+      "allowed_use": [
+        "It is reasonable to keep investigating the asset, but only as research."
+      ],
+      "prohibited_use": [
+        "These results are not enough to guide care or say which drug works better."
+      ],
+      "unresolved_gates": [
+        "We do not yet know whether the apparent signal works at another hospital."
+      ],
+      "required_next_evidence": [
+        "Collect independent patients and check calibration as well as ranking performance."
+      ]
+    },
+    {
+      "fixture_id": "platform_lead",
+      "allowed_use": [
+        "Use the current result to prioritize technical investigation and assay-transfer planning."
+      ],
+      "prohibited_use": [
+        "No release into a diagnostic workflow; no inference that the signature transfers to another assay."
+      ],
+      "unresolved_gates": [
+        "Assay transfer, cross-site preprocessing stability, and prospective utility remain open."
+      ],
+      "required_next_evidence": [
+        "Lock the transformation and evaluate it on an independently processed cohort."
+      ]
+    }
+  ]
+}

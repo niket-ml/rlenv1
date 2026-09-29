@@ -1,0 +1,6 @@
+{
+  "declared_reference_role": "training",
+  "membership_file": "fit_membership.csv",
+  "model_weights_locked": true,
+  "reference_transform": "featurewise_zscore"
+}

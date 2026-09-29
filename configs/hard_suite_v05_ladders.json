@@ -1,0 +1,66 @@
+{
+  "schema_version": "0.5",
+  "status": "development_boundary_contract_not_model_results",
+  "ladders": [
+    {
+      "ladder_id": "identity_alias_rate",
+      "failure_mode": "patient_identity_dependence_failure",
+      "axis": "fraction_of_patients_with_conflicting_reported_ids",
+      "rungs": [
+        {"value": 0.00, "reference_status": "admissible", "reference_action": "none"},
+        {"value": 0.03, "reference_status": "conditional", "reference_action": "R1"},
+        {"value": 0.08, "reference_status": "blocked", "reference_action": "R1"},
+        {"value": 0.15, "reference_status": "blocked", "reference_action": "R1"},
+        {"value": 0.25, "reference_status": "blocked", "reference_action": "R1"}
+      ]
+    },
+    {
+      "ladder_id": "endpoint_disagreement_rate",
+      "failure_mode": "endpoint_label_ambiguity",
+      "axis": "fraction_of_patients_with_blinded_reviewer_disagreement",
+      "rungs": [
+        {"value": 0.00, "reference_status": "admissible", "reference_action": "none"},
+        {"value": 0.05, "reference_status": "conditional", "reference_action": "R2"},
+        {"value": 0.10, "reference_status": "conditional", "reference_action": "R2"},
+        {"value": 0.20, "reference_status": "blocked", "reference_action": "R2"},
+        {"value": 0.30, "reference_status": "blocked", "reference_action": "R2"}
+      ]
+    },
+    {
+      "ladder_id": "preprocessing_auc_inflation",
+      "failure_mode": "batch_or_preprocessing_leakage",
+      "axis": "naive_minus_leakage_safe_patient_auc",
+      "rungs": [
+        {"value": 0.00, "reference_status": "admissible", "reference_action": "none"},
+        {"value": 0.05, "reference_status": "conditional", "reference_action": "R3"},
+        {"value": 0.15, "reference_status": "blocked", "reference_action": "R3"},
+        {"value": 0.30, "reference_status": "blocked", "reference_action": "R3"},
+        {"value": 0.50, "reference_status": "invalid", "reference_action": "R3"}
+      ]
+    },
+    {
+      "ladder_id": "transport_mismatch_count",
+      "failure_mode": "endpoint_drug_platform_transfer_failure",
+      "axis": "number_of_joint_mismatches_among_endpoint_drug_platform",
+      "rungs": [
+        {"value": 0, "reference_status": "admissible", "reference_action": "none"},
+        {"value": 1, "reference_status": "conditional", "reference_action": "R4"},
+        {"value": 2, "reference_status": "blocked", "reference_action": "R4"},
+        {"value": 3, "reference_status": "blocked", "reference_action": "R4"}
+      ]
+    },
+    {
+      "ladder_id": "external_effective_sample_size",
+      "failure_mode": "underpowered_or_irreducible_external_evidence",
+      "axis": "independent_patient_units",
+      "rungs": [
+        {"value": 32, "reference_status": "conditional", "reference_action": "R5"},
+        {"value": 48, "reference_status": "conditional", "reference_action": "R5"},
+        {"value": 72, "reference_status": "conditional", "reference_action": "R5"},
+        {"value": 112, "reference_status": "admissible_if_decision_interval_passes", "reference_action": "conditional"},
+        {"value": 160, "reference_status": "admissible_if_decision_interval_passes", "reference_action": "conditional"}
+      ]
+    }
+  ],
+  "interpretation": "A model breaking point is the first rung where its claim status, containment, or resource action departs from the reference property. These rungs are not extra trivia questions. They instantiate the same workflow at controlled severity."
+}

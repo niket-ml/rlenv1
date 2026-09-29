@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1",
+  "scenario_id": "authentic_weak_evidence",
+  "family": "authentic_weak_evidence",
+  "expected_decision": "insufficient_evidence",
+  "expected_diagnostic_codes": [
+    "underpowered_validation",
+    "endpoint_mismatch",
+    "platform_shift",
+    "drug_transfer"
+  ],
+  "accepted_failure_modes": [
+    "underpowered_cross_endpoint_and_cross_platform_transfer"
+  ],
+  "accepted_next_action_types": [
+    "prospective_endpoint_matched_validation"
+  ],
+  "appropriate_confidence_range": [0.50, 0.95],
+  "expected_auc_zero_score_error": 0.25,
+  "small_validation_n_threshold": 100
+}

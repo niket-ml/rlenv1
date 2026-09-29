@@ -1,0 +1,39 @@
+{
+  "event": "case2_graceful_budget_calibration_completed",
+  "release_id": "uc-bench-case2-graceful-failure-v1-budget1",
+  "release_digest": "3233cff94612fa75d80ebbe80468df5a4c73a0ead64d8d7327c01825d3436b4c",
+  "authorized_spend_usd": 50.0,
+  "actual_spend_usd": 9.4419394,
+  "models": [
+    "google/gemini-3.1-pro-preview",
+    "openai/gpt-5.1",
+    "anthropic/claude-sonnet-4"
+  ],
+  "strict_mission_results": {
+    "google/gemini-3.1-pro-preview": false,
+    "openai/gpt-5.1": false,
+    "anthropic/claude-sonnet-4": false
+  },
+  "completion_classifications": {
+    "google/gemini-3.1-pro-preview": "model_completion_failure",
+    "openai/gpt-5.1": "valid_episode",
+    "anthropic/claude-sonnet-4": "model_completion_failure"
+  },
+  "technical_integrity": {
+    "usable_provider_responses": "183/183",
+    "exact_route_identity": true,
+    "fallbacks_disabled": true,
+    "replay_and_regrade": true,
+    "provider_failures": 0,
+    "infrastructure_failures": 0,
+    "credential_leakage": false
+  },
+  "post_run_adjudication": {
+    "partial_score_comparison_valid": false,
+    "reason": "Sonnet calculations inside the public numerical tolerance pass strict properties but are zeroed by warning promotion in diagnostic artifact binding",
+    "strict_mission_results_affected": false
+  },
+  "report": "reports/UC_BENCH_CASE2_GRACEFUL_CALIBRATION_RESULTS.md",
+  "reconciliation": "artifacts/uc_bench_case2_graceful_budget_calibration/science/final_reconciliation.json"
+}
+

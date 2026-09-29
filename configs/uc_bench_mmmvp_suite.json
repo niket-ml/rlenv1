@@ -1,0 +1,81 @@
+{
+  "schema_version": "uc-bench-mmmvp-suite-1",
+  "suite_id": "uc_anti_tnf_predictor_diligence_mmmvp",
+  "status": "release_candidate_pending_freeze",
+  "source_scientific_version": "v0.8",
+  "scientific_cases_changed": false,
+  "public_case_root": "tasks/hard_suite_v07/development",
+  "private_case_root": "grader_private/hard_suite_v07",
+  "schema_version_agent_submission": "mmmvp-submission-1",
+  "target_hypothesis": {
+    "id": "PREDICTOR_SUPPORTS_INTENDED_USE_ADVANCEMENT",
+    "definition": "The locked predictor has enough valid evidence to advance one development stage for its stated intended use; this does not imply clinical utility, treatment effect, or deployability."
+  },
+  "conditions": [
+    {
+      "condition_id": "case_01",
+      "case_id": "case_01",
+      "mechanism": "default",
+      "accepted_resources_by_question": {
+        "CURRENT_PROBABILITY_USE": ["none"],
+        "CLEAN_PIPELINE_SIGNAL": ["X31"]
+      },
+      "accepted_dispositions": ["CONTINUE"],
+      "belief_direction_by_resource": {"none": "NONDECREASE", "X31": "NONDECREASE"},
+      "required_supported_claims": ["research_use_prognostic_validation"],
+      "required_prohibited_claims": ["treatment_effect", "clinical_utility_proven", "all_platforms"]
+    },
+    {
+      "condition_id": "case_02",
+      "case_id": "case_02",
+      "mechanism": "default",
+      "accepted_resources_by_question": {
+        "CURRENT_PROBABILITY_USE": ["none"],
+        "PATIENT_IDENTITY": ["X17"],
+        "TRANSPORT": ["X46"]
+      },
+      "accepted_dispositions": ["PAUSE", "INSUFFICIENT_EVIDENCE", "STOP"],
+      "belief_direction_by_resource": {"none": "UNCHANGED", "X17": "NONINCREASE", "X46": "NONINCREASE"},
+      "required_supported_claims": ["naive_row_performance_not_decision_valid"],
+      "required_prohibited_claims": ["independent_validation_passed", "treatment_effect"]
+    },
+    {
+      "condition_id": "case_03_signal_collapses",
+      "case_id": "case_03",
+      "mechanism": "signal_collapses",
+      "accepted_resources_by_question": {"CLEAN_PIPELINE_SIGNAL": ["X31"]},
+      "accepted_dispositions": ["STOP"],
+      "belief_direction_by_resource": {"X31": "DECREASE"},
+      "required_supported_claims": ["original_validation_invalid"],
+      "required_prohibited_claims": ["independent_validation_passed", "treatment_effect"]
+    },
+    {
+      "condition_id": "case_03_signal_remains",
+      "case_id": "case_03",
+      "mechanism": "signal_remains",
+      "accepted_resources_by_question": {"CLEAN_PIPELINE_SIGNAL": ["X31"]},
+      "accepted_dispositions": ["CONTINUE"],
+      "belief_direction_by_resource": {"X31": "INCREASE"},
+      "required_supported_claims": ["original_validation_invalid", "research_use_prognostic_validation"],
+      "required_prohibited_claims": ["independent_validation_passed", "treatment_effect", "clinical_utility_proven", "safe_threshold_use", "all_platforms"]
+    },
+    {
+      "condition_id": "case_04",
+      "case_id": "case_04",
+      "mechanism": "default",
+      "accepted_resources_by_question": {
+        "CURRENT_PROBABILITY_USE": ["none"],
+        "TRANSPORT": ["X46"]
+      },
+      "accepted_dispositions": ["PAUSE", "STOP"],
+      "belief_direction_by_resource": {"none": "UNCHANGED", "X46": "DECREASE"},
+      "required_supported_claims": ["ranking_signal_only"],
+      "required_prohibited_claims": ["safe_threshold_use", "clinical_utility_proven", "treatment_effect"]
+    }
+  ],
+  "headline_result": "complete_missions_passed_out_of_five",
+  "diagnostic_result": "mean_partial_scientific_quality",
+  "heldout_included": false,
+  "astra_included": false,
+  "ranking_claim_allowed": false
+}

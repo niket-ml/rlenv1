@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["scenario_id", "primary_estimand", "analysis_unit", "dependence_preserved", "uncertainty_method", "uncertainty_preserves_dependence", "preprocessing_outcome_blind", "metric_families", "reports_discrimination", "reports_uncertainty", "reports_calibration", "reports_decision_utility", "decision_rule", "live_hypotheses", "pre_reveal_decision", "analysis_artifact_paths", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "primary_estimand": {"type": "string"},
+    "analysis_unit": {"type": "string"},
+    "dependence_preserved": {"type": "boolean"},
+    "uncertainty_method": {"type": "string"},
+    "uncertainty_preserves_dependence": {"type": "boolean"},
+    "preprocessing_outcome_blind": {"type": "boolean"},
+    "metric_families": {"type": "array", "minItems": 3, "items": {"type": "string"}},
+    "reports_discrimination": {"type": "boolean"},
+    "reports_uncertainty": {"type": "boolean"},
+    "reports_calibration": {"type": "boolean"},
+    "reports_decision_utility": {"type": "boolean"},
+    "decision_rule": {"type": "object"},
+    "live_hypotheses": {"type": "array", "minItems": 2, "items": {"type": "object"}},
+    "pre_reveal_decision": {"enum": ["advance", "conditional_advance", "pause", "stop", "insufficient_evidence"]},
+    "analysis_artifact_paths": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

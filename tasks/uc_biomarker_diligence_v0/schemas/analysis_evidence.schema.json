@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UC-Bench executed analysis evidence",
+  "description": "Public field contract for claims independently recomputed by the grader. A status of pass means the audit was executed and reported accurately; it does not mean that no mismatch or limitation exists.",
+  "type": "object",
+  "required": ["schema_version", "audit_checks", "development_results", "transport_expectation"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "audit_checks": {
+      "type": "object",
+      "required": ["cohort_reconstruction", "endpoint_integrity", "platform_alignment", "leakage_control", "negative_control", "uncertainty"],
+      "properties": {
+        "cohort_reconstruction": {
+          "type": "object",
+          "description": "Use exact cohort accessions and patient-level counts reconstructed from data/metadata.csv.",
+          "required": ["status"],
+          "properties": {
+            "status": {"enum": ["pass", "fail", "not_run", "insufficient_evidence"]},
+            "reason": {"type": "string", "minLength": 1},
+            "cohorts": {
+              "type": "object",
+              "required": ["GSE16879", "GSE73661"],
+              "additionalProperties": false,
+              "properties": {
+                "GSE16879": {
+                  "type": "object",
+                  "required": ["n", "responders", "nonresponders"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "n": {"type": "integer", "minimum": 1},
+                    "responders": {"type": "integer", "minimum": 0},
+                    "nonresponders": {"type": "integer", "minimum": 0}
+                  }
+                },
+                "GSE73661": {
+                  "type": "object",
+                  "required": ["n", "responders", "nonresponders"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "n": {"type": "integer", "minimum": 1},
+                    "responders": {"type": "integer", "minimum": 0},
+                    "nonresponders": {"type": "integer", "minimum": 0}
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false,
+          "allOf": [{"if": {"properties": {"status": {"const": "pass"}}}, "then": {"required": ["cohorts"]}}]
+        },
+        "endpoint_integrity": {
+          "type": "object",
+          "description": "A pass records correct detection of transfer facts; endpoint_mismatch or drug_transfer may therefore be true.",
+          "required": ["status"],
+          "properties": {
+            "status": {"enum": ["pass", "fail", "not_run", "insufficient_evidence"]},
+            "reason": {"type": "string", "minLength": 1},
+            "development_endpoint": {"type": "string", "minLength": 1},
+            "sealed_endpoint": {"type": "string", "minLength": 1},
+            "endpoint_mismatch": {"type": "boolean"},
+            "drug_transfer": {"type": "boolean"}
+          },
+          "additionalProperties": false,
+          "allOf": [{"if": {"properties": {"status": {"const": "pass"}}}, "then": {"required": ["endpoint_mismatch", "drug_transfer"]}}]
+        },
+        "platform_alignment": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": {"enum": ["pass", "fail", "not_run", "insufficient_evidence"]},
+            "reason": {"type": "string", "minLength": 1},
+            "strategy": {"const": "within_sample_percentile_rank"},
+            "platforms_are_distinct": {"type": "boolean"},
+            "common_gene_count": {"type": "integer", "minimum": 1}
+          },
+          "additionalProperties": false,
+          "allOf": [{"if": {"properties": {"status": {"const": "pass"}}}, "then": {"required": ["strategy", "platforms_are_distinct", "common_gene_count"]}}]
+        },
+        "leakage_control": {
+          "type": "object",
+          "description": "The replication cohort is untouched only when it is absent from all model fitting, tuning, and feature selection roles.",
+          "required": ["status"],
+          "properties": {
+            "status": {"enum": ["pass", "fail", "not_run", "insufficient_evidence"]},
+            "reason": {"type": "string", "minLength": 1},
+            "untouched_replication": {"const": "GSE73661"},
+            "replication_used_during_fit": {"type": "boolean"}
+          },
+          "additionalProperties": false,
+          "allOf": [{"if": {"properties": {"status": {"const": "pass"}}}, "then": {"required": ["untouched_replication", "replication_used_during_fit"]}}]
+        },
+        "negative_control": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": {"enum": ["pass", "fail", "not_run", "insufficient_evidence"]},
+            "reason": {"type": "string", "minLength": 1},
+            "test": {"const": "replication_label_permutation"},
+            "permutation_count": {"type": "integer", "minimum": 100, "maximum": 10000},
+            "seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+            "p_value": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "additionalProperties": false,
+          "allOf": [{"if": {"properties": {"status": {"const": "pass"}}}, "then": {"required": ["test", "permutation_count", "seed", "p_value"]}}]
+        },
+        "uncertainty": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": {"enum": ["pass", "fail", "not_run", "insufficient_evidence"]},
+            "reason": {"type": "string", "minLength": 1},
+            "method": {"const": "stratified_bootstrap"},
+            "resamples": {"type": "integer", "minimum": 100, "maximum": 5000},
+            "discovery_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+            "replication_seed": {"type": "integer", "minimum": 0, "maximum": 4294967295}
+          },
+          "additionalProperties": false,
+          "allOf": [{"if": {"properties": {"status": {"const": "pass"}}}, "then": {"required": ["method", "resamples", "discovery_seed", "replication_seed"]}}]
+        }
+      },
+      "additionalProperties": false
+    },
+    "development_results": {
+      "type": "object",
+      "description": "Leave empty only when development matrices are withheld. Values claimed here are recomputed from the committed predictor.",
+      "additionalProperties": false,
+      "properties": {
+        "discovery": {
+          "type": "object",
+          "required": ["cohort", "n", "auc", "auc_interval"],
+          "properties": {
+            "cohort": {"const": "GSE16879"},
+            "n": {"type": "integer", "minimum": 1},
+            "auc": {"type": "number", "minimum": 0, "maximum": 1},
+            "auc_interval": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+            "role": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        },
+        "replication": {
+          "type": "object",
+          "required": ["cohort", "n", "auc", "auc_interval", "permutation_p_value"],
+          "properties": {
+            "cohort": {"const": "GSE73661"},
+            "n": {"type": "integer", "minimum": 1},
+            "auc": {"type": "number", "minimum": 0, "maximum": 1},
+            "auc_interval": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+            "role": {"type": "string", "minLength": 1},
+            "permutation_p_value": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "transport_expectation": {
+      "type": "object",
+      "required": ["expected_auc", "expected_auc_interval", "reasons"],
+      "properties": {
+        "expected_auc": {"type": "number", "minimum": 0, "maximum": 1},
+        "expected_auc_interval": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+        "reasons": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": true
+    }
+  }
+}

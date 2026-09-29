@@ -1,0 +1,118 @@
+% Illustrative replacement section. Not an empirical result or implemented case.
+% Uses the report's existing commands, colours and TikZ styles.
+\reportcase{1}{Can the study proceed with its current records?}
+\reportstatus{SYNTHETIC MOCK-UP. Added problems and model outcomes are hypothetical. No model runs produced these scores.}
+
+The agent must decide whether the current study justifies testing the predictor on an independent group of patients. It can request additional information if that information could change its recommendation. The question is not whether clinicians should use the predictor to choose treatments.
+
+This illustrative version retains 134 records from 124 people. It also retains the explicitly flagged disagreement in one patient's response record. However, finding that flag is only the start. Other supplied documents contain errors that the agent must investigate.
+
+\reporthead{What the agent receives}
+The folder contains a prediction file and patient records. A study protocol defines response six weeks after treatment. A specimen log records which samples came from the same person. Dated clinical records let the agent check when each response was assessed.
+
+The mock introduces two additional problems. An outdated export guide says that each row represents a different patient, although the specimen log shows repeated samples. Some patient identifiers also differ between files. Separately, a spreadsheet column described as a six-week response contains some two-week assessments. The signed protocol and dated records supply the information needed to detect that mismatch.
+
+\begin{center}
+\begin{tikzpicture}[node distance=5mm]
+\node[box] (a) {Inspect 134 records and the study instructions\\Do not assume the export guide describes the files correctly};
+\node[box,below=of a] (b) {Match records to patients using the specimen log\\Check response timing against the signed protocol};
+\node[gate,below=of b] (c) {Record patient selection and the response definition\\Then receive the recorded response values};
+\node[box,below=of c] (d) {Calculate results using the intended patients and assessment times\\Estimate uncertainty without treating repeat samples as new patients};
+\node[gate,text width=5.4cm,below=6mm of d.south,xshift=-3.25cm] (e) {Buy nothing if the supplied records resolve the problems\\State any remaining limits};
+\node[gate,text width=5.4cm,below=6mm of d.south,xshift=3.25cm] (f) {Request one specific check if its answer can change the decision\\State what the check can and cannot resolve};
+\node[result,anchor=north] (g) at ($(e.south)!0.5!(f.south)+(0,-.65)$) {Analyse the answer and revise the recommendation\\Submit calculations that another scientist can reproduce};
+\foreach \x/\y in {a/b,b/c,c/d,d/e,d/f,e/g,f/g} \draw[arr] (\x)--(\y);
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 1. Hypothetical investigation with conflicting source documents.}
+
+\reporthead{Why the added work matters}
+Counting one person several times can make an estimate appear more precise than it is. Mixing two-week and six-week responses changes the scientific question. A numerically correct analysis can therefore support the wrong conclusion.
+
+The agent has enough information to investigate both problems. It does not need secret filenames or an undisclosed answer. A valid workflow can combine repeated records or retain them with an appropriate patient-level analysis. The final choice can be further testing or a justified hold.
+
+\newpage
+\reportcase{1}{Illustrative partial success and failure}
+\reportstatus{MOCK RESULTS. Scores are assigned for presentation. They are not measured model performance.}
+
+The following example shows two different failure paths. The labels Model 1 and Model 2 are fictional placeholders within this mock. They do not refer to the model identities in the empirical report.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=.95cm]
+\foreach \x in {0,2.5,5,7.5,10} \draw[black!12] (\x,-.35)--(\x,1.45);
+\foreach \y/\name/\score/\col in {1/Model 1/62/Blue,0/Model 2/57/Teal} {
+ \node[anchor=east,font=\small] at (-.2,\y) {\name};
+ \fill[\col!80] (0,{\y-.21}) rectangle ({\score/10},{\y+.21});
+ \node[anchor=west,font=\small] at ({\score/10+.12},\y) {\score};
+}
+\draw[Ink] (0,-.45)--(10,-.45);
+\foreach \x/\label in {0/0,2.5/25,5/50,7.5/75,10/100} \node[below,font=\small] at (\x,-.45) {\label};
+\node[below,font=\small] at (5,-.92) {Illustrative work score};
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 2. Assigned scores for the synthetic example.}
+
+Both hypothetical agents submit a recommendation. Neither completes the investigation correctly. Model 1 handles patient identity but uses some responses from the wrong assessment time. Model 2 selects the correct response time but treats some repeated observations as separate patients.
+
+\begin{tabularx}{\textwidth}{@{}Yrrr@{}}\toprule
+Illustrative scoring area & Maximum & Model 1 & Model 2 \\\midrule
+Match records to the correct patients & 20 & \cellcolor{Teal!18}20 & \cellcolor{Amber!20}10 \\
+Use the intended six-week responses & 20 & \cellcolor{Amber!30}6 & \cellcolor{Teal!18}20 \\
+Calculate performance and its uncertainty & 25 & \cellcolor{Teal!10}20 & \cellcolor{Amber!25}10 \\
+Choose and interpret additional information & 15 & \cellcolor{Amber!15}8 & \cellcolor{Amber!10}10 \\
+Support the next research decision & 20 & \cellcolor{Amber!25}8 & \cellcolor{Amber!30}7 \\\midrule
+Total & 100 & 62 & 57 \\\bottomrule
+\end{tabularx}
+\reportcaption{Table 1. Illustrative point allocation, not the deployed scoring rubric.}
+
+The allocation explains the two presentation scores. It does not claim that a working verifier would produce these values. Partial credit represents useful work that remains independently checkable. For example, matching patients correctly still matters when the response definition is wrong.
+
+\reporthead{Model 1: the calculations answer the wrong time-point question}
+In this example, Model 1 detects the repeated patients and constructs a correct patient table. It also notices the flagged disagreement. However, it trusts the spreadsheet's six-week description without checking every assessment date.
+
+The model calculates performance on a mixture of two-week and six-week responses. Its arithmetic can be correct for those rows, but those rows do not answer the intended six-week question. It then recommends independent validation too confidently.
+
+\reporthead{Model 2: the uncertainty estimate counts some people twice}
+Model 2 checks the dated records and uses six-week responses. It notices obvious duplicate identifiers but misses aliases that the specimen log links to the same person. It then estimates uncertainty as though the remaining records were independent patients.
+
+Its estimate can therefore appear more precise than the data justify. The model requests a larger patient sample for confirmation without first correcting the identity problem. Extra patients do not repair the interpretation of the original records.
+
+\newpage
+\reportcase{1}{What the synthetic failures illustrate}
+\reportstatus{HYPOTHETICAL ERROR ANALYSIS. No observed trajectories establish these behaviours.}
+
+The added problems affect the research decision through different routes. The example does not lower scores because an agent misses an arbitrary field. It illustrates mistakes that change which question the analysis answers or how much confidence the study can support.
+
+\begin{center}
+\begin{tikzpicture}[node distance=6mm]
+\node[box,text width=5.4cm] (a) at (-3.25,0) {Model 1 trusts the spreadsheet's response-time description};
+\node[box,text width=5.4cm] (b) at (3.25,0) {Model 2 treats patient aliases as different people};
+\node[box,text width=5.4cm,below=of a] (c) {Some analysed responses come from week two rather than week six};
+\node[box,text width=5.4cm,below=of b] (d) {Repeated observations inflate the apparent amount of independent information};
+\node[result,text width=5.4cm,below=of c] (e) {The result does not support the intended six-week prediction claim};
+\node[result,text width=5.4cm,below=of d] (f) {The uncertainty estimate does not support the model's confidence};
+\draw[arr] (a)--(c);\draw[arr] (c)--(e);
+\draw[arr] (b)--(d);\draw[arr] (d)--(f);
+\end{tikzpicture}
+\end{center}
+\reportcaption{Figure 3. Hypothetical errors and their consequences.}
+
+\reporthead{Additional information must address the actual error}
+The mock response-record review covers the explicitly flagged record only. It can resolve that disagreement without fixing the timing errors elsewhere. Model 1 incorrectly treats that limited review as confirmation of the whole response table. A correct interpretation would retain the unresolved timing problem.
+
+Model 2 requests more patients, but the original identity mapping still needs correction. The useful next action is to compare its mapping with the supplied specimen log. If that log remains ambiguous, it can request a targeted identity check. Increasing sample size answers a different question.
+
+\reporthead{Recovery remains possible}
+An agent that detects a problem late should not automatically lose credit for every calculation. It can withdraw an unsupported recommendation and identify which results require a new analysis. It must not silently change its original commitment after seeing responses.
+
+For Model 1, recovery means distinguishing the mixed-time calculation from the intended six-week claim. For Model 2, it means acknowledging that the apparent precision is not established. A justified hold can be preferable to proceeding with an unsupported result.
+
+\reporthead{A valid alternative workflow}
+A competent analyst could establish the patient mapping from the specimen log and resolve the timing mismatch from the dated records. The analyst could then use a supported method to account for repeated measurements. A purchase is needed only if an important ambiguity remains.
+
+The example does not require a particular final action regardless of the corrected results. It requires the recommendation to follow from the analysis that actually addresses the proposed use.
+
+\reporthead{Limits of the demonstration}
+The additional documents, error patterns and agent behaviours are proposed synthetic content. They are not part of the evaluated Case 1. The scores of 62 and 57 are illustrative, not estimates of difficulty or model capability. No API costs, request counts or measured biological performance are claimed for this mock.
+
+A runnable version would require coherent source files and an independently checked verifier before evaluation. It would also require alternative valid solutions and tests that distinguish incorrect science from incomplete work. This presentation does not establish that those conditions are satisfied.

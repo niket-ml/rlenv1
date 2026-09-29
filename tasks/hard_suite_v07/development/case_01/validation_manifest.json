@@ -1,0 +1,7 @@
+{
+  "commitment_required_before_reveal": true,
+  "expected_analysis_unit": "must be justified from supplied records",
+  "outcome_key": "fingerprint_cluster -> patient_key",
+  "outcomes_sealed": true,
+  "predictions_locked": true
+}

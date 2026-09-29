@@ -1,0 +1,54 @@
+{
+  "schema_version": "0.1",
+  "catalog_checked_at": "2026-09-06",
+  "model_id": "openai/gpt-5.6-sol",
+  "purpose": "Paid infrastructure and contract canary only; not leaderboard evidence.",
+  "catalog_properties": {
+    "context_length": 1050000,
+    "input_usd_per_million_tokens": 1.0,
+    "output_usd_per_million_tokens": 5.0,
+    "tool_calling_supported": true,
+    "temperature_supported": true,
+    "expiration_date": null
+  },
+  "run_budget": {
+    "temperature": 0.2,
+    "maximum_turns": 40,
+    "maximum_completion_tokens_per_turn": 4000,
+    "maximum_total_completion_tokens": 40000,
+    "wall_clock_timeout_seconds": 1800,
+    "observed_valid_canary_cost_usd": 0.07409381,
+    "observed_valid_canary_run_id": "canary-openai-gpt-5.6-sol-20260906-20260906T221022Z"
+  },
+  "paid_followup_model": "openai/gpt-5.6-luna",
+  "paid_followup_blocker": null,
+  "paid_followup_authorization": {
+    "account_credits_usd": 30.0,
+    "provider_key_limit_usd": 30.0,
+    "scope": "one paid canary followed by the nine-run smoke only if the canary passes audit",
+    "checked_at": "2026-09-06T21:46:06.501447+00:00"
+  },
+  "zero_cost_attempts": [
+    {
+      "model_id": "google/gemma-4-31b-it:free",
+      "result": "infrastructure_failure_upstream_429"
+    },
+    {
+      "model_id": "google/gemma-4-26b-a4b-it:free",
+      "result": "infrastructure_failure_upstream_429"
+    },
+    {
+      "model_id": "minimax/minimax-m3:free",
+      "result": "agent_task_failure_completion_budget_exhausted"
+    }
+  ],
+  "selection_status": "valid_paid_canary_completed",
+  "valid_paid_canary": {
+    "model_id": "openai/gpt-5.6-sol",
+    "contract_valid": true,
+    "score": 61.955,
+    "provider_cost_delta_usd": 0.07409381,
+    "leaderboard_eligible": false
+  },
+  "leaderboard_eligible": false
+}

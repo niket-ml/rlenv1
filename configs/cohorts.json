@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.1",
+  "cohorts": [
+    {
+      "accession": "GSE16879",
+      "role": "discovery",
+      "drug": "infliximab",
+      "disease": "ulcerative_colitis",
+      "tissue": "baseline_inflamed_mucosal_biopsy",
+      "verified_baseline_n": 24,
+      "verified_response_counts": {"responders": 8, "nonresponders": 16},
+      "endpoint": {
+        "name": "complete_mucosal_healing",
+        "timepoint": "week_4_to_6",
+        "definition": "Mayo endoscopic subscore 0 or 1 and histological score 0 or 1"
+      },
+      "platform": {
+        "geo_id": "GPL570",
+        "name": "Affymetrix Human Genome U133 Plus 2.0 Array",
+        "public_processing": "GCOS global scaling"
+      },
+      "agent_access": {
+        "documentation": "visible",
+        "features": "visible",
+        "outcomes": "visible_as_task_allows"
+      },
+      "public_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE16879"
+    },
+    {
+      "accession": "GSE73661",
+      "role": "replication",
+      "drug": "infliximab",
+      "disease": "ulcerative_colitis",
+      "tissue": "baseline_colonic_mucosal_biopsy",
+      "verified_baseline_n": 23,
+      "verified_response_counts": {"responders": 8, "nonresponders": 15},
+      "endpoint": {
+        "name": "endoscopic_mucosal_healing",
+        "timepoint": "week_4_to_6",
+        "definition": "Mayo endoscopic subscore 0 or 1"
+      },
+      "platform": {
+        "geo_id": "GPL6244",
+        "name": "Affymetrix Human Gene 1.0 ST Array",
+        "public_processing": "cohort_native_normalization"
+      },
+      "agent_access": {
+        "documentation": "visible",
+        "features": "visible",
+        "outcomes": "visible_as_task_allows"
+      },
+      "public_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE73661"
+    },
+    {
+      "accession": "GSE92415",
+      "role": "sealed_transfer",
+      "drug": "golimumab",
+      "disease": "ulcerative_colitis",
+      "tissue": "baseline_colonic_mucosal_biopsy",
+      "treated_baseline_n": 59,
+      "verified_response_counts": {"responders": 32, "nonresponders": 27},
+      "endpoint": {
+        "name": "clinical_response",
+        "timepoint": "week_6",
+        "field": "wk6response",
+        "definition": "Mayo score decrease of at least 30 percent and 3 points, plus rectal-bleeding improvement"
+      },
+      "platform": {
+        "geo_id": "GPL13158",
+        "name": "Affymetrix HT HG-U133 Plus PM Array Plate",
+        "public_processing": "RMA normalized log2 intensity"
+      },
+      "agent_access": {
+        "documentation": "visible_as_task_allows",
+        "features": "never_visible_private_grader_application",
+        "outcomes": "never_visible"
+      },
+      "public_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE92415"
+    }
+  ]
+}

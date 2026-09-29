@@ -1,0 +1,446 @@
+{
+  "schema_version": "0.2",
+  "suite_id": "uc_biomarker_diligence_hard_v0",
+  "status": "frozen_pre_development_model",
+  "objective": "Measure composed scientific diligence, evidence diagnosis, containment, recovery design, and irreversible workflow execution; identify which resource changes the outcome.",
+  "model_policy": {
+    "development_models": [
+      "openai/gpt-5.6-sol",
+      "openai/gpt-5.4",
+      "openai/gpt-5.2"
+    ],
+    "heldout_ceiling_probe": "openai/gpt-6-astra",
+    "astra_may_not_be_used_for_task_tuning": true,
+    "ranking_requires_repeated_seeds": true
+  },
+  "family_weights": {
+    "H01_identity_metadata": 0.2,
+    "H02_transfer_data": 0.2,
+    "H03_process_science": 0.2,
+    "H04_label_expertise": 0.2,
+    "H05_evidence_sufficiency": 0.2
+  },
+  "acceptance_gates": {
+    "frontier_mean_maximum": 85.0,
+    "frontier_mean_ideal_range": [65.0, 80.0],
+    "maximum_frontier_task_ceiling_rate": 0.25,
+    "weakest_model_universal_failure_forbidden": true,
+    "minimum_distinct_interpretable_failure_modes": 3,
+    "allowed_gap_failure_domains": [
+      "scientific_reasoning",
+      "evidence_diagnosis",
+      "recovery",
+      "long_horizon_execution"
+    ],
+    "schema_or_json_may_not_be_primary_gap": true,
+    "maximum_single_family_gap_share": 0.3,
+    "infrastructure_failures": "excluded",
+    "usable_unsubmitted_attempt_score": 0.0,
+    "authentic_and_controlled_results_separate": true,
+    "repeated_seeds_required_for_ranking": true
+  },
+  "local_gates": {
+    "reference_minimum_score": 90.0,
+    "mediocre_ranked_below_reference_every_family": true,
+    "universal_advance_abstain_stop_fail": true,
+    "reward_hacking_checks_pass": true,
+    "answer_leakage_checks_pass": true,
+    "partial_credit_graceful_degradation": true
+  },
+  "scoring": {
+    "decision": 0.15,
+    "quantitative_analysis": 0.2,
+    "scientific_diagnosis": 0.2,
+    "evidence_integration": 0.15,
+    "recovery_design": 0.15,
+    "commitment_and_reproducibility": 0.15
+  },
+  "intervention_catalog": {
+    "additional_data": [
+      "larger_validation_sample",
+      "missing_subgroup_site_or_platform",
+      "endpoint_matched_cohort",
+      "drug_matched_cohort",
+      "independent_replication"
+    ],
+    "better_labels_and_metadata": [
+      "expert_endpoint_adjudication",
+      "patient_visit_reconciliation",
+      "batch_and_platform_documentation",
+      "resolved_cohort_definitions"
+    ],
+    "expert_assistance": [
+      "biostatistician",
+      "transcriptomics_platform_specialist",
+      "ibd_clinical_expert",
+      "data_curator",
+      "experimental_design_expert"
+    ],
+    "better_process_or_tools": [
+      "leakage_safe_splitting",
+      "schema_checklist_support",
+      "workflow_memory",
+      "commit_before_reveal_enforcement",
+      "automated_integrity_and_provenance_checks"
+    ],
+    "model_adaptation": [
+      "prompting_playbooks",
+      "retrieval",
+      "tool_training",
+      "domain_sft",
+      "rl_or_preference_optimization"
+    ]
+  },
+  "intervention_claim_policy": {
+    "tested_model_adaptations": ["prompting_playbooks"],
+    "untested_model_adaptations": [
+      "retrieval",
+      "tool_training",
+      "domain_sft",
+      "rl_or_preference_optimization"
+    ],
+    "rule": "An intervention may be called resolving only from a predeclared paired comparison. Untested model adaptation may be proposed but never identified as necessary."
+  },
+  "public_decision_policy": {
+    "stop_if": [
+      "identity_conflict_count > 0 and identity containment is absent",
+      "abs(batch_outcome_phi) >= 0.50 and a leakage-safe split has not been demonstrated"
+    ],
+    "advance_requires_all": [
+      "identity_conflict_count == 0",
+      "required_feature_retention >= 0.80",
+      "abs(batch_outcome_phi) < 0.30",
+      "label_disagreement_rate < 0.15",
+      "matched_evidence_n >= 50",
+      "matched_evidence_auc >= 0.70"
+    ],
+    "insufficient_evidence_otherwise": true
+  },
+  "failure_families": [
+    {
+      "family_id": "H01_identity_metadata",
+      "failure_mode": "identity_overlap",
+      "observable_problem": "Expression-identical biopsies carry incompatible patient or visit identities, so the effective unit and split integrity are unknown.",
+      "scored_detection_and_containment": "Count conflicting fingerprint groups, cite identity and cohort evidence, stop before validation, and require reconciliation.",
+      "smallest_correct_next_action": "patient_linkage_audit",
+      "resolving_intervention": "patient_visit_reconciliation",
+      "causal_contrast": "Better metadata resolves the case; a larger unreconciled sample does not.",
+      "variants": [
+        {
+          "variant_id": "dev_identity_more_rows",
+          "pair_role": "ineffective_control",
+          "provided_intervention": "larger_validation_sample",
+          "expected_resource_effect": "does_not_resolve",
+          "seed": 1101,
+          "generation": {
+            "n": 160,
+            "duplicate_pairs": 2,
+            "feature_dropout": 0.0,
+            "target_phi": 0.05,
+            "development_endpoint": "clinical_response_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "array_A",
+            "development_drug": "infliximab",
+            "validation_drug": "infliximab",
+            "label_disagreement": 0.03,
+            "pilot_signal": 1.1,
+            "adjudicated_signal": 1.1,
+            "factorial_n": 70,
+            "factorial_aucs": [0.75, 0.75, 0.75, 0.75, 0.75]
+          }
+        },
+        {
+          "variant_id": "dev_identity_reconciled",
+          "pair_role": "resolving_intervention",
+          "provided_intervention": "patient_visit_reconciliation",
+          "expected_resource_effect": "resolves",
+          "seed": 1102,
+          "generation": {
+            "n": 100,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.0,
+            "target_phi": 0.05,
+            "development_endpoint": "clinical_response_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "array_A",
+            "development_drug": "infliximab",
+            "validation_drug": "infliximab",
+            "label_disagreement": 0.03,
+            "pilot_signal": 1.1,
+            "adjudicated_signal": 1.1,
+            "factorial_n": 70,
+            "factorial_aucs": [0.75, 0.75, 0.75, 0.75, 0.75]
+          }
+        }
+      ]
+    },
+    {
+      "family_id": "H02_transfer_data",
+      "failure_mode": "transfer_interaction",
+      "observable_problem": "Endpoint, platform, and drug all change; expert plausibility cannot identify which transfer breaks the predictor.",
+      "scored_detection_and_containment": "Quantify the factorial bridge, distinguish individual from interacting transfer effects, and avoid treating expert opinion as validation data.",
+      "smallest_correct_next_action": "factorial_transfer_bridge",
+      "resolving_intervention": "endpoint_drug_platform_matched_cohort",
+      "causal_contrast": "An endpoint-, drug-, and platform-matched cohort helps; IBD expert advice alone does not.",
+      "variants": [
+        {
+          "variant_id": "dev_transfer_expert_only",
+          "pair_role": "ineffective_control",
+          "provided_intervention": "ibd_clinical_expert",
+          "expected_resource_effect": "does_not_resolve",
+          "seed": 1201,
+          "generation": {
+            "n": 100,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.1,
+            "target_phi": 0.05,
+            "development_endpoint": "mucosal_healing_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "rna_seq",
+            "development_drug": "infliximab",
+            "validation_drug": "golimumab",
+            "label_disagreement": 0.04,
+            "pilot_signal": 0.5,
+            "adjudicated_signal": 0.5,
+            "factorial_n": 24,
+            "factorial_aucs": [0.55, 0.58, 0.58, 0.57, 0.75]
+          }
+        },
+        {
+          "variant_id": "dev_transfer_matched_cohort",
+          "pair_role": "resolving_intervention",
+          "provided_intervention": "endpoint_drug_platform_matched_cohort",
+          "expected_resource_effect": "resolves",
+          "seed": 1202,
+          "generation": {
+            "n": 110,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.05,
+            "target_phi": 0.05,
+            "development_endpoint": "mucosal_healing_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "rna_seq",
+            "development_drug": "infliximab",
+            "validation_drug": "golimumab",
+            "label_disagreement": 0.04,
+            "pilot_signal": 0.5,
+            "adjudicated_signal": 0.5,
+            "factorial_n": 90,
+            "factorial_aucs": [0.55, 0.58, 0.58, 0.57, 0.76]
+          }
+        }
+      ]
+    },
+    {
+      "family_id": "H03_process_science",
+      "failure_mode": "batch_confounding",
+      "observable_problem": "A strong apparent validation signal is entangled with batch and split provenance.",
+      "scored_detection_and_containment": "Recompute confounding, verify split provenance, contain the invalid estimate, then separately judge the honest biological evidence.",
+      "smallest_correct_next_action": "leakage_safe_reanalysis",
+      "resolving_intervention": "leakage_safe_splitting",
+      "causal_contrast": "Tooling repairs execution and provenance, but the repaired result still requires scientific judgment about endpoint transfer.",
+      "variants": [
+        {
+          "variant_id": "dev_process_unaudited",
+          "pair_role": "uncontained_control",
+          "provided_intervention": "larger_validation_sample",
+          "expected_resource_effect": "does_not_resolve",
+          "seed": 1301,
+          "generation": {
+            "n": 160,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.0,
+            "target_phi": 0.65,
+            "development_endpoint": "mucosal_healing_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "array_A",
+            "development_drug": "infliximab",
+            "validation_drug": "infliximab",
+            "label_disagreement": 0.03,
+            "pilot_signal": 1.3,
+            "adjudicated_signal": 1.3,
+            "factorial_n": 65,
+            "factorial_aucs": [0.58, 0.66, 0.58, 0.58, 0.66]
+          }
+        },
+        {
+          "variant_id": "dev_process_audited",
+          "pair_role": "containment_only_intervention",
+          "provided_intervention": "leakage_safe_splitting",
+          "expected_resource_effect": "resolves_execution_not_scientific_judgment",
+          "seed": 1302,
+          "generation": {
+            "n": 120,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.0,
+            "target_phi": 0.05,
+            "development_endpoint": "mucosal_healing_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "array_A",
+            "development_drug": "infliximab",
+            "validation_drug": "infliximab",
+            "label_disagreement": 0.03,
+            "pilot_signal": 0.55,
+            "adjudicated_signal": 0.55,
+            "factorial_n": 65,
+            "factorial_aucs": [0.58, 0.68, 0.58, 0.58, 0.68]
+          }
+        }
+      ]
+    },
+    {
+      "family_id": "H04_label_expertise",
+      "failure_mode": "label_uncertainty",
+      "observable_problem": "A large cohort has discordant clinical endpoint labels; sample size cannot remove systematic label error.",
+      "scored_detection_and_containment": "Quantify disagreement and the adjudication delta, avoid claiming a data-volume remedy, and request blinded endpoint adjudication.",
+      "smallest_correct_next_action": "blinded_label_readjudication",
+      "resolving_intervention": "expert_endpoint_adjudication",
+      "causal_contrast": "Expert adjudication helps; more observations with the same ambiguous labels do not.",
+      "variants": [
+        {
+          "variant_id": "dev_labels_more_rows",
+          "pair_role": "ineffective_control",
+          "provided_intervention": "larger_validation_sample",
+          "expected_resource_effect": "does_not_resolve",
+          "seed": 1401,
+          "generation": {
+            "n": 180,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.0,
+            "target_phi": 0.05,
+            "development_endpoint": "clinical_response_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "array_A",
+            "development_drug": "infliximab",
+            "validation_drug": "infliximab",
+            "label_disagreement": 0.25,
+            "pilot_signal": 1.1,
+            "adjudicated_signal": 1.1,
+            "factorial_n": 70,
+            "factorial_aucs": [0.75, 0.75, 0.75, 0.75, 0.75]
+          }
+        },
+        {
+          "variant_id": "dev_labels_adjudicated",
+          "pair_role": "resolving_intervention",
+          "provided_intervention": "expert_endpoint_adjudication",
+          "expected_resource_effect": "resolves",
+          "seed": 1402,
+          "generation": {
+            "n": 90,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.0,
+            "target_phi": 0.05,
+            "development_endpoint": "clinical_response_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "array_A",
+            "development_drug": "infliximab",
+            "validation_drug": "infliximab",
+            "label_disagreement": 0.03,
+            "pilot_signal": 1.1,
+            "adjudicated_signal": 1.1,
+            "factorial_n": 70,
+            "factorial_aucs": [0.75, 0.75, 0.75, 0.75, 0.75]
+          }
+        }
+      ]
+    },
+    {
+      "family_id": "H05_evidence_sufficiency",
+      "failure_mode": "underpowered_validation",
+      "observable_problem": "Several plausible transfer explanations remain compatible with a small, noisy bridge; no currently supplied resource resolves them.",
+      "scored_detection_and_containment": "Abstain when the bridge cannot discriminate hypotheses, but advance without unnecessary escalation when a clean independent replication is supplied.",
+      "smallest_correct_next_action": "independent_replication",
+      "resolving_intervention": "independent_replication",
+      "causal_contrast": "No supplied intervention resolves the base case; a predeclared independent replication resolves the paired case and makes further escalation wasteful.",
+      "variants": [
+        {
+          "variant_id": "dev_evidence_unresolved",
+          "pair_role": "no_current_resolution",
+          "provided_intervention": "experimental_design_expert",
+          "expected_resource_effect": "does_not_resolve_evidence_abstention_correct",
+          "seed": 1501,
+          "generation": {
+            "n": 90,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.05,
+            "target_phi": 0.15,
+            "development_endpoint": "mucosal_healing_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "rna_seq",
+            "development_drug": "infliximab",
+            "validation_drug": "golimumab",
+            "label_disagreement": 0.08,
+            "pilot_signal": 0.45,
+            "adjudicated_signal": 0.45,
+            "factorial_n": 36,
+            "factorial_aucs": [0.55, 0.59, 0.58, 0.57, 0.63]
+          }
+        },
+        {
+          "variant_id": "dev_evidence_replicated",
+          "pair_role": "sufficient_evidence",
+          "provided_intervention": "independent_replication",
+          "expected_resource_effect": "resolves_and_unnecessary_escalation_penalized",
+          "seed": 1502,
+          "generation": {
+            "n": 120,
+            "duplicate_pairs": 0,
+            "feature_dropout": 0.05,
+            "target_phi": 0.1,
+            "development_endpoint": "mucosal_healing_week_6",
+            "validation_endpoint": "clinical_response_week_6",
+            "development_platform": "array_A",
+            "validation_platform": "rna_seq",
+            "development_drug": "infliximab",
+            "validation_drug": "golimumab",
+            "label_disagreement": 0.05,
+            "pilot_signal": 0.5,
+            "adjudicated_signal": 0.5,
+            "factorial_n": 120,
+            "factorial_aucs": [0.55, 0.59, 0.58, 0.57, 0.76]
+          }
+        }
+      ]
+    }
+  ],
+  "breaking_point_ladders": [
+    {"ladder_id": "identity_conflicts", "family_id": "H01_identity_metadata", "parameter": "duplicate_pairs", "levels": [0, 1, 2, 4]},
+    {"ladder_id": "matched_cohort_size", "family_id": "H02_transfer_data", "parameter": "factorial_n", "levels": [20, 35, 50, 90]},
+    {"ladder_id": "batch_confounding", "family_id": "H03_process_science", "parameter": "target_phi", "levels": [0.1, 0.3, 0.5, 0.7]},
+    {"ladder_id": "label_disagreement", "family_id": "H04_label_expertise", "parameter": "label_disagreement", "levels": [0.03, 0.1, 0.2, 0.3]},
+    {"ladder_id": "replication_strength", "family_id": "H05_evidence_sufficiency", "parameter": "matched_auc", "levels": [0.55, 0.62, 0.7, 0.78]}
+  ],
+  "report_contract": {
+    "primary_output": "model_x_failure_mode_x_intervention_matrix",
+    "required_curves": "score and correct-decision rate at every predeclared ladder level",
+    "aggregate_ranking": "secondary_and_prohibited_until_repeated_seeds",
+    "recovery_definition": "paired improvement in detection, containment, smallest next action, or correct advance/abstain decision; raw score alone is insufficient"
+  },
+  "heldout_manifest": {
+    "private_spec_path": "grader_private/hard_suite_heldout.json",
+    "ceiling_probe_variants": [
+      "hold_identity_more_rows",
+      "hold_transfer_expert_only",
+      "hold_process_unaudited",
+      "hold_labels_more_rows",
+      "hold_evidence_unresolved"
+    ],
+    "paired_recovery_variants": [
+      "hold_identity_reconciled",
+      "hold_transfer_matched_cohort",
+      "hold_process_audited",
+      "hold_labels_adjudicated",
+      "hold_evidence_replicated"
+    ]
+  }
+}

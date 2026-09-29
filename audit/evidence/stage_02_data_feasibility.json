@@ -1,0 +1,272 @@
+{
+  "cohorts": {
+    "GSE16879": {
+      "endpoints": [
+        "complete_endoscopic_and_histological_healing_week_4_to_6"
+      ],
+      "nonresponders": 16,
+      "platforms": [
+        "GPL570"
+      ],
+      "responders": 8,
+      "timepoints": [
+        "baseline"
+      ],
+      "total": 24,
+      "treatments": [
+        "infliximab"
+      ],
+      "unique_patients": 24,
+      "unique_samples": 24
+    },
+    "GSE73661": {
+      "endpoints": [
+        "endoscopic_mucosal_healing_week_4_to_6"
+      ],
+      "nonresponders": 15,
+      "platforms": [
+        "GPL6244"
+      ],
+      "responders": 8,
+      "timepoints": [
+        "baseline"
+      ],
+      "total": 23,
+      "treatments": [
+        "infliximab"
+      ],
+      "unique_patients": 23,
+      "unique_samples": 23
+    },
+    "GSE92415": {
+      "endpoints": [
+        "clinical_response_week_6"
+      ],
+      "nonresponders": 27,
+      "platforms": [
+        "GPL13158"
+      ],
+      "responders": 32,
+      "timepoints": [
+        "baseline"
+      ],
+      "total": 59,
+      "treatments": [
+        "golimumab"
+      ],
+      "unique_patients": 59,
+      "unique_samples": 59
+    }
+  },
+  "cross_accession_identity_audit": {
+    "assigned_correlation_max": 0.5831000291464676,
+    "assigned_correlation_median": 0.3223156844158273,
+    "assigned_correlation_min": 0.15909756439337208,
+    "assignment_pair_count": 23,
+    "common_gene_count": 17263,
+    "informative_gene_count": 17263,
+    "interpretation": "No near-identity expression pattern was found; outcome concordance alone does not establish sample identity.",
+    "near_identity_signal": false,
+    "outcome_concordance": 0.9565217391304348,
+    "pairs": [
+      {
+        "correlation": 0.5831000291464676,
+        "left_sample_id": "GSM364651",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900148"
+      },
+      {
+        "correlation": 0.5044558859207078,
+        "left_sample_id": "GSM364646",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900176"
+      },
+      {
+        "correlation": 0.4906566665657371,
+        "left_sample_id": "GSM364645",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900208"
+      },
+      {
+        "correlation": 0.47749208836339874,
+        "left_sample_id": "GSM364649",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900195"
+      },
+      {
+        "correlation": 0.47129628656274836,
+        "left_sample_id": "GSM364647",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900202"
+      },
+      {
+        "correlation": 0.42876651103329616,
+        "left_sample_id": "GSM364652",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900155"
+      },
+      {
+        "correlation": 0.41668016815080733,
+        "left_sample_id": "GSM364648",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900215"
+      },
+      {
+        "correlation": 0.41350017003228295,
+        "left_sample_id": "GSM364636",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900158"
+      },
+      {
+        "correlation": 0.381487779563589,
+        "left_sample_id": "GSM364635",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900204"
+      },
+      {
+        "correlation": 0.36580237787672715,
+        "left_sample_id": "GSM364644",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900175"
+      },
+      {
+        "correlation": 0.3333095839546258,
+        "left_sample_id": "GSM364634",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900172"
+      },
+      {
+        "correlation": 0.3223156844158273,
+        "left_sample_id": "GSM364639",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900192"
+      },
+      {
+        "correlation": 0.3040630596571978,
+        "left_sample_id": "GSM364655",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900181"
+      },
+      {
+        "correlation": 0.2880917401218851,
+        "left_sample_id": "GSM364641",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900154"
+      },
+      {
+        "correlation": 0.2596593750372596,
+        "left_sample_id": "GSM364643",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900206"
+      },
+      {
+        "correlation": 0.24750304825182015,
+        "left_sample_id": "GSM364640",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900213"
+      },
+      {
+        "correlation": 0.22823741045029838,
+        "left_sample_id": "GSM364638",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900180"
+      },
+      {
+        "correlation": 0.2147430625994475,
+        "left_sample_id": "GSM364653",
+        "outcome_concordant": false,
+        "right_sample_id": "GSM1900210"
+      },
+      {
+        "correlation": 0.1921471543677249,
+        "left_sample_id": "GSM364654",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900214"
+      },
+      {
+        "correlation": 0.1907314489739274,
+        "left_sample_id": "GSM364633",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900186"
+      },
+      {
+        "correlation": 0.19060939144890754,
+        "left_sample_id": "GSM364650",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900185"
+      },
+      {
+        "correlation": 0.18514878482552025,
+        "left_sample_id": "GSM364656",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900184"
+      },
+      {
+        "correlation": 0.15909756439337208,
+        "left_sample_id": "GSM364642",
+        "outcome_concordant": true,
+        "right_sample_id": "GSM1900217"
+      }
+    ]
+  },
+  "features": {
+    "collapse_rule": "median_across_unambiguously_mapped_probes",
+    "gene_counts_before_intersection": {
+      "GSE16879": 20848,
+      "GSE73661": 19235,
+      "GSE92415": 21117
+    },
+    "three_platform_common_gene_count": 17151,
+    "unambiguous_annotation_mappings": {
+      "GPL13158": 43195,
+      "GPL570": 42904,
+      "GPL6244": 20303
+    }
+  },
+  "gate_decision": "proceed_for_diligence_not_biomarker_discovery",
+  "schema_version": "0.1",
+  "sealed_data_policy": {
+    "agent_visible_metadata_contains_response": false,
+    "private_label_path": "grader_private/data/gse92415_labels.csv",
+    "raw_gse92415_matrix_agent_visible": false
+  },
+  "source_verification": [
+    {
+      "bytes": 13614374,
+      "id": "GSE16879_series_matrix",
+      "path": "data/raw/geo/GSE16879_series_matrix.txt.gz",
+      "sha256": "8874d0d40217c3b92c44cead29bf15a0b157e45f62825c95b3c5183c0f513602"
+    },
+    {
+      "bytes": 32063527,
+      "id": "GSE73661_series_matrix",
+      "path": "data/raw/geo/GSE73661_series_matrix.txt.gz",
+      "sha256": "3e988a71e35c69bfdc3dcaabb96554acf9e644d4ab7140ed770a958b2185437d"
+    },
+    {
+      "bytes": 27037708,
+      "id": "GSE92415_series_matrix",
+      "path": "data/raw/geo/GSE92415_series_matrix.txt.gz",
+      "sha256": "61cd218f97a47c94902fc4094284424041203f7c809447bf45aae321749c8bf1"
+    },
+    {
+      "bytes": 8471521,
+      "id": "GPL570_annotation",
+      "path": "data/raw/geo/GPL570.annot.gz",
+      "sha256": "d7cd44352127b1e34f3a720ebea86093ef255a38f1612a85a2962b71bde8f394"
+    },
+    {
+      "bytes": 7193437,
+      "id": "GPL6244_annotation",
+      "path": "data/raw/geo/GPL6244.annot.gz",
+      "sha256": "99ee70f87e02c75ff1c8dc57b6c40c0482c7ef2760e004301315ac34344ac6dc"
+    },
+    {
+      "bytes": 8313277,
+      "id": "GPL13158_annotation",
+      "path": "data/raw/geo/GPL13158.annot.gz",
+      "sha256": "d9eddd653c200c9ac1b282b441079a19e890914929b35792a4e99ce4eba3b0d0"
+    }
+  ],
+  "stage": 2
+}

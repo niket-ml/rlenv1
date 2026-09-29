@@ -1,0 +1,43 @@
+{
+  "schema_version": "uc-bench-open-mmmvp-rc1-3-release-execution-1",
+  "source_scientific_freeze": "artifacts/mmmvp_open_rc1/freeze.json",
+  "source_rc12_release_freeze": "artifacts/mmmvp_open_rc12/release_freeze.json",
+  "partition": "development",
+  "sentinel_condition": "case_02",
+  "sentinel_order_seed": 2026090913,
+  "compatibility": {
+    "inherit_exact_passes": 10,
+    "new_paid_canaries": 0,
+    "minimum_compatible_models": 10
+  },
+  "scientific_episode": {
+    "maximum_turns": 65,
+    "maximum_completion_tokens_per_turn": 5000,
+    "maximum_total_completion_tokens": 90000,
+    "wall_clock_timeout_seconds": 4200,
+    "minimum_request_interval_seconds": 3.25,
+    "provider_request_retries": 0,
+    "usable_episode_retries": 0,
+    "context_policy": "Preserve the complete tool transcript and returned provider reasoning state; no automatic compaction."
+  },
+  "sentinel": {
+    "scientific_episode_count_maximum": 10,
+    "hard_cumulative_cap_usd": 40.0,
+    "continue_to_remaining_matrix": false
+  },
+  "forbidden_partitions": ["heldout"],
+  "forbidden_models": [
+    "openai/gpt-5.2",
+    "openai/gpt-5.4",
+    "openai/gpt-5.5",
+    "openai/gpt-5.6-sol",
+    "openai/gpt-6-astra",
+    "anthropic/claude-opus-4.5",
+    "anthropic/claude-opus-4.8",
+    "anthropic/claude-opus-5",
+    "anthropic/claude-sonnet-4.5",
+    "anthropic/claude-sonnet-4.6"
+  ],
+  "ranking_claim_allowed": false,
+  "remaining_matrix_authorized": false
+}

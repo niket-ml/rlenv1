@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "family_id",
+    "variant_id",
+    "ranked_hypotheses",
+    "primary_estimand_id",
+    "analysis_method_id",
+    "planned_metric_ids",
+    "uncertainty_unit",
+    "requested_resource_id",
+    "pre_reveal_decision",
+    "if_primary_supported",
+    "if_primary_refuted"
+  ],
+  "properties": {
+    "family_id": {"type": "string", "minLength": 1},
+    "variant_id": {"type": "string", "minLength": 1},
+    "ranked_hypotheses": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "primary_estimand_id": {"type": "string", "minLength": 1},
+    "analysis_method_id": {"type": "string", "minLength": 1},
+    "planned_metric_ids": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "uncertainty_unit": {"type": "string", "minLength": 1},
+    "requested_resource_id": {"enum": ["R1", "R2", "R3", "none"]},
+    "pre_reveal_decision": {"enum": ["advance", "insufficient_evidence", "stop"]},
+    "if_primary_supported": {"enum": ["advance", "insufficient_evidence", "stop"]},
+    "if_primary_refuted": {"enum": ["advance", "insufficient_evidence", "stop"]}
+  }
+}

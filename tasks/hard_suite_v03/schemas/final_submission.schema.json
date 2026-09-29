@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "family_id",
+    "variant_id",
+    "selected_resource_id",
+    "decision",
+    "confidence",
+    "primary_failure",
+    "secondary_failures",
+    "metrics",
+    "evidence_ids",
+    "containment_status",
+    "smallest_resolving_experiment",
+    "recommended_resource",
+    "provided_intervention_assessment",
+    "unnecessary_escalation",
+    "rationale"
+  ],
+  "properties": {
+    "family_id": {"type": "string", "pattern": "^H0[1-5]_"},
+    "variant_id": {"type": "string", "minLength": 1},
+    "selected_resource_id": {"type": "string", "enum": ["none", "R1", "R2", "R3"]},
+    "decision": {"$ref": "#/$defs/decision"},
+    "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+    "primary_failure": {"$ref": "#/$defs/failure"},
+    "secondary_failures": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/failure"}},
+    "metrics": {"type": "object", "minProperties": 4, "additionalProperties": {"type": "number"}},
+    "evidence_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^EV-[A-Z-]+$"}},
+    "containment_status": {"type": "string", "enum": ["not_contained", "contained", "verified_no_issue"]},
+    "smallest_resolving_experiment": {"$ref": "#/$defs/experiment"},
+    "recommended_resource": {"$ref": "#/$defs/resource"},
+    "provided_intervention_assessment": {"type": "string", "enum": ["resolves", "does_not_resolve", "resolves_process_only", "evidence_still_insufficient", "not_needed"]},
+    "unnecessary_escalation": {"type": "boolean"},
+    "rationale": {"type": "string", "minLength": 1, "maxLength": 1800}
+  },
+  "$defs": {
+    "decision": {"type": "string", "enum": ["advance", "insufficient_evidence", "stop"]},
+    "failure": {"type": "string", "enum": ["identity_overlap", "endpoint_mismatch", "platform_shift", "drug_transfer", "transfer_interaction", "feature_contract_failure", "batch_confounding", "label_uncertainty", "underpowered_validation", "model_misspecification", "no_material_failure"]},
+    "experiment": {"type": "string", "enum": ["patient_linkage_audit", "factorial_transfer_bridge", "platform_mapping_audit", "leakage_safe_reanalysis", "blinded_label_readjudication", "endpoint_matched_validation", "drug_matched_validation", "independent_replication", "none_proceed"]},
+    "resource": {"type": "string", "enum": ["none", "larger_validation_sample", "missing_subgroup_site_or_platform", "endpoint_matched_cohort", "drug_matched_cohort", "endpoint_drug_platform_matched_cohort", "independent_replication", "expert_endpoint_adjudication", "patient_visit_reconciliation", "batch_and_platform_documentation", "resolved_cohort_definitions", "biostatistician", "transcriptomics_platform_specialist", "ibd_clinical_expert", "data_curator", "experimental_design_expert", "leakage_safe_splitting", "schema_checklist_support", "workflow_memory", "commit_before_reveal_enforcement", "automated_integrity_and_provenance_checks", "prompting_playbooks", "retrieval", "tool_training", "domain_sft", "rl_or_preference_optimization"]}
+  }
+}

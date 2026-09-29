@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UC-Bench predictor provenance manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["model_version", "feature_schema_version", "endpoint", "training_sample_ids", "tuning_sample_ids", "feature_selection_sample_ids"],
+  "properties": {
+    "model_version": {"type": "string", "minLength": 1},
+    "feature_schema_version": {"type": "string", "minLength": 1},
+    "endpoint": {"type": "string", "minLength": 1},
+    "training_sample_ids": {"type": "array", "description": "Exact sample_id values from data/metadata.csv used to fit coefficients. Cohort aliases, wildcards, and count placeholders are invalid. In data_withheld only, use the single marker DOCUMENTED-NOT-EXECUTED.", "minItems": 1, "uniqueItems": true, "items": {"oneOf": [{"type": "string", "pattern": "^GSM[0-9]+$"}, {"const": "DOCUMENTED-NOT-EXECUTED"}]}},
+    "tuning_sample_ids": {"type": "array", "description": "Exact sample_id values used for hyperparameter or threshold tuning; empty when none. A sample may appear in more than one role because roles record uses, not disjoint partitions.", "uniqueItems": true, "items": {"oneOf": [{"type": "string", "pattern": "^GSM[0-9]+$"}, {"const": "DOCUMENTED-NOT-EXECUTED"}]}},
+    "feature_selection_sample_ids": {"type": "array", "description": "Exact sample_id values used to choose genes; empty for a genuinely prespecified panel. Replication sample IDs here mean replication was not untouched.", "uniqueItems": true, "items": {"oneOf": [{"type": "string", "pattern": "^GSM[0-9]+$"}, {"const": "DOCUMENTED-NOT-EXECUTED"}]}}
+  }
+}

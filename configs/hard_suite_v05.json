@@ -1,0 +1,162 @@
+{
+  "schema_version": "0.5",
+  "suite_id": "uc_anti_tnf_predictor_diligence_v0_5",
+  "status": "design_frozen_before_any_v05_model_call",
+  "construct": "Evidence-backed diligence of a locked anti-TNF response predictor under interacting data, endpoint, process, transport, and evidence limitations.",
+  "non_constructs": [
+    "de_novo_predictor_optimization",
+    "obscure_biomedical_recall",
+    "exact_method_name_matching",
+    "file_hunting",
+    "schema_compliance_as_primary_difficulty"
+  ],
+  "milestones": [
+    {"id": "M01", "name": "intended_use_and_decision_contract", "weight": 8},
+    {"id": "M02", "name": "data_room_integrity_and_provenance", "weight": 9},
+    {"id": "M03", "name": "patient_visit_identity_and_missingness", "weight": 10},
+    {"id": "M04", "name": "endpoint_and_label_construction", "weight": 10},
+    {"id": "M05", "name": "assay_platform_and_preprocessing_audit", "weight": 10},
+    {"id": "M06", "name": "baseline_reproduction", "weight": 8},
+    {"id": "M07", "name": "irreversible_validation_plan_commitment", "weight": 10},
+    {"id": "M08", "name": "leakage_safe_internal_and_external_validation", "weight": 14},
+    {"id": "M09", "name": "followup_resource_selection_and_belief_revision", "weight": 11},
+    {"id": "M10", "name": "final_diligence_decision_and_recovery_plan", "weight": 10}
+  ],
+  "capabilities": [
+    "data_integrity",
+    "endpoint_reasoning",
+    "statistical_validity",
+    "leakage_prevention",
+    "transportability",
+    "calibration_and_decision_utility",
+    "experimental_design_value_of_information",
+    "belief_revision",
+    "reproducibility",
+    "graceful_abstention"
+  ],
+  "trajectory_budget": {
+    "maximum_turns": 55,
+    "maximum_completion_tokens_per_turn": 4000,
+    "maximum_total_completion_tokens": 75000,
+    "wall_clock_timeout_seconds": 3600,
+    "minimum_request_interval_seconds": 3.25
+  },
+  "decision_contract": {
+    "intended_population": "adults_with_moderate_to_severe_ulcerative_colitis_starting_first_anti_tnf",
+    "target_endpoint": "week_6_clinical_response",
+    "prediction_time": "baseline_pre_treatment_biopsy",
+    "probability_threshold": 0.35,
+    "minimum_auc": 0.7,
+    "minimum_auc_ci_low": 0.58,
+    "maximum_brier": 0.23,
+    "minimum_net_benefit": 0.0,
+    "permitted_decisions": [
+      "advance",
+      "conditional_advance",
+      "pause",
+      "stop",
+      "insufficient_evidence"
+    ]
+  },
+  "resource_catalog": [
+    {"resource_id": "R1", "class": "better_labels_and_metadata", "intervention": "source_record_patient_visit_reconciliation", "cost_units": 1, "description": "A curator reconciles patient, visit, biopsy, and fingerprint identities against source records."},
+    {"resource_id": "R2", "class": "expert_assistance", "intervention": "blinded_ibd_endpoint_adjudication", "cost_units": 2, "description": "Two blinded IBD clinicians adjudicate the prespecified week-6 endpoint from source records."},
+    {"resource_id": "R3", "class": "better_process_or_tools", "intervention": "leakage_safe_locked_pipeline_rerun", "cost_units": 1, "description": "The locked pipeline is replayed with patient-grouped splits and training-only preprocessing."},
+    {"resource_id": "R4", "class": "additional_data", "intervention": "endpoint_drug_platform_matched_bridge", "cost_units": 3, "description": "An independent bridge cohort matches the intended endpoint, anti-TNF exposure, and assay platform."},
+    {"resource_id": "R5", "class": "additional_data", "intervention": "larger_independent_replication", "cost_units": 3, "description": "A larger independent replication is added under the currently documented cohort contract."},
+    {"resource_id": "R6", "class": "expert_assistance", "intervention": "cross_functional_expert_review_without_new_source_data", "cost_units": 1, "description": "A clinical, statistical, and platform panel reviews the existing evidence without adding records or rerunning the pipeline."}
+  ],
+  "development_scenarios": [
+    {
+      "scenario_id": "dev5_clean_progression",
+      "scenario_class": "clean_enough_progression",
+      "seed": 51001,
+      "external_n": 156,
+      "signal_strength": 1.05,
+      "states": {"provenance": "clear", "identity": "clear", "endpoint": "clear", "preprocessing": "clear", "reproduction": "clear", "transport": "clear", "evidence": "sufficient"},
+      "initial_decision": "conditional_advance",
+      "optimal_resource": "none",
+      "final_decision": "conditional_advance",
+      "designed_effect": "no_resource_needed",
+      "resource_utilities": {"none": 1.0, "R1": 0.1, "R2": 0.1, "R3": 0.1, "R4": 0.25, "R5": 0.25, "R6": 0.0}
+    },
+    {
+      "scenario_id": "dev5_identity_dependence",
+      "scenario_class": "patient_identity_dependence_failure",
+      "seed": 52002,
+      "external_n": 92,
+      "signal_strength": 1.0,
+      "states": {"provenance": "conditional", "identity": "blocked", "endpoint": "clear", "preprocessing": "clear", "reproduction": "clear", "transport": "clear", "evidence": "conditional"},
+      "initial_decision": "pause",
+      "optimal_resource": "R1",
+      "final_decision": "conditional_advance",
+      "designed_effect": "resolves_blocker",
+      "resource_utilities": {"none": 0.2, "R1": 1.0, "R2": 0.0, "R3": 0.2, "R4": 0.2, "R5": 0.0, "R6": 0.25}
+    },
+    {
+      "scenario_id": "dev5_endpoint_ambiguity",
+      "scenario_class": "endpoint_label_ambiguity",
+      "seed": 53003,
+      "external_n": 58,
+      "signal_strength": 1.0,
+      "states": {"provenance": "clear", "identity": "clear", "endpoint": "blocked", "preprocessing": "clear", "reproduction": "clear", "transport": "conditional", "evidence": "conditional"},
+      "initial_decision": "pause",
+      "optimal_resource": "R2",
+      "final_decision": "insufficient_evidence",
+      "designed_effect": "exposes_second_blocker",
+      "resource_utilities": {"none": 0.2, "R1": 0.0, "R2": 1.0, "R3": 0.0, "R4": 0.3, "R5": 0.05, "R6": 0.4}
+    },
+    {
+      "scenario_id": "dev5_preprocessing_leakage",
+      "scenario_class": "batch_or_preprocessing_leakage",
+      "seed": 54004,
+      "external_n": 104,
+      "signal_strength": 1.55,
+      "states": {"provenance": "clear", "identity": "clear", "endpoint": "clear", "preprocessing": "blocked", "reproduction": "clear", "transport": "conditional", "evidence": "invalid_process"},
+      "initial_decision": "pause",
+      "optimal_resource": "R3",
+      "final_decision": "stop",
+      "designed_effect": "exposes_second_blocker",
+      "resource_utilities": {"none": 0.1, "R1": 0.0, "R2": 0.0, "R3": 1.0, "R4": 0.2, "R5": 0.0, "R6": 0.35}
+    },
+    {
+      "scenario_id": "dev5_transport_failure",
+      "scenario_class": "endpoint_drug_platform_transfer_failure",
+      "seed": 55005,
+      "external_n": 116,
+      "signal_strength": 1.15,
+      "states": {"provenance": "clear", "identity": "clear", "endpoint": "conditional", "preprocessing": "clear", "reproduction": "clear", "transport": "blocked", "evidence": "conditional"},
+      "initial_decision": "pause",
+      "optimal_resource": "R4",
+      "final_decision": "conditional_advance",
+      "designed_effect": "resolves_blocker",
+      "resource_utilities": {"none": 0.15, "R1": 0.0, "R2": 0.2, "R3": 0.1, "R4": 1.0, "R5": 0.0, "R6": 0.25}
+    },
+    {
+      "scenario_id": "dev5_irreducible_external",
+      "scenario_class": "underpowered_or_irreducible_external_evidence",
+      "seed": 56006,
+      "external_n": 34,
+      "signal_strength": 0.82,
+      "states": {"provenance": "clear", "identity": "clear", "endpoint": "clear", "preprocessing": "clear", "reproduction": "clear", "transport": "clear", "evidence": "underpowered"},
+      "initial_decision": "insufficient_evidence",
+      "optimal_resource": "R5",
+      "final_decision": "insufficient_evidence",
+      "designed_effect": "reduces_uncertainty_without_resolving",
+      "resource_utilities": {"none": 0.45, "R1": 0.0, "R2": 0.0, "R3": 0.0, "R4": 0.35, "R5": 1.0, "R6": 0.15}
+    }
+  ],
+  "acceptance_gates": {
+    "reference_minimum": 90.0,
+    "strong_must_beat_mediocre_in_every_applicable_milestone": true,
+    "universal_policy_maximum": 50.0,
+    "single_ordinary_error_minimum_recoverable_points": 50.0,
+    "strongest_model_maximum": 85.0,
+    "strongest_model_ideal_range": [65.0, 80.0],
+    "maximum_ceiling_fraction": 0.25,
+    "maximum_single_family_gap_share": 0.30,
+    "minimum_interpretable_failure_modes": 3,
+    "ranking_claim_requires_repeated_seeds": true,
+    "astra_allowed_before_local_and_development_gates": false
+  }
+}

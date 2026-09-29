@@ -1,0 +1,45 @@
+% Compile with pdfLaTeX. All figures are included in this source.
+% This document is a fictional demonstration. Scores and failures are illustrative.
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage[margin=20mm,headheight=14pt]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{booktabs,tabularx,array,amsmath,tikz,fancyhdr,hyperref}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\definecolor{Ink}{HTML}{19334B}
+\definecolor{Teal}{HTML}{087F8C}
+\definecolor{Blue}{HTML}{3568A3}
+\definecolor{Purple}{HTML}{8064A2}
+\definecolor{Amber}{HTML}{BF7A27}
+\definecolor{Muted}{HTML}{52616B}
+\hypersetup{colorlinks=true,linkcolor=Teal,urlcolor=Teal,pdftitle={Synthetic Case 1 mock-up: not measured results}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small UC-Bench: illustrative scenario}
+\fancyhead[R]{\small September 2026}
+\fancyfoot[L]{\scriptsize SYNTHETIC MOCK-UP -- NOT MEASURED RESULTS}
+\fancyfoot[R]{\thepage}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.2}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\reportcase}[2]{{\Large\bfseries Case #1. #2\par}\vspace{2mm}}
+\newcommand{\reporthead}[1]{\vspace{2mm}{\normalsize\bfseries #1\par}}
+\newcommand{\reportcaption}[1]{\par{\small\color{Muted}#1\par}\vspace{1mm}}
+\newcommand{\reportstatus}[1]{{\small\color{Muted}#1\par}\vspace{1mm}}
+\newcommand{\reportmet}{\cellcolor{Teal!18}Met}
+\newcommand{\reportfailed}{\cellcolor{Amber!23}Failed}
+\newcommand{\reportmissing}{\cellcolor{black!8}Missing}
+\newcommand{\reportunscored}{\cellcolor{black!8}--}
+\tikzset{
+ box/.style={draw=Ink!60,fill=Teal!5,rounded corners=2pt,align=center,font=\small,text width=12cm,minimum height=8mm,inner sep=4pt},
+ gate/.style={box,fill=Amber!10,draw=Amber},
+ result/.style={box,fill=Teal!10,draw=Teal},
+ arr/.style={-{Latex[length=1.8mm]},thick,draw=Ink!80},
+ dep/.style={arr,dashed,draw=Muted}
+}
+\begin{document}
+\input{case1_mock.tex}
+\end{document}

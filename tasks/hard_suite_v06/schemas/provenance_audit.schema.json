@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["scenario_id", "manifest_assets_checked", "outcomes_sealed_before_commit", "sponsor_attestations_treated_as_ground_truth", "licence_scope", "findings", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "manifest_assets_checked": {"type": "boolean"},
+    "outcomes_sealed_before_commit": {"type": "boolean"},
+    "sponsor_attestations_treated_as_ground_truth": {"type": "boolean"},
+    "licence_scope": {"type": "string"},
+    "findings": {"type": "array", "items": {"type": "object"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

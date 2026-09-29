@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["scenario_id", "committed_plan_honoured", "dependence_preserved", "preprocessing_outcome_blind", "metrics", "claim_statuses", "provisional_decision", "dominant_uncertainty", "evidence_refs"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "committed_plan_honoured": {"type": "boolean"},
+    "dependence_preserved": {"type": "boolean"},
+    "preprocessing_outcome_blind": {"type": "boolean"},
+    "metrics": {"type": "object"},
+    "claim_statuses": {"type": "object"},
+    "provisional_decision": {"enum": ["advance", "conditional_advance", "pause", "stop", "insufficient_evidence"]},
+    "dominant_uncertainty": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

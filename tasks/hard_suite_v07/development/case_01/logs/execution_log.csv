@@ -1,0 +1,7 @@
+timestamp,event,artifact,host_clock_offset_seconds
+2026-07-14T08:05:00Z,load_expression,expression_matrix,0
+2026-07-14T08:20:00Z,resolve_membership,fit_membership.csv,0
+2026-07-14T08:35:00Z,fit_reference,reference_distribution.rds,0
+2026-07-14T09:20:00Z,export_predictions,locked_predictions.csv,0
+2026-07-14T09:21:00Z,export_predictions_duplicate,locked_predictions.copy.csv,0
+2026-07-14T09:12:00Z,archive_upload,locked_predictions.copy.csv,-480

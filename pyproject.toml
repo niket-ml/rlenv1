@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uc-bench"
+version = "0.1.0"
+description = "Contamination-aware RL environment for UC anti-TNF biomarker diligence"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = {text = "Proprietary"}
+authors = [
+  {name = "UC-Bench contributors"},
+]
+dependencies = [
+  "jsonschema>=4.23,<5",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.9",
+]
+science = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "pyarrow>=16",
+  "scikit-learn>=1.5",
+  "scipy>=1.13",
+]
+notebook = [
+  "ipykernel>=6,<7",
+  "matplotlib>=3.9,<4",
+  "nbclient>=0.10,<1",
+  "nbformat>=5,<6",
+]
+rl = [
+  "python-dotenv>=1,<2",
+  "verifiers>=0.3.1,<0.4",
+]
+
+[project.scripts]
+uc-bench = "uc_bench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1",
+  "headline_score": "graceful_failure_score",
+  "weights": {
+    "failure_detection_and_diagnosis": 0.25,
+    "evidence_integrity_and_containment": 0.25,
+    "uncertainty_and_decision_calibration": 0.20,
+    "recovery_and_next_action": 0.15,
+    "reproducibility_and_contract": 0.15
+  },
+  "hard_invalid_action_score": 0.0,
+  "soft_contract_failure_ceiling": 40.0,
+  "incorrect_terminal_decision_ceiling": 59.0,
+  "realized_discrimination_maximum_within_episode_weight": 0.10,
+  "report_contract_valid_rate_separately": true,
+  "anti_hacking_rules": {
+    "unsupported_caution_receives_detection_credit": false,
+    "universal_abstention_can_pass": false,
+    "universal_advancement_can_pass": false,
+    "incorrect_terminal_decision_can_pass": false,
+    "narrated_but_unexecuted_checks_receive_credit": false,
+    "post_hoc_model_changes_receive_credit": false
+  }
+}
